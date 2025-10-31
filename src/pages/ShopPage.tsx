@@ -4,8 +4,10 @@ import { supabase } from '../lib/supabase';
 import { Product, Category } from '../types/database';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
-import { Search, SlidersHorizontal, X, Filter } from 'lucide-react';
+import { Search, X, Filter } from 'lucide-react';
 import SEO from '../components/SEO';
+import FilterSidebar from '../components/FilterSidebar';
+import { trackSearch } from '../lib/analytics';
 
 const ShopPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,6 +21,9 @@ const ShopPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('newest');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [showFilters, setShowFilters] = useState(false);
+  const [showInStock, setShowInStock] = useState(false);
+  const [showNewOnly, setShowNewOnly] = useState(false);
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadData();
@@ -26,7 +31,24 @@ const ShopPage: React.FC = () => {
 
   useEffect(() => {
     filterAndSortProducts();
-  }, [selectedCategory, sortBy, searchQuery, priceRange]);
+  }, [selectedCategory, sortBy, searchQuery, priceRange, showInStock, showNewOnly]);
+
+  // Track search with debounce
+  useEffect(() => {
+    if (searchQuery && searchQuery.length > 2) {
+      if (searchTimeout) clearTimeout(searchTimeout);
+      
+      const timeout = setTimeout(() => {
+        trackSearch(searchQuery);
+      }, 1000);
+      
+      setSearchTimeout(timeout);
+    }
+    
+    return () => {
+      if (searchTimeout) clearTimeout(searchTimeout);
+    };
+  }, [searchQuery]);
 
   const loadData = async () => {
     try {
@@ -53,10 +75,14 @@ const ShopPage: React.FC = () => {
         query = query.eq('category', selectedCategory);
       }
 
-      if (searchParams.get('filter') === 'new') {
+      if (searchParams.get('filter') === 'new' || showNewOnly) {
         query = query.eq('is_new', true);
       } else if (searchParams.get('filter') === 'bestsellers') {
         query = query.eq('is_bestseller', true);
+      }
+
+      if (showInStock) {
+        query = query.gt('stock_quantity', 0);
       }
 
       query = query.gte('price', priceRange[0]).lte('price', priceRange[1]);
@@ -82,6 +108,10 @@ const ShopPage: React.FC = () => {
             break;
           case 'name':
             filtered.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case 'popular':
+          case 'bestsellers':
+            filtered.sort((a, b) => (b.is_bestseller ? 1 : 0) - (a.is_bestseller ? 1 : 0));
             break;
           case 'newest':
           default:
@@ -129,112 +159,22 @@ const ShopPage: React.FC = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <aside className={`lg:w-72 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            {/* Search */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-ochre-100">
-              <h3 className="text-sm font-bold tracking-widest text-chocolate mb-4 flex items-center font-playfair">
-                <Search className="w-5 h-5 mr-2 text-ochre" />
-                SEARCH
-              </h3>
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Find your favorite..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre focus:border-ochre transition-all"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-chocolate-400 hover:text-ochre transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Categories */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-ochre-100">
-              <h3 className="text-sm font-bold tracking-widest text-chocolate mb-4 font-playfair">
-                CATEGORIES
-              </h3>
-              <div className="space-y-2">
-                <button
-                  onClick={() => handleCategoryChange('all')}
-                  className={`w-full text-left px-4 py-3 rounded-xl transition-all font-semibold ${
-                    selectedCategory === 'all'
-                      ? 'bg-ochre text-white shadow-md'
-                      : 'text-chocolate-600 hover:bg-ochre-50'
-                  }`}
-                >
-                  All Products
-                </button>
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => handleCategoryChange(category.slug)}
-                    className={`w-full text-left px-4 py-3 rounded-xl transition-all font-semibold ${
-                      selectedCategory === category.slug
-                        ? 'bg-ochre text-white shadow-md'
-                        : 'text-chocolate-600 hover:bg-ochre-50'
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Sort By */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-ochre-100">
-              <h3 className="text-sm font-bold tracking-widest text-chocolate mb-4 flex items-center font-playfair">
-                <SlidersHorizontal className="w-5 h-5 mr-2 text-ochre" />
-                SORT BY
-              </h3>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre focus:border-ochre transition-all font-semibold text-chocolate cursor-pointer"
-              >
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="name">Name: A to Z</option>
-                <option value="bestsellers">Bestsellers</option>
-              </select>
-            </div>
-
-            {/* Price Range */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-ochre-100">
-              <h3 className="text-sm font-bold tracking-widest text-chocolate mb-4 font-playfair">
-                PRICE RANGE
-              </h3>
-              <div className="space-y-4">
-                <div className="flex justify-between text-sm font-bold">
-                  <span className="text-ochre">₹{priceRange[0]}</span>
-                  <span className="text-ochre">₹{priceRange[1]}</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000"
-                  step="50"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                  className="w-full h-2 bg-ochre-200 rounded-lg appearance-none cursor-pointer accent-ochre"
-                />
-                <button
-                  onClick={() => setPriceRange([0, 1000])}
-                  className="text-xs text-chocolate-500 hover:text-ochre transition-colors underline"
-                >
-                  Reset Price Filter
-                </button>
-              </div>
-            </div>
-          </aside>
+          {/* New Filter Sidebar Component */}
+          <FilterSidebar
+            isOpen={showFilters}
+            onClose={() => setShowFilters(false)}
+            categories={categories.map(c => ({ id: c.slug, name: c.name }))}
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+            priceRange={priceRange}
+            onPriceRangeChange={setPriceRange}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            showInStock={showInStock}
+            onInStockChange={setShowInStock}
+            showNewOnly={showNewOnly}
+            onNewOnlyChange={setShowNewOnly}
+          />
 
           {/* Mobile Filter Toggle */}
           <button
@@ -246,10 +186,48 @@ const ShopPage: React.FC = () => {
 
           {/* Products Grid */}
           <main className="flex-1">
+            {/* Search Bar */}
+            <div className="mb-6 bg-white rounded-xl p-4 shadow-md border-2 border-ochre-100">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-chocolate-400" />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-12 py-3 border-2 border-ochre-200 rounded-lg focus:border-ochre focus:ring-2 focus:ring-ochre-200 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-chocolate-400 hover:text-ochre transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
+            </div>
+            
             <div className="mb-6 flex items-center justify-between">
               <p className="text-chocolate-600 font-semibold">
                 {products.length} {products.length === 1 ? 'Product' : 'Products'} Found
               </p>
+              
+              {/* Active Filters Display */}
+              {(showInStock || showNewOnly || selectedCategory !== 'all') && (
+                <div className="flex items-center gap-2">
+                  {showInStock && (
+                    <span className="inline-flex items-center px-3 py-1 bg-olive/10 text-olive rounded-full text-sm font-semibold">
+                      In Stock
+                    </span>
+                  )}
+                  {showNewOnly && (
+                    <span className="inline-flex items-center px-3 py-1 bg-ochre/10 text-ochre rounded-full text-sm font-semibold">
+                      New Arrivals
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
 
             {loading ? (

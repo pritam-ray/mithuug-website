@@ -6,8 +6,10 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles } from 'lucide-react';
 import ReviewSection from '../components/ReviewSection';
-import { mitthuugProducts } from '../data/products';
 import SEO from '../components/SEO';
+import Breadcrumb from '../components/Breadcrumb';
+import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
+import { trackViewItem, trackAddToCart } from '../lib/analytics';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +39,16 @@ const ProductDetailPage: React.FC = () => {
 
       if (error) throw error;
       setProduct(data);
+      
+      // Track product view
+      if (data) {
+        trackViewItem({
+          id: data.id,
+          name: data.name,
+          price: data.price,
+          category: 'Til-Gud Bites',
+        });
+      }
     } catch (error) {
       console.error('Error loading product:', error);
     } finally {
@@ -106,6 +118,15 @@ const ProductDetailPage: React.FC = () => {
     for (let i = 0; i < quantity; i++) {
       addToCart(product);
     }
+    
+    // Track add to cart event
+    trackAddToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      category: 'Til-Gud Bites',
+    });
   };
 
   const averageRating = reviews.length > 0
@@ -134,19 +155,41 @@ const ProductDetailPage: React.FC = () => {
     );
   }
 
-  // Find matching product data for enhanced information
-  const productData = mitthuugProducts.find(p => p.title === product.name);
+  // Breadcrumb items for structured data
+  const breadcrumbItems = [
+    { name: 'Home', url: 'https://pritam-ray.github.io/mithuug-website/' },
+    { name: 'Shop', url: 'https://pritam-ray.github.io/mithuug-website/shop' },
+    { name: product?.name || 'Product', url: `https://pritam-ray.github.io/mithuug-website/product/${id}` },
+  ];
 
   return (
     <div className="min-h-screen pt-20 bg-ivory">
       <SEO 
         title={`${product.name} - Premium Til-Gud | MitthuuG`}
         description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹500.`}
-        keywords={`${product.name}, buy ${product.name} online, til gud ${product.name}, traditional indian sweets, handcrafted sweets`}
+        keywords={`${product.name}, buy ${product.name} online, til gud, traditional indian sweets`}
         ogImage={product.image_url}
       />
       
+      {/* Structured Data for SEO */}
+      <ProductSchema
+        name={product.name}
+        description={product.description || `Handcrafted ${product.name} made with 100% natural ingredients`}
+        image={[product.image_url]}
+        price={product.price}
+        currency="INR"
+        availability={product.stock_quantity > 0 ? 'InStock' : 'OutOfStock'}
+        rating={averageRating}
+        reviewCount={reviews.length}
+        sku={product.id}
+        brand="MitthuuG"
+      />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Auto Breadcrumb */}
+        <Breadcrumb />
+
         <Link
           to="/shop"
           className="inline-flex items-center space-x-2 text-chocolate-600 hover:text-ochre mb-8 transition-colors font-semibold"
@@ -208,20 +251,26 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             <p className="text-chocolate-700 mb-8 leading-relaxed text-lg border-l-4 border-ochre pl-4 bg-white/50 p-4 rounded-r-lg">
-              {productData?.long_desc || product.description}
+              {product.description}
             </p>
 
-            {/* Product Highlights */}
-            {productData?.bullets && (
+            {/* Product Highlights - Simple Version */}
+            {product.ingredients && product.ingredients.length > 0 && (
               <div className="mb-8 bg-white rounded-xl p-6 shadow-md">
                 <h3 className="font-playfair font-bold text-chocolate text-xl mb-4">Why You'll Love This</h3>
                 <ul className="space-y-3">
-                  {productData.bullets.map((bullet, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
-                      <span className="text-chocolate-700">{bullet}</span>
-                    </li>
-                  ))}
+                  <li className="flex items-start space-x-3">
+                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700">100% Natural Ingredients - No Preservatives</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700">Handcrafted in Small Batches</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700">Traditional Recipe with Modern Quality Standards</span>
+                  </li>
                 </ul>
               </div>
             )}
@@ -234,24 +283,9 @@ const ProductDetailPage: React.FC = () => {
                   <span>Pure Ingredients</span>
                 </h3>
                 <p className="text-chocolate-700 leading-relaxed">
-                  {productData?.ingredients || product.ingredients.join(', ')}
+                  {product.ingredients.join(', ')}
                 </p>
               </div>
-
-              {/* Nutrition Highlights */}
-              {productData?.nutrition_highlights && (
-                <div className="bg-white rounded-xl p-6 shadow-md">
-                  <h3 className="font-playfair font-bold text-chocolate text-lg mb-4">Nutrition Highlights (per 100g)</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {Object.entries(productData.nutrition_highlights).map(([key, value]) => (
-                      <div key={key} className="flex justify-between items-center p-3 bg-ochre-50 rounded-lg">
-                        <span className="text-sm font-semibold text-chocolate-600">{key}</span>
-                        <span className="text-sm font-bold text-ochre">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Stock Status */}
               <div className="flex items-center justify-between py-4 px-6 bg-white rounded-xl shadow-md">
