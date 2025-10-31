@@ -16,6 +16,10 @@ import SignUpPage from './pages/SignUpPage';
 import AccountPage from './pages/AccountPage';
 import CheckoutPage from './pages/CheckoutPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
+import ShippingPolicyPage from './pages/ShippingPolicyPage';
+import ReturnPolicyPage from './pages/ReturnPolicyPage';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -37,6 +41,10 @@ function App() {
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/account/*" element={<AccountPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/shipping" element={<ShippingPolicyPage />} />
+              <Route path="/returns" element={<ReturnPolicyPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />

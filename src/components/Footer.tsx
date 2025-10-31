@@ -68,14 +68,19 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#faq" className="hover:text-ochre transition-colors">
-                  FAQs
-                </a>
+                <Link to="/contact" className="hover:text-ochre transition-colors">
+                  Contact Us
+                </Link>
               </li>
               <li>
-                <a href="#shipping" className="hover:text-ochre transition-colors">
-                  Shipping & Returns
-                </a>
+                <Link to="/shipping" className="hover:text-ochre transition-colors">
+                  Shipping Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/returns" className="hover:text-ochre transition-colors">
+                  Return Policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -136,6 +141,12 @@ const Footer: React.FC = () => {
               <Heart className="w-4 h-4 fill-ochre text-ochre" />
               <span>in India</span>
             </p>
+
+            <div className="flex items-center space-x-4 text-sm">
+              <Link to="/privacy" className="hover:text-ochre transition-colors">Privacy</Link>
+              <span className="text-ivory-300">•</span>
+              <Link to="/terms" className="hover:text-ochre transition-colors">Terms</Link>
+            </div>
 
             <div className="flex items-center space-x-6">
               <a
