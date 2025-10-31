@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pritam-ray.github.io/mithuug-website/sitemap.xml
+
+# Disallow admin or sensitive routes if any
+# User-agent: *
+# Disallow: /admin/
