@@ -7,6 +7,8 @@ import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { heroCopy, primaryUSPs } from '../data/content';
 import SEO from '../components/SEO';
+import Testimonials from '../components/Testimonials';
+import Newsletter from '../components/Newsletter';
 
 const HomePage: React.FC = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([]);
@@ -217,6 +219,16 @@ const HomePage: React.FC = () => {
           )}
         </>
       )}
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* Newsletter Section */}
+      <section className="py-20 px-4 bg-ivory-50">
+        <div className="max-w-4xl mx-auto">
+          <Newsletter />
+        </div>
+      </section>
 
       {/* Mitthu Express CTA Section */}
       <section className="py-24 px-4 bg-gradient-to-r from-ochre to-gold">
