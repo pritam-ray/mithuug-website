@@ -158,13 +158,18 @@ const CheckoutPage: React.FC = () => {
             order_number: orderNumber,
             status: paymentMethod === 'cod' ? 'pending' : 'payment_pending',
             total_amount: orderTotal,
+            subtotal_amount: cartTotal,
             shipping_address: shippingAddress,
             billing_address: sameAsShipping ? shippingAddress : billingAddress,
             payment_method: paymentMethod,
+            payment_status: 'pending',
             promo_code: appliedPromo?.promoCode?.code || null,
             discount_amount: discount,
             shipping_fee: finalShippingFee,
             cod_fee: codFee,
+            shipping_zone: deliveryEstimate?.zone || null,
+            estimated_delivery_start: deliveryEstimate?.startDate || null,
+            estimated_delivery_end: deliveryEstimate?.endDate || null,
           },
         ])
         .select()
@@ -210,13 +215,13 @@ const CheckoutPage: React.FC = () => {
             },
           },
           async (response) => {
-            // Payment successful - update order status
+            // Payment successful - update order status and payment info
             await supabase
               .from('orders')
               .update({
-                status: 'paid',
+                status: 'confirmed',
+                payment_status: 'completed',
                 payment_id: response.razorpay_payment_id,
-                payment_signature: response.razorpay_signature,
               })
               .eq('id', order.id);
 

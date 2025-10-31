@@ -72,12 +72,45 @@ export interface Order {
   id: string;
   user_id: string;
   order_number: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: 'pending' | 'payment_pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'refunded';
+  
+  // Payment Information
+  payment_id?: string;  // Razorpay payment ID
+  payment_method: 'razorpay' | 'cod' | 'upi' | 'bank_transfer';
+  payment_status: 'pending' | 'processing' | 'completed' | 'failed' | 'refunded';
+  
+  // Pricing Breakdown
   total_amount: number;
+  subtotal_amount: number;
+  discount_amount: number;
+  shipping_fee: number;
+  cod_fee: number;
+  
+  // Promo Code
+  promo_code?: string;
+  
+  // Addresses
   shipping_address: Address;
   billing_address: Address;
+  
+  // Shipping Tracking
+  tracking_number?: string;
+  shipped_at?: string;
+  delivered_at?: string;
+  estimated_delivery_start?: string;
+  estimated_delivery_end?: string;
+  shipping_zone?: string;
+  
+  // Additional Metadata
+  notes?: string;
+  cancellation_reason?: string;
+  cancelled_at?: string;
+  
+  // Timestamps
   created_at: string;
   updated_at: string;
+  
+  // Relations
   order_items?: OrderItem[];
 }
 
