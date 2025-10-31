@@ -5,6 +5,7 @@ import { Product, Category } from '../types/database';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { Search, SlidersHorizontal, X, Filter } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const ShopPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -110,6 +111,12 @@ const ShopPage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-20 bg-ivory">
+      <SEO 
+        title="Shop Premium Til-Gud Sweets | MitthuuG"
+        description="Browse our collection of authentic handcrafted Til-Gud, traditional Indian sweets, and festive treats. All-natural ingredients, no preservatives. Free shipping on orders above ₹500."
+        keywords="buy til gud online, tilgul sweets, indian sweets online, traditional sweets, sesame jaggery ladoo, makar sankranti sweets, order sweets online"
+      />
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-12 text-center">

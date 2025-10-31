@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Instagram, Facebook, Twitter } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -35,6 +36,12 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-ivory-50 py-12">
+      <SEO 
+        title="Contact Us | MitthuuG"
+        description="Get in touch with MitthuuG. Contact us for inquiries about our til-gud sweets, bulk orders, or customer support. We're here to help!"
+        keywords="contact mitthuug, customer support, contact details, email, phone number, bulk orders"
+      />
+      
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">

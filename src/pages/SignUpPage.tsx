@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, User, AlertCircle, Sparkles, Leaf, CheckCircle } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -58,6 +59,12 @@ const SignUpPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-12">
+      <SEO 
+        title="Create Your Account | MitthuuG"
+        description="Join MitthuuG and discover premium Til-Gud sweets. Create your account to enjoy exclusive offers, track orders, and get personalized recommendations."
+        keywords="mitthuug signup, create account, register, new customer"
+      />
+      
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">

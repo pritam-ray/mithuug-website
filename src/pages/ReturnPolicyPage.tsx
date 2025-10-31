@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { RefreshCw, ArrowLeft, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const ReturnPolicyPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-20 bg-ivory-50">
+      <SEO 
+        title="Return & Refund Policy | MitthuuG"
+        description="MitthuuG's return and refund policy. 7-day return window, easy refund process, and customer satisfaction guaranteed. Learn about eligible items and return procedures."
+        keywords="return policy, refund policy, product returns, money back, customer returns"
+      />
+      
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link to="/" className="inline-flex items-center space-x-2 text-ochre-600 hover:text-ochre-700 mb-8">
           <ArrowLeft className="w-5 h-5" />

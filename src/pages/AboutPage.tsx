@@ -1,10 +1,17 @@
 import React from 'react';
 import { Heart, Sparkles, Award, Users, Leaf, Star, Shield, Train } from 'lucide-react';
 import { mitthuExpressStations } from '../data/content';
+import SEO from '../components/SEO';
 
 const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-20 bg-ivory">
+      <SEO 
+        title="About MitthuuG - The Mitthu Express Journey | Our Story"
+        description="Discover the story behind MitthuuG - from a childhood memory to India's premium Til-Gud brand. Learn about our commitment to authentic recipes, natural ingredients, and bringing GUD vibes to every home."
+        keywords="mitthuug story, about mitthuug, til gud brand, traditional indian sweets company, handcrafted sweets india, natural sweets brand"
+      />
+      
       {/* Hero Section */}
       <section className="py-24 px-4 bg-gradient-to-br from-ochre via-gold-100 to-ivory">
         <div className="max-w-4xl mx-auto text-center">

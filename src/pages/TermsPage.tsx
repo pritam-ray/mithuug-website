@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, ArrowLeft } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const TermsPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-20 bg-ivory-50">
+      <SEO 
+        title="Terms & Conditions | MitthuuG"
+        description="Read MitthuuG's terms and conditions for using our website, ordering products, shipping policies, and return guidelines."
+        keywords="terms and conditions, terms of service, user agreement, mitthuug terms"
+      />
+      
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link to="/" className="inline-flex items-center space-x-2 text-ochre-600 hover:text-ochre-700 mb-8">
           <ArrowLeft className="w-5 h-5" />

@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles } from 'lucide-react';
 import ReviewSection from '../components/ReviewSection';
 import { mitthuugProducts } from '../data/products';
+import SEO from '../components/SEO';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -122,6 +123,7 @@ const ProductDetailPage: React.FC = () => {
   if (!product) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
+        <SEO title="Product Not Found | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl text-stone-900 mb-4">Product not found</h2>
           <Link to="/shop" className="text-stone-600 hover:text-stone-900">
@@ -137,6 +139,13 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-20 bg-ivory">
+      <SEO 
+        title={`${product.name} - Premium Til-Gud | MitthuuG`}
+        description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹500.`}
+        keywords={`${product.name}, buy ${product.name} online, til gud ${product.name}, traditional indian sweets, handcrafted sweets`}
+        ogImage={product.image_url}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
         <Link
           to="/shop"

@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, ArrowLeft } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-20 bg-ivory-50">
+      <SEO 
+        title="Privacy Policy | MitthuuG"
+        description="Read MitthuuG's privacy policy to understand how we collect, use, and protect your personal information. Your privacy and data security are our priorities."
+        keywords="privacy policy, data protection, user privacy, mitthuug privacy"
+      />
+      
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Back Button */}
         <Link

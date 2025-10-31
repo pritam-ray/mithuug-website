@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, Clock, ArrowRight, Tag, Search } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface BlogPost {
   id: number;
@@ -100,6 +101,12 @@ const BlogPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-ivory-50 py-12">
+      <SEO 
+        title="Blog - Stories & Recipes | MitthuuG"
+        description="Explore MitthuuG's blog for authentic til-gud recipes, health benefits, cultural traditions, and heartwarming stories about India's favorite winter sweet."
+        keywords="til gud recipes, sesame jaggery benefits, indian sweet recipes, makar sankranti traditions, winter foods blog"
+      />
+      
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">

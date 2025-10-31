@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, AlertCircle, Sparkles, Leaf } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -34,6 +35,12 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-12">
+      <SEO 
+        title="Login to Your Account | MitthuuG"
+        description="Sign in to your MitthuuG account to track orders, manage your wishlist, and enjoy exclusive offers on premium Til-Gud sweets."
+        keywords="mitthuug login, customer login, account signin"
+      />
+      
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">

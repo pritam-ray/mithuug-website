@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Address } from '../types/database';
 import { CreditCard, Lock } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ const CheckoutPage: React.FC = () => {
   if (!user) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
+        <SEO title="Checkout - Sign In Required | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl text-stone-900 mb-4">Please sign in to checkout</h2>
           <button
@@ -121,6 +123,12 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-20 bg-stone-50">
+      <SEO 
+        title="Secure Checkout | MitthuuG"
+        description="Complete your order securely. Fast shipping, multiple payment options, and guaranteed freshness on all Til-Gud sweets."
+        keywords="checkout, buy til gud, order sweets, secure payment"
+      />
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
           Checkout

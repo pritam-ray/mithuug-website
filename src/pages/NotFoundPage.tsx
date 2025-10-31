@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Search, ShoppingBag, Sparkles } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-20 bg-gradient-to-br from-ivory-50 to-ochre-50 flex items-center justify-center px-4">
+      <SEO 
+        title="Page Not Found (404) | MitthuuG"
+        description="The page you're looking for doesn't exist. Return to MitthuuG's homepage to explore our premium til-gud sweets."
+      />
+      
       <div className="max-w-2xl mx-auto text-center">
         {/* Decorative Elements */}
         <div className="relative inline-block mb-8">
