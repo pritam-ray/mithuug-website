@@ -7,6 +7,7 @@ import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
+import Breadcrumb from './components/Breadcrumb';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -35,6 +36,7 @@ function App() {
             <ToastProvider>
               <div className="min-h-screen bg-white">
                 <Navbar onCartClick={() => setIsCartOpen(true)} />
+                <Breadcrumb />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
