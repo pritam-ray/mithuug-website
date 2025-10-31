@@ -323,9 +323,7 @@ const ProductDetailPage: React.FC = () => {
         </div>
 
         <ReviewSection
-          productId={product.id}
-          reviews={reviews}
-          onReviewSubmit={loadReviews}
+          product_id={product.id}
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, TrendingUp, Heart, PackageCheck, Leaf } from 'luc
 import { supabase } from '../lib/supabase';
 import { Product } from '../types/database';
 import ProductCard from '../components/ProductCard';
+import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { heroCopy, primaryUSPs } from '../data/content';
 
 const HomePage: React.FC = () => {
@@ -161,11 +162,15 @@ const HomePage: React.FC = () => {
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {newProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
+                {loading ? (
+                  <ProductGridSkeleton count={3} />
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {newProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                )}
               </div>
             </section>
           )}
@@ -190,11 +195,15 @@ const HomePage: React.FC = () => {
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {bestsellers.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
+                {loading ? (
+                  <ProductGridSkeleton count={3} />
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {bestsellers.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                )}
               </div>
             </section>
           )}

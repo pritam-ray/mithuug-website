@@ -15,6 +15,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AccountPage from './pages/AccountPage';
 import CheckoutPage from './pages/CheckoutPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -36,6 +37,7 @@ function App() {
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/account/*" element={<AccountPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />
             <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Product, Category } from '../types/database';
 import ProductCard from '../components/ProductCard';
+import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { Search, SlidersHorizontal, X, Filter } from 'lucide-react';
 
 const ShopPage: React.FC = () => {
@@ -245,12 +246,7 @@ const ShopPage: React.FC = () => {
             </div>
 
             {loading ? (
-              <div className="flex items-center justify-center h-64 bg-white rounded-2xl border-2 border-ochre-100">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ochre mx-auto mb-4"></div>
-                  <p className="text-chocolate-600 font-semibold">Loading delicious bites...</p>
-                </div>
-              </div>
+              <ProductGridSkeleton count={6} />
             ) : products.length === 0 ? (
               <div className="text-center py-24 bg-white rounded-2xl border-2 border-ochre-100">
                 <p className="text-chocolate-600 text-lg font-playfair mb-4">No products found</p>
