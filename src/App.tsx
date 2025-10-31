@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
@@ -25,34 +26,36 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <div className="min-h-screen bg-white">
-            <Navbar onCartClick={() => setIsCartOpen(true)} />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/shop" element={<ShopPage />} />
-              <Route path="/product/:id" element={<ProductDetailPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/account/*" element={<AccountPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/privacy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="/shipping" element={<ShippingPolicyPage />} />
-              <Route path="/returns" element={<ReturnPolicyPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-            <Footer />
-            <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-          </div>
-        </CartProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <CartProvider>
+            <div className="min-h-screen bg-white">
+              <Navbar onCartClick={() => setIsCartOpen(true)} />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/shop" element={<ShopPage />} />
+                <Route path="/product/:id" element={<ProductDetailPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/account/*" element={<AccountPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/shipping" element={<ShippingPolicyPage />} />
+                <Route path="/returns" element={<ReturnPolicyPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+              <Footer />
+              <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            </div>
+          </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

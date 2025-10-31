@@ -6,6 +6,7 @@ import { Product } from '../types/database';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { heroCopy, primaryUSPs } from '../data/content';
+import SEO from '../components/SEO';
 
 const HomePage: React.FC = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([]);
@@ -47,6 +48,13 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="MitthuuG - Premium Til-Gud & Traditional Indian Sweets"
+        description="Discover authentic, handcrafted Til-Gud (sesame jaggery sweets) and traditional Indian delicacies. Made with 100% natural ingredients, celebrating India's sweet heritage with every bite."
+        keywords="til gud, tilgul, sesame jaggery sweets, indian sweets, traditional sweets, natural sweets, handcrafted sweets, makar sankranti sweets"
+        ogImage="https://pritam-ray.github.io/mithuug-website/og-image.jpg"
+      />
+      
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-ivory via-ochre-50 to-gold-50">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/4198170/pexels-photo-4198170.jpeg')] bg-cover bg-center opacity-5"></div>
