@@ -1,0 +1,566 @@
+{
+  "hero_copy": {
+    "variants": {
+      "short_30": "GUD vibes, pure nostalgia 🍯",
+      "medium_60": "Sesame. Jaggery. Nostalgia. — The GUD Bites you grew up with.",
+      "long_120": "Handcrafted Til-Gud bites that bring back childhood memories — made with pure jaggery, toasted sesame, and zero guilt."
+    },
+    "full_paragraph": "Remember those golden winter evenings when Nani would slip you a piece of til-gud? That crunch, that warmth, that feeling of home? We've bottled it. MitthuuG brings you artisan GUD Bites — handcrafted in small batches with pure jaggery, premium sesame, and a whole lot of pyaar. No refined sugar. No preservatives. Just the nostalgia you crave and the energy you need. From our Mitthu Express kitchen to your chai-time ritual — welcome aboard!",
+    "subheadline": "Artisan Til-Gud Bites | Handcrafted Daily | Station-to-Snack Freshness",
+    "cta_primary": "Order Your First Box",
+    "cta_secondary": "Explore Our Journey"
+  },
+  "usps": [
+    {
+      "title": "100% Natural Sweetness",
+      "support_line": "Only pure jaggery — no refined sugar, no guilt, just GUD vibes.",
+      "icon_suggestion": "leaf OR honey-drop",
+      "emoji": "🍯"
+    },
+    {
+      "title": "Handcrafted in Small Batches",
+      "support_line": "Each batch made fresh at our Mitthu Express kitchen with love.",
+      "icon_suggestion": "hands OR chef-hat",
+      "emoji": "👨‍🍳"
+    },
+    {
+      "title": "Nostalgia You Can Taste",
+      "support_line": "Traditional recipes reimagined for modern snacking — taste the memories.",
+      "icon_suggestion": "heart OR vintage-camera",
+      "emoji": "❤️"
+    }
+  ],
+  "products": [
+    {
+      "sku": "MG-TIL-CL-100",
+      "title": "Classic Til-Gud Bites",
+      "short_desc": "Crispy sesame & jaggery bites made for everyday snacking.",
+      "long_desc": "Our signature Til-Gud Bites combine earthy sesame seeds with pure jaggery, delivering warmth, crunch, and nostalgia in every bite. Roasted to perfection at our Mitthu Express Station 3 kitchen, these golden beauties are your go-to winter energy snack. Perfect with chai, perfect as a midday pick-me-up, perfect for sharing (but we won't judge if you don't). No refined sugar, no preservatives — just the GUD stuff your Nani would approve of.",
+      "bullets": [
+        "Handcrafted in small batches daily",
+        "100% natural jaggery — no refined sugar",
+        "Rich in iron, calcium & natural energy",
+        "Perfect winter warming snack",
+        "Stays fresh for 6 months in airtight pack"
+      ],
+      "ingredients": "Sesame seeds (49%), Jaggery (49%), Cardamom, Pure Ghee",
+      "nutrition_highlights": {
+        "Energy": "420 kcal/100g",
+        "Protein": "10g",
+        "Total Fat": "15g",
+        "Carbohydrates": "65g",
+        "Fiber": "8g",
+        "Iron": "15% DV",
+        "Calcium": "12% DV"
+      },
+      "alt_text": "Classic Til-Gud Bites – Golden sesame jaggery snack by MitthuuG in artisan packaging",
+      "meta_title": "Classic Til Gud Bites | Pure Jaggery Sesame Snack - MitthuuG",
+      "meta_description": "Handcrafted Til Gud Bites with sesame & pure jaggery. No refined sugar. Traditional taste, modern freshness. Order India's favorite winter snack.",
+      "price": "₹249",
+      "weight": "100g",
+      "serves": "4-5 servings"
+    },
+    {
+      "sku": "MG-TIL-CD-100",
+      "title": "Cardamom Til-Gud Bites",
+      "short_desc": "Aromatic cardamom meets sesame gold — a premium twist on tradition.",
+      "long_desc": "For those who like their nostalgia with a hint of royal. Our Cardamom Til-Gud Bites layer premium green cardamom into the classic sesame-jaggery base, creating a fragrant, warming snack that's perfect for gifting or indulging. Each bite releases a burst of elaichi aroma that pairs beautifully with masala chai or evening coffee. Made at Mitthu Express Station 3 with hand-selected spices and small-batch care. This isn't just a snack — it's an experience.",
+      "bullets": [
+        "Premium green cardamom infused",
+        "Aromatic & warming flavor profile",
+        "Handcrafted with hand-selected spices",
+        "Perfect pairing with chai or coffee",
+        "Elegant gift option for festivals"
+      ],
+      "ingredients": "Sesame seeds (47%), Jaggery (47%), Green Cardamom (4%), Pure Ghee, Rose Water",
+      "nutrition_highlights": {
+        "Energy": "425 kcal/100g",
+        "Protein": "10g",
+        "Total Fat": "15g",
+        "Carbohydrates": "66g",
+        "Fiber": "8g",
+        "Antioxidants": "High (from cardamom)"
+      },
+      "alt_text": "Cardamom Til-Gud Bites – Premium aromatic sesame jaggery snack with green cardamom",
+      "meta_title": "Cardamom Til Gud | Aromatic Sesame Snack - MitthuuG",
+      "meta_description": "Premium Cardamom Til Gud Bites — handcrafted with green elaichi & pure jaggery. Perfect gift for festivals. Order artisan Indian sweets online.",
+      "price": "₹299",
+      "weight": "100g",
+      "serves": "4-5 servings"
+    },
+    {
+      "sku": "MG-TIL-AL-100",
+      "title": "Almond Til-Gud Bites",
+      "short_desc": "Crunchy almonds meet sesame crunch — protein-packed indulgence.",
+      "long_desc": "Upgrade your snack game with our Almond Til-Gud Bites — a protein-rich fusion of toasted sesame, pure jaggery, and premium California almonds. Every bite delivers double crunch, double nutrition, and double the reason to feel good about snacking. Ideal for fitness enthusiasts, busy professionals, or anyone who wants their nostalgia with a nutty twist. Handcrafted at Mitthu Express with the same love as Nani's kitchen, but with a modern nutritional edge.",
+      "bullets": [
+        "Premium California almonds added",
+        "High protein & healthy fats",
+        "Perfect post-workout energy snack",
+        "Satisfying double-crunch texture",
+        "No refined sugar or preservatives"
+      ],
+      "ingredients": "Sesame seeds (40%), Jaggery (40%), Almonds (18%), Cardamom, Pure Ghee",
+      "nutrition_highlights": {
+        "Energy": "480 kcal/100g",
+        "Protein": "14g",
+        "Total Fat": "22g",
+        "Carbohydrates": "58g",
+        "Fiber": "10g",
+        "Vitamin E": "20% DV"
+      },
+      "alt_text": "Almond Til-Gud Bites – Protein-rich sesame jaggery snack with premium almonds",
+      "meta_title": "Almond Til Gud | Protein Sesame Snack - MitthuuG",
+      "meta_description": "Almond Til Gud Bites with premium nuts & pure jaggery. High protein, zero refined sugar. Healthy Indian snack for fitness & energy.",
+      "price": "₹349",
+      "weight": "100g",
+      "serves": "4-5 servings"
+    },
+    {
+      "sku": "MG-TRIAL-50",
+      "title": "MitthuuG Trial Pack",
+      "short_desc": "New to GUD Bites? Start here — 50g of pure nostalgia.",
+      "long_desc": "Not sure which flavor to commit to? We get it. Our Trial Pack gives you 50g of our Classic Til-Gud Bites at a special introductory price — just enough to fall in love without the commitment. Think of it as your first stop on the Mitthu Express journey. One taste and you'll understand why thousands of snack lovers have already hopped aboard. Perfect for first-timers, gifting sampler sets, or stashing in your bag for emergencies (we won't tell).",
+      "bullets": [
+        "Perfect introduction size",
+        "Classic Til-Gud flavor",
+        "Special introductory pricing",
+        "Portable pouch packaging",
+        "Ideal for travel or desk snacking"
+      ],
+      "ingredients": "Sesame seeds (49%), Jaggery (49%), Cardamom, Pure Ghee",
+      "nutrition_highlights": {
+        "Energy": "420 kcal/100g",
+        "Protein": "10g",
+        "Total Fat": "15g",
+        "Carbohydrates": "65g",
+        "Shelf Life": "6 months"
+      },
+      "alt_text": "MitthuuG Trial Pack – 50g introductory pack of Classic Til-Gud Bites",
+      "meta_title": "Try MitthuuG | 50g Trial Pack - Til Gud Bites",
+      "meta_description": "Try MitthuuG Til Gud Bites with our 50g Trial Pack. Pure jaggery, sesame crunch, no refined sugar. Your first taste of nostalgia.",
+      "price": "₹99",
+      "weight": "50g",
+      "serves": "2 servings"
+    },
+    {
+      "sku": "MG-GIFT-500",
+      "title": "MitthuuG Premium Gift Box",
+      "short_desc": "Share GUD vibes — 500g of artisan bites in premium packaging.",
+      "long_desc": "The perfect gift speaks without words. Our Premium Gift Box delivers 500g of handcrafted Til-Gud goodness in elegant, festival-ready packaging that honors tradition while looking utterly Instagram-worthy. Choose from Classic, Cardamom, or Almond varieties, or mix all three. Ideal for Diwali, Makar Sankranti, corporate gifting, or showing someone you care (the delicious way). Each box comes with a handwritten note option and our signature Mitthu Express journey card. Because some gifts are worth savoring.",
+      "bullets": [
+        "Premium festival-ready packaging",
+        "500g of handcrafted GUD Bites",
+        "Choice of single or mixed flavors",
+        "Includes handwritten note option",
+        "Perfect for Diwali, Sankranti & corporate gifts"
+      ],
+      "ingredients": "Varies by flavor selection (Classic/Cardamom/Almond)",
+      "nutrition_highlights": {
+        "Total Servings": "20-25",
+        "Energy": "420-480 kcal/100g",
+        "Packaging": "Eco-friendly, reusable box",
+        "Shelf Life": "6 months"
+      },
+      "alt_text": "MitthuuG Premium Gift Box – 500g artisan Til-Gud Bites in festival packaging",
+      "meta_title": "Premium Gift Box 500g | MitthuuG Til Gud - Festival Gifting",
+      "meta_description": "Premium Til Gud Gift Box — 500g handcrafted bites in elegant packaging. Perfect for Diwali, Sankranti & corporate gifting. Order now.",
+      "price": "₹999",
+      "weight": "500g",
+      "serves": "20-25 servings",
+      "customization": "Mix flavors available"
+    }
+  ],
+  "microcopy": {
+    "cart": {
+      "empty_state": "Your cart is feeling lonely — add some GUD vibes! 🛒",
+      "add_to_cart": "Add to Cart",
+      "added_confirmation": "Added! Keep shopping or checkout?",
+      "continue_shopping": "Keep Browsing",
+      "checkout_button": "Checkout Securely",
+      "subtotal_label": "Subtotal",
+      "shipping_note": "Free shipping on orders above ₹499",
+      "discount_applied": "Yay! Discount applied ✨"
+    },
+    "checkout": {
+      "page_title": "Almost there — complete your order",
+      "shipping_heading": "Where should we send your GUD Bites?",
+      "payment_heading": "Choose your payment method",
+      "order_summary": "Your Order Summary",
+      "secure_badge": "🔒 Secure & encrypted checkout",
+      "place_order_button": "Complete Order",
+      "processing_message": "Processing your order... hang tight!"
+    },
+    "coupons": {
+      "placeholder": "Have a coupon code?",
+      "apply_button": "Apply",
+      "invalid_message": "Oops! This code isn't valid.",
+      "success_message": "Woohoo! You saved {{amount}}",
+      "first_order_10": "FIRST10",
+      "festival_15": "FESTIVEGUD",
+      "refer_friend": "SHAREGUD"
+    },
+    "notifications": {
+      "order_placed": "Order confirmed! Check your email for details 📧",
+      "shipped": "Your GUD Bites are on the way! Track your order here.",
+      "delivered": "Delivered! Hope you love your MitthuuG Bites ❤️",
+      "out_of_stock": "This flavor just sold out — but we're making more!",
+      "back_in_stock": "Good news! {{product}} is back in stock 🎉"
+    }
+  },
+  "emails": {
+    "welcome": {
+      "subject_lines": [
+        "Welcome to the GUD side of snacking! (10% off inside)",
+        "Your Mitthu Express journey starts here — claim your discount",
+        "You're in! Here's 10% off your first MitthuuG order"
+      ],
+      "body": "Namaste!\n\nWelcome aboard the Mitthu Express! 🚂\n\nWe're thrilled you've joined thousands of snack lovers who've rediscovered the magic of traditional Til-Gud — now made fresh, modern, and guilt-free.\n\nHere's a little welcome gift to get you started:\n\n**Use code FIRST10 for 10% off your first order**\n\nWhether you're craving nostalgia or looking for a natural energy boost, our handcrafted GUD Bites deliver both. Made with pure jaggery, toasted sesame, and zero refined sugar — just like Nani used to make, but better.\n\nNot sure where to start? Try our Trial Pack (₹99) or dive straight into a 100g box.\n\nQuestions? Hit reply — we read every email.\n\nHappy snacking,\nTeam MitthuuG\n\nP.S. Follow our Mitthu Express journey on Instagram @mitthuug for behind-the-scenes kitchen stories!",
+      "cta": "Shop Now & Save 10%",
+      "cta_url": "/shop"
+    },
+    "post_purchase": {
+      "subject_lines": [
+        "Your GUD Bites are on their way! 📦",
+        "Order confirmed — track your Mitthu Express delivery",
+        "Thank you for ordering! Your snacks are coming home"
+      ],
+      "body": "Hi {{first_name}},\n\nYour order is confirmed and your MitthuuG Bites are being packed with love! 📦\n\n**Order #{{order_number}}** is now in our Mitthu Express kitchen. We're handcrafting your bites fresh and they'll ship within 24-48 hours.\n\n**What happens next?**\n1. We pack your order with care\n2. You'll get a tracking link via SMS/email\n3. Your bites arrive fresh in 3-5 days\n\nWhile you wait, here's what our community is saying:\n\n\"MitthuuG brought back my childhood winters — one bite at a time!\" - Priya, Mumbai\n\n**First-time customer?** We'd love to hear what you think! Reply to this email or tag us on Instagram @mitthuug.\n\n**Pro tip:** Store your bites in an airtight container for maximum freshness (they'll stay perfect for 6 months).\n\nThank you for choosing MitthuuG — we can't wait for you to taste the nostalgia.\n\nWith GUD vibes,\nTeam MitthuuG",
+      "cta": "Track Your Order",
+      "cta_url": "/track-order"
+    },
+    "cart_abandonment": {
+      "email_1": {
+        "subject_lines": [
+          "You left something behind... 🛒",
+          "Still thinking about those GUD Bites?",
+          "Your cart is waiting (and so are we!)"
+        ],
+        "body": "Hi there,\n\nWe noticed you left some GUD Bites in your cart — no worries, we've saved them for you!\n\nYour cart:\n{{cart_items}}\n\nNeed help deciding? Our Trial Pack (₹99) is perfect for first-timers, or go big with our Premium Gift Box.\n\nQuestions? Just hit reply.\n\nHappy to help,\nTeam MitthuuG",
+        "cta": "Complete Your Order",
+        "send_after": "2 hours"
+      },
+      "email_2": {
+        "subject_lines": [
+          "Here's 10% off to sweeten the deal 🍯",
+          "Still interested? We're offering you a discount",
+          "Your cart + 10% off = perfect match"
+        ],
+        "body": "Hi {{first_name}},\n\nWe really want you to try MitthuuG, so here's a special offer:\n\n**Get 10% off your cart with code COMEBACK10**\n\nYour items are still waiting:\n{{cart_items}}\n\nThis code expires in 24 hours — don't miss out on handcrafted nostalgia!\n\nQuestions? We're here.\n\nTeam MitthuuG",
+        "cta": "Claim Your Discount",
+        "send_after": "24 hours"
+      },
+      "email_3": {
+        "subject_lines": [
+          "Last chance — your cart expires soon",
+          "We're holding your GUD Bites for 2 more hours",
+          "Final reminder: Your MitthuuG cart is waiting"
+        ],
+        "body": "Hi {{first_name}},\n\nJust a friendly heads-up — we can only hold your cart for a few more hours.\n\nYour items:\n{{cart_items}}\n\n**Your COMEBACK10 discount expires tonight at midnight.**\n\nReady to try India's most-loved artisan Til-Gud? We're standing by.\n\nTeam MitthuuG\n\nP.S. No pressure — but thousands of happy customers can't be wrong 😊",
+        "cta": "Complete Checkout Now",
+        "send_after": "48 hours"
+      }
+    },
+    "loyalty_referral": {
+      "subject_lines": [
+        "Share GUD vibes, earn ₹100 rewards! 🎁",
+        "Your friends need MitthuuG — and you'll get rewarded",
+        "Spread the nostalgia, stack the rewards"
+      ],
+      "body": "Hi {{first_name}},\n\nLove MitthuuG? Share the GUD vibes with friends and family!\n\n**Here's how our referral program works:**\n\n1. Share your unique link: {{referral_link}}\n2. Your friend gets 15% off their first order\n3. You earn ₹100 credit when they purchase\n\n**No limits.** Refer 10 friends = ₹1,000 in rewards. Use your credits on future orders or gift them to loved ones.\n\n**Bonus:** Every 5 referrals earns you a FREE 100g box of your choice.\n\nReady to spread the nostalgia?\n\nStart sharing today,\nTeam MitthuuG\n\nP.S. Your current reward balance: ₹{{reward_balance}}",
+      "cta": "Share Your Link",
+      "cta_url": "/referral-program"
+    }
+  },
+  "blog_topics": [
+    {
+      "title": "Why Sesame & Jaggery Make the Perfect Winter Snack",
+      "slug": "sesame-jaggery-winter-snack-benefits",
+      "meta_title": "Why Til-Gud is the Perfect Winter Snack | Health Benefits",
+      "meta_description": "Discover why sesame & jaggery (Til-Gud) are Ayurvedic winter superfoods. Learn health benefits, nutrition facts & traditional recipes.",
+      "keywords": ["til gud benefits", "sesame jaggery health", "winter snacks India", "ayurvedic foods"],
+      "word_count": 850,
+      "outline": "Introduction: The wisdom of seasonal eating | Section 1: Sesame's warming properties (iron, calcium, healthy fats) | Section 2: Jaggery as a natural energy source | Section 3: Ayurvedic perspective on winter foods | Section 4: Modern nutritional science backing | Conclusion: How MitthuuG honors this tradition | CTA: Try our Classic Til-Gud Bites"
+    },
+    {
+      "title": "How to Gift Traditional Sweets the Modern Way",
+      "slug": "modern-indian-sweet-gifting-guide",
+      "meta_title": "Modern Indian Sweet Gifting Guide | Festival Gift Ideas",
+      "meta_description": "Elevate your festival gifting with modern Indian sweets. Tips for Diwali, Sankranti & corporate gifts with traditional flavors.",
+      "keywords": ["Diwali gifts", "Indian sweet boxes", "corporate gifting India", "festival hampers"],
+      "word_count": 800,
+      "outline": "Introduction: The evolution of mithai gifting | Section 1: Why presentation matters | Section 2: Choosing quality over quantity | Section 3: Personalizing traditional gifts | Section 4: Corporate gifting etiquette | Section 5: MitthuuG's Premium Gift Box showcase | Conclusion: Gifting with meaning | CTA: Shop Gift Boxes"
+    },
+    {
+      "title": "5 Ways to Enjoy MitthuuG Bites (Beyond Snacking)",
+      "slug": "creative-ways-enjoy-til-gud-bites",
+      "meta_title": "5 Creative Ways to Enjoy Til-Gud Bites | Recipe Ideas",
+      "meta_description": "Discover 5 delicious ways to enjoy MitthuuG Til-Gud Bites — from dessert toppings to chai pairings. Get creative with your snacks!",
+      "keywords": ["til gud recipes", "sesame snack ideas", "Indian snack pairings", "dessert toppings"],
+      "word_count": 750,
+      "outline": "Introduction: Your versatile GUD companion | Idea 1: Crushed over kulfi or ice cream | Idea 2: Paired with masala chai or filter coffee | Idea 3: Mixed into yogurt bowls | Idea 4: As an energy boost pre-workout | Idea 5: In trail mix with dry fruits | Conclusion: Get creative! | CTA: Order your favorite flavor"
+    },
+    {
+      "title": "Behind the GUD Bites — Our Mitthu Express Kitchen Story",
+      "slug": "mitthuug-kitchen-story-mitthu-express",
+      "meta_title": "Our Story | How MitthuuG GUD Bites Are Made",
+      "meta_description": "Go behind the scenes at MitthuuG's Mitthu Express kitchen. Learn how we handcraft traditional Til-Gud with modern quality standards.",
+      "keywords": ["MitthuuG story", "artisan food India", "handcrafted sweets", "food brand journey"],
+      "word_count": 900,
+      "outline": "Introduction: Every bite tells a story | Station 1: The inspiration (childhood memories) | Station 2: Recipe development & testing | Station 3: Our kitchen setup & hygiene standards | Station 4: Ingredient sourcing (jaggery from Maharashtra, sesame from Gujarat) | Station 5: The handcrafting process | Station 6: Packaging & delivery | Conclusion: Join our journey | CTA: Follow on Instagram"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is MitthuuG sugar-free?",
+      "answer": "We use only natural jaggery (gud) as our sweetener — absolutely no refined white sugar. Jaggery is a healthier alternative with minerals like iron and magnesium, and it has a lower glycemic index than refined sugar."
+    },
+    {
+      "question": "How long do GUD Bites stay fresh?",
+      "answer": "Our GUD Bites stay fresh for up to 6 months when stored in an airtight container in a cool, dry place. We handcraft every batch to order, so you always receive the freshest product."
+    },
+    {
+      "question": "Are your products suitable for vegans?",
+      "answer": "Our Classic and Cardamom variants contain ghee (clarified butter), so they're vegetarian but not vegan. We're working on a vegan version — stay tuned!"
+    },
+    {
+      "question": "Do you ship pan-India?",
+      "answer": "Yes! We ship across India via trusted courier partners. Orders are typically delivered within 3-5 business days. Free shipping on orders above ₹499."
+    },
+    {
+      "question": "What makes MitthuuG different from regular til-gud?",
+      "answer": "We combine traditional recipes with modern hygiene standards and premium ingredients. Every batch is handcrafted in small quantities, quality-tested, and packed fresh. Plus, our packaging is Instagram-worthy and gift-ready!"
+    },
+    {
+      "question": "Can I customize a gift box?",
+      "answer": "Absolutely! Our Premium Gift Box allows you to choose a single flavor or mix all three. You can also add a personalized handwritten note during checkout."
+    },
+    {
+      "question": "Are there any allergens in your products?",
+      "answer": "Our products contain sesame seeds and may contain traces of nuts (especially the Almond variant). We also use ghee (dairy). Please check individual product pages for detailed ingredient lists."
+    },
+    {
+      "question": "What is the Mitthu Express?",
+      "answer": "Mitthu Express is our journey — from recipe testing to kitchen setup to your doorstep. We share behind-the-scenes stories on Instagram, making you part of our growth. Every 'Station' represents a milestone!"
+    },
+    {
+      "question": "Do you offer bulk orders for corporate gifting?",
+      "answer": "Yes! We offer special pricing and customization for corporate orders above 25 boxes. Email us at hello@mitthuug.com or WhatsApp +91-XXXXXXXXXX for details."
+    },
+    {
+      "question": "Can I return or exchange my order?",
+      "answer": "Due to the handcrafted food nature of our products, we don't accept returns on opened packages. However, if you receive a damaged or incorrect order, contact us within 24 hours for a replacement or refund."
+    },
+    {
+      "question": "Are your products made in a certified kitchen?",
+      "answer": "Yes! Our Mitthu Express kitchen is FSSAI-certified and follows strict hygiene protocols. Every batch is made in a clean, controlled environment."
+    },
+    {
+      "question": "What payment methods do you accept?",
+      "answer": "We accept UPI, debit/credit cards, net banking, and cash on delivery (COD) for orders below ₹2,000. All payments are processed securely."
+    },
+    {
+      "question": "Do you have a subscription service?",
+      "answer": "Not yet, but it's coming soon! Join our newsletter to be the first to know when we launch monthly subscription boxes."
+    },
+    {
+      "question": "Where do you source your ingredients?",
+      "answer": "We source premium sesame from Gujarat, organic jaggery from Maharashtra, and California almonds for our Almond variant. Quality is non-negotiable at MitthuuG."
+    },
+    {
+      "question": "Can I track my order?",
+      "answer": "Yes! Once your order ships, you'll receive a tracking link via SMS and email. You can also track from your account dashboard on our website."
+    }
+  ],
+  "seo_metadata": {
+    "homepage": {
+      "meta_title": "MitthuuG — Handcrafted Til-Gud Bites | Pure Jaggery Sesame Snacks",
+      "meta_description": "Order artisan Til-Gud Bites handcrafted with pure jaggery & sesame. No refined sugar. Traditional taste, modern freshness. Free shipping above ₹499.",
+      "keywords": ["til gud online", "sesame jaggery snacks", "handcrafted Indian sweets", "natural energy snacks", "festival gifting India"],
+      "og_title": "MitthuuG — Nostalgia You Can Taste",
+      "og_description": "Handcrafted Til-Gud Bites made with pure jaggery, toasted sesame, and zero guilt. Shop now!",
+      "og_image_url": "/images/og-mitthuug-hero.jpg"
+    },
+    "shop_page": {
+      "meta_title": "Shop MitthuuG | Til-Gud Bites, Gift Boxes & Trial Packs",
+      "meta_description": "Browse our collection of handcrafted Til-Gud Bites — Classic, Cardamom, Almond & Gift Boxes. Made fresh, shipped fast. Order online.",
+      "keywords": ["buy til gud online", "sesame snacks India", "Indian festival sweets", "artisan food gifts"]
+    },
+    "product_category": {
+      "meta_title": "{{Category Name}} — MitthuuG Til-Gud Bites",
+      "meta_description": "Explore our {{category}} collection of handcrafted GUD Bites. Pure jaggery, premium ingredients, traditional recipes reimagined.",
+      "keywords": ["{{category}} til gud", "{{category}} sesame snacks", "handcrafted {{category}}"]
+    }
+  },
+  "schema_json_ld": {
+    "organization": {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MitthuuG",
+      "url": "https://www.mitthuug.com",
+      "logo": "https://www.mitthuug.com/logo.png",
+      "description": "Handcrafted Til-Gud Bites made with pure jaggery and sesame — traditional Indian snacks reimagined for modern snacking.",
+      "sameAs": [
+        "https://www.instagram.com/mitthuug",
+        "https://www.facebook.com/mitthuug",
+        "https://twitter.com/mitthuug"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-XXXXXXXXXX",
+        "contactType": "Customer Service",
+        "email": "hello@mitthuug.com"
+      }
+    },
+    "product_classic": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Classic Til-Gud Bites",
+      "image": "https://www.mitthuug.com/images/classic-til-gud.jpg",
+      "description": "Handcrafted sesame and jaggery bites made with pure ingredients and zero refined sugar. Traditional Indian winter snack.",
+      "sku": "MG-TIL-CL-100",
+      "brand": {
+        "@type": "Brand",
+        "name": "MitthuuG"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.mitthuug.com/products/classic-til-gud-bites",
+        "priceCurrency": "INR",
+        "price": "249",
+        "priceValidUntil": "2025-12-31",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "MitthuuG"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "287"
+      },
+      "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "420 kcal",
+        "proteinContent": "10g",
+        "fatContent": "15g",
+        "carbohydrateContent": "65g"
+      }
+    },
+    "product_cardamom": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cardamom Til-Gud Bites",
+      "image": "https://www.mitthuug.com/images/cardamom-til-gud.jpg",
+      "description": "Premium Til-Gud Bites infused with aromatic green cardamom. Perfect for gifting and chai time.",
+      "sku": "MG-TIL-CD-100",
+      "brand": {
+        "@type": "Brand",
+        "name": "MitthuuG"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.mitthuug.com/products/cardamom-til-gud-bites",
+        "priceCurrency": "INR",
+        "price": "299",
+        "priceValidUntil": "2025-12-31",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "MitthuuG"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "156"
+      }
+    }
+  },
+  "social_copy": {
+    "instagram": {
+      "product_launch": {
+        "caption": "Station 4 announcement! 🚂\n\nOur Classic Til-Gud Bites are LIVE and ready to ship! ✨\n\nCrunchy sesame. Golden jaggery. Zero refined sugar. 100% nostalgia.\n\nSwipe to see what goes into every batch → (it's a lot of love and a little bit of chaos 😅)\n\nFirst 50 orders get FREE shipping with code MITTHU50\n\nLink in bio 👆 or DM us to order!\n\n#MitthuuG #TilGud #HandcraftedSnacks #IndianSnacks #NaturalSweets #JaggeryLove #NostalgiaSnacking #MitthuExpress #FoodiesOfIndia #ArtisanFood",
+        "hashtags": "#MitthuuG #TilGud #HandcraftedSnacks #IndianSnacks #NaturalSweets #JaggeryLove #NoRefinedSugar #MitthuExpress #FoodiesOfIndia #TraditionalSnacks"
+      },
+      "behind_the_scenes": {
+        "caption": "POV: You're watching til-gud magic happen at 6 AM in our Mitthu Express kitchen ☀️\n\nThis is Ramesh Uncle — he's been roasting sesame seeds for 20+ years and taught us everything we know about getting that *perfect* golden crunch.\n\nEvery batch of MitthuuG starts here, with hands that know their craft.\n\nThis is what 'handcrafted' really means. 🙏\n\n(Also, the kitchen smells AMAZING right now)\n\n#BehindTheScenes #MitthuExpress #HandcraftedWithLove #ArtisanFood #SmallBatch #FoodCraft #MitthuuG",
+        "hashtags": "#BehindTheScenes #MitthuExpress #HandcraftedWithLove #ArtisanFood #IndianFoodCulture"
+      },
+      "testimonial_repost": {
+        "caption": "When customers become family 💛\n\nThank you @{{username}} for this beautiful review! Your words = our fuel to keep the Mitthu Express rolling.\n\n\"Tastes exactly like my Nani's til-gud but somehow BETTER\" — we'll take that as the highest compliment 🥹\n\nWant to share your MitthuuG moment? Tag us or use #MyMitthuuGMoment for a chance to be featured!\n\nOrder yours → Link in bio\n\n#CustomerLove #MitthuuG #TilGud #Reviews #HappyCustomers",
+        "hashtags": "#CustomerLove #MitthuuG #Testimonial #FoodReview #HappySnacking"
+      }
+    },
+    "twitter_x": {
+      "product_drop": "🚂 MITTHU EXPRESS UPDATE\n\nStation 4: Classic Til-Gud Bites are now LIVE!\n\n✅ Pure jaggery (no refined sugar)\n✅ Handcrafted daily\n✅ Ships across India\n\nFirst 50 orders → FREE shipping\nCode: MITTHU50\n\nOrder: [link]\n\n#MitthuuG #IndianSnacks #Foodie",
+      "festival_message": "This Makar Sankranti, let's bring back the REAL til-gud 🌾\n\nNo refined sugar.\nNo preservatives.\nJust pure nostalgia in every bite.\n\nMitthuuG — because some traditions deserve better.\n\nOrder now → [link]\n\n#MakarSankranti #TilGud #MitthuuG #TraditionalFood",
+      "engagement_poll": "Quick poll for our snack fam 👇\n\nHow do YOU eat your til-gud?\n\nA) With chai ☕\nB) Straight from the box 📦\nC) Crushed over dessert 🍨\nD) I hide it from everyone 🤫\n\nDrop your answer! Winner gets featured in our next post.\n\n#MitthuuG #SnackTime"
+    },
+    "whatsapp_broadcast": {
+      "order_confirmation": "🎉 Order Confirmed!\n\nHi {{name}},\n\nYour MitthuuG order #{{order_id}} is packed and ready to ship!\n\nExpected delivery: {{delivery_date}}\n\nTrack here: {{tracking_link}}\n\nQuestions? Just reply to this message.\n\nThank you for choosing MitthuuG! 🍯",
+      "flash_sale": "⚡ FLASH SALE ALERT!\n\n24 HOURS ONLY:\nFlat 20% OFF on ALL GUD Bites 🎊\n\nCode: FLASH20\n\nOrder now: {{shop_link}}\n\nSale ends tomorrow at midnight — don't miss it!\n\n- Team MitthuuG",
+      "festival_greeting": "Happy Makar Sankranti! 🪁\n\nMay your year be as sweet as til-gud and as colorful as your kites.\n\nSpecial festive pricing on our Gift Boxes — perfect for sharing GUD vibes with family!\n\nShop: {{link}}\n\nWith warmth,\nTeam MitthuuG 🍯"
+    }
+  },
+  "ab_test_ideas": [
+    {
+      "element": "Homepage Hero Headline",
+      "variant_a": "GUD vibes, pure nostalgia 🍯",
+      "variant_b": "The til-gud you grew up with. Now better.",
+      "hypothesis": "Emotional nostalgia (A) vs. quality promise (B) — testing which drives more clicks",
+      "metric": "CTA click-through rate"
+    },
+    {
+      "element": "Product Page CTA Button",
+      "variant_a": "Add to Cart",
+      "variant_b": "Try MitthuuG Now",
+      "hypothesis": "Standard eCommerce CTA vs. branded trial language",
+      "metric": "Add-to-cart conversion rate"
+    },
+    {
+      "element": "Pricing Display",
+      "variant_a": "₹249 per 100g box",
+      "variant_b": "₹249 (₹2.49 per bite)",
+      "hypothesis": "Per-unit pricing may reduce sticker shock",
+      "metric": "Checkout completion rate"
+    },
+    {
+      "element": "Product Description Opening",
+      "variant_a": "Handcrafted in small batches",
+      "variant_b": "Remember Nani's til-gud?",
+      "hypothesis": "Craft messaging vs. nostalgic storytelling",
+      "metric": "Time on page + scroll depth"
+    },
+    {
+      "element": "Free Shipping Threshold",
+      "variant_a": "Free shipping above ₹499",
+      "variant_b": "Add ₹{{amount}} more for FREE shipping",
+      "hypothesis": "Dynamic messaging may increase AOV",
+      "metric": "Average order value"
+    }
+  ],
+  "design_brief": {
+    "moodboard_keywords": [
+      "Nostalgic Indian kitchen",
+      "Artisan handcraft",
+      "Sesame gold tones",
+      "Warm chai light",
+      "Brass and terracotta textures",
+      "Soft morning sunlight",
+      "Heritage meets modern",
+      "Earthy, warm, inviting"
+    ],
+    "hero_image_concept": "Close-up of golden Til-Gud bites arranged on a textured ivory linen cloth, with a vintage brass bowl partially visible. Soft, diffused natural daylight from the side creates warm shadows. A few loose sesame seeds scattered artfully. Background blurred to emphasize product texture. Shot from a 45-degree angle. Color palette: ochre gold, chocolate brown, ivory cream.",
+    "photography_style": "Natural light, rustic-modern, product-focused with cultural context (brass bowls, handwoven textiles, terracotta). Avoid overly polished studio shots — aim for 'artisan kitchen' authenticity.",
+    "packaging_design_notes": "Premium matte finish box in ivory with ochre gold logo. Minimalist front with product window. Inside lid: handwritten Mitthu Express journey note. Eco-friendly, reusable materials. Gift-ready without extra wrapping.",
+    "icon_style": "Hand-drawn line icons in ochre gold. Examples: sesame seed cluster, jaggery block, mortar & pestle, train (Mitthu Express), leaf (natural), chef hat (handcrafted).",
+    "typography_usage": {
+      "headings": "Playfair Display — elegant, nostalgic serif for brand name and hero headlines",
+      "subheadings": "Merriweather — readable serif for section titles",
+      "body": "Inter or Lato — clean sans-serif for product descriptions and UI",
+      "accent": "Handwritten script font for 'Mitthu Express' journey elements (use sparingly)"
+    }
+  }
+}

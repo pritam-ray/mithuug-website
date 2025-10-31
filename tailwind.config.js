@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // MitthuuG Brand Colors
+        // MitthuuG Brand Colors - Enhanced Design System
         ochre: {
           DEFAULT: '#C6862E',
           50: '#F9F3E8',
@@ -76,6 +76,41 @@ export default {
         merriweather: ['Merriweather', 'serif'],
         inter: ['Inter', 'sans-serif'],
         lato: ['Lato', 'sans-serif'],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '112': '28rem',
+        '128': '32rem',
+      },
+      boxShadow: {
+        'mitthuug': '0 4px 20px rgba(198, 134, 46, 0.15)',
+        'mitthuug-lg': '0 10px 40px rgba(198, 134, 46, 0.2)',
+        'chocolate': '0 4px 15px rgba(75, 46, 42, 0.1)',
+      },
+      animation: {
+        'slideIn': 'slideIn 0.3s ease-out',
+        'fadeIn': 'fadeIn 0.5s ease-in',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 2s infinite',
+      },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-mitthuug': 'linear-gradient(135deg, #C6862E 0%, #B8860B 100%)',
+        'gradient-chocolate': 'linear-gradient(135deg, #4B2E2A 0%, #2D1C19 100%)',
+      },
+      transitionDuration: {
+        '400': '400ms',
       },
     },
   },
