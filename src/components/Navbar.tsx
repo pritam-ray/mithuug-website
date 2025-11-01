@@ -13,7 +13,12 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount } = useCart();
   const { user } = useAuth();
-  const { isAdmin } = useAdmin();
+  const { isAdmin, isLoading: adminLoading } = useAdmin();
+
+  // Debug logging
+  console.log('Navbar - User:', user?.email);
+  console.log('Navbar - isAdmin:', isAdmin);
+  console.log('Navbar - adminLoading:', adminLoading);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
