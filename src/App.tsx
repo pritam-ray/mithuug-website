@@ -38,6 +38,7 @@ const AdminOrdersPage = lazy(() => import('./pages/AdminOrdersPage'));
 const AdminCustomersPage = lazy(() => import('./pages/AdminCustomersPage'));
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
+const AdminBulkOperationsPage = lazy(() => import('./pages/AdminBulkOperationsPage'));
 
 // Loading component
 const PageLoader = () => (
@@ -91,6 +92,7 @@ function App() {
                       <Route path="/admin/customers" element={<AdminCustomersPage />} />
                       <Route path="/admin/settings" element={<AdminSettingsPage />} />
                       <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
+                      <Route path="/admin/bulk-operations" element={<AdminBulkOperationsPage />} />
                       
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
