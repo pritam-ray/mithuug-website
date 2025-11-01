@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Gift, Sparkles } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, Gift, Sparkles, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useAdmin } from '../context/AdminContext';
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -12,6 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount } = useCart();
   const { user } = useAuth();
+  const { isAdmin } = useAdmin();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
@@ -54,6 +56,18 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
 
           {/* Secondary Actions */}
           <div className="flex items-center space-x-6">
+            {/* Admin Dashboard - Only for admins */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="hidden md:flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 transition-all rounded-lg font-semibold text-sm"
+                title="Admin Dashboard"
+              >
+                <Shield className="w-4 h-4" />
+                <span>Admin</span>
+              </Link>
+            )}
+
             {/* Gift Packs Link */}
             <Link
               to="/shop?category=gift-sets"
@@ -101,6 +115,17 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
       {isMenuOpen && (
         <div className="md:hidden bg-ivory border-t-2 border-ochre-100">
           <div className="px-4 py-6 space-y-4">
+            {/* Admin Dashboard - Only for admins */}
+            {isAdmin && (
+              <Link 
+                to="/admin" 
+                className="flex items-center space-x-2 py-3 text-sm font-bold tracking-widest text-white bg-purple-600 hover:bg-purple-700 px-4 rounded-lg transition-all"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Shield className="w-5 h-5" />
+                <span>ADMIN DASHBOARD</span>
+              </Link>
+            )}
             <Link 
               to="/shop" 
               className="block py-3 text-sm font-bold tracking-widest text-chocolate hover:text-ochre hover:bg-ochre-50 px-4 rounded-lg transition-all"
