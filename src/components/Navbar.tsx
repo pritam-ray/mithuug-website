@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Gift, Sparkles, Shield } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, Gift, Sparkles, Shield, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useAdmin } from '../context/AdminContext';
+import { useWishlist } from '../context/WishlistContext';
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -12,6 +13,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount } = useCart();
+  const { wishlistItems } = useWishlist();
   const { user } = useAuth();
   const { isAdmin, isLoading: adminLoading } = useAdmin();
 
@@ -89,6 +91,20 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
               title={user ? 'My Account' : 'Sign In'}
             >
               <User className="w-6 h-6" />
+            </Link>
+
+            {/* Wishlist */}
+            <Link
+              to="/wishlist"
+              className="relative hidden md:block text-chocolate hover:text-ochre transition-colors"
+              title="Wishlist"
+            >
+              <Heart className="w-6 h-6" />
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-lg">
+                  {wishlistItems.length}
+                </span>
+              )}
             </Link>
 
             {/* Shopping Cart */}

@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import { AdminProvider } from './context/AdminContext';
 import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -24,6 +25,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const AccountPage = lazy(() => import('./pages/AccountPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
@@ -59,11 +61,12 @@ function App() {
         <AuthProvider>
           <AdminProvider>
             <CartProvider>
-              <ToastProvider>
-                <div className="min-h-screen bg-white">
-                  <Navbar onCartClick={() => setIsCartOpen(true)} />
-                  <Breadcrumb />
-                  <Suspense fallback={<PageLoader />}>
+              <WishlistProvider>
+                <ToastProvider>
+                  <div className="min-h-screen bg-white">
+                    <Navbar onCartClick={() => setIsCartOpen(true)} />
+                    <Breadcrumb />
+                    <Suspense fallback={<PageLoader />}>
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/shop" element={<ShopPage />} />
@@ -78,6 +81,7 @@ function App() {
                       <Route path="/reset-password" element={<ResetPasswordPage />} />
                       <Route path="/account/*" element={<AccountPage />} />
                       <Route path="/checkout" element={<CheckoutPage />} />
+                      <Route path="/wishlist" element={<WishlistPage />} />
                       <Route path="/privacy" element={<PrivacyPolicyPage />} />
                       <Route path="/terms" element={<TermsPage />} />
                       <Route path="/shipping" element={<ShippingPolicyPage />} />
@@ -101,10 +105,11 @@ function App() {
                   <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
                 </div>
               </ToastProvider>
-            </CartProvider>
-          </AdminProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </HelmetProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </AdminProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  </HelmetProvider>
   );
 }export default App;
