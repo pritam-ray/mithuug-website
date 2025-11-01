@@ -1,8 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useAdmin } from '../context/AdminContext';
 import { supabase } from '../lib/supabase';
-import { User, Package, Heart, Settings, LogOut } from 'lucide-react';
+import { User, Package, Heart, Settings, LogOut, Shield } from 'lucide-react';
 import SEO from '../components/SEO';
 
 interface Order {
@@ -24,6 +25,7 @@ interface Wishlist {
 
 const AccountPage: React.FC = () => {
   const { user, profile, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [orders, setOrders] = useState<Order[]>([]);
   const [wishlist, setWishlist] = useState<Wishlist[]>([]);
@@ -84,6 +86,13 @@ const AccountPage: React.FC = () => {
         <div className="grid lg:grid-cols-4 gap-8">
           <aside className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6 space-y-2">
+              {/* Admin Dashboard Link - Only for admins */}
+              {isAdmin && (
+                <Link to="/admin" className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors">
+                  <Shield className="w-5 h-5" />
+                  <span className="font-semibold">Admin Dashboard</span>
+                </Link>
+              )}
               <Link to="/account" className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-stone-100 text-stone-900">
                 <User className="w-5 h-5" />
                 <span>Profile</span>
