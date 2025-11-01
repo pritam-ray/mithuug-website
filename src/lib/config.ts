@@ -10,7 +10,6 @@ interface EnvironmentConfig {
   // Razorpay
   razorpay: {
     keyId: string;
-    keySecret: string;
     isTestMode: boolean;
   };
   
@@ -65,7 +64,6 @@ const getConfig = (): EnvironmentConfig => {
     },
     razorpay: {
       keyId: import.meta.env.VITE_RAZORPAY_KEY_ID || '',
-      keySecret: import.meta.env.VITE_RAZORPAY_KEY_SECRET || '',
       isTestMode: import.meta.env.VITE_PAYMENT_MODE !== 'live',
     },
     analytics: {

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, AlertCircle, Sparkles, Leaf } from 'lucide-react';
+import { Mail, Lock, AlertCircle, Sparkles, Leaf, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const LoginPage: React.FC = () => {
@@ -9,8 +9,19 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [searchParams] = useSearchParams();
+  const [showVerifiedMessage, setShowVerifiedMessage] = useState(false);
+  const { signIn, signInWithGoogle, signInWithFacebook } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user just verified their email
+    if (searchParams.get('verified') === 'true') {
+      setShowVerifiedMessage(true);
+      // Hide message after 10 seconds
+      setTimeout(() => setShowVerifiedMessage(false), 10000);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +44,22 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setError('');
+    const { error } = await signInWithGoogle();
+    if (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    setError('');
+    const { error } = await signInWithFacebook();
+    if (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-12">
       <SEO 
@@ -42,6 +69,21 @@ const LoginPage: React.FC = () => {
       />
       
       <div className="max-w-md w-full">
+        {/* Email Verified Success Message */}
+        {showVerifiedMessage && (
+          <div className="mb-6 p-4 bg-green-50 border-2 border-green-200 rounded-xl animate-fade-in">
+            <div className="flex items-start space-x-3">
+              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-green-800">Email Verified Successfully! 🎉</p>
+                <p className="text-xs text-green-700 mt-1">
+                  You can now login with your credentials below.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-ochre-500 to-ochre-600 rounded-full mb-4">
@@ -60,7 +102,24 @@ const LoginPage: React.FC = () => {
           {error && (
             <div className="mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl flex items-start space-x-3">
               <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-800 font-medium">{error}</p>
+              <div className="flex-1">
+                <p className="text-sm text-red-800 font-medium">{error}</p>
+                {error.toLowerCase().includes('email') && error.toLowerCase().includes('confirm') && (
+                  <div className="mt-3 pt-3 border-t border-red-200">
+                    <p className="text-xs text-red-700 mb-2">
+                      📧 Please check your email inbox and click the verification link we sent you.
+                    </p>
+                    <p className="text-xs text-red-600 font-semibold">
+                      Already verified? Try:
+                    </p>
+                    <ul className="text-xs text-red-700 mt-1 ml-4 list-disc">
+                      <li>Clear your browser cache and try again</li>
+                      <li>Wait a few minutes and retry</li>
+                      <li>Contact support if issue persists</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
@@ -145,6 +204,7 @@ const LoginPage: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <button
               type="button"
+              onClick={handleGoogleSignIn}
               className="flex items-center justify-center px-4 py-3 border-2 border-ochre-200 rounded-xl hover:border-ochre-400 hover:bg-ochre-50 transition-all font-medium text-chocolate-700"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -158,6 +218,7 @@ const LoginPage: React.FC = () => {
             
             <button
               type="button"
+              onClick={handleFacebookSignIn}
               className="flex items-center justify-center px-4 py-3 border-2 border-ochre-200 rounded-xl hover:border-ochre-400 hover:bg-ochre-50 transition-all font-medium text-chocolate-700"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">

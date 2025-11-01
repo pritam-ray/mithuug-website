@@ -7,6 +7,8 @@ import { Address } from '../types/database';
 import { CreditCard, Lock, Truck, Tag, AlertCircle, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 import { 
+  createRazorpayOrder,
+  verifyRazorpayPayment,
   initiateRazorpayPayment, 
   isCODEligible, 
   calculateCODFee
@@ -193,14 +195,25 @@ const CheckoutPage: React.FC = () => {
 
       // Handle payment based on method
       if (paymentMethod === 'razorpay') {
-        // Initiate Razorpay payment
+        // Step 1: Create Razorpay order via Supabase Edge Function
+        const razorpayOrder = await createRazorpayOrder(
+          orderTotal,
+          orderNumber,
+          {
+            order_id: order.id,
+            customer_email: user.email || '',
+            customer_phone: shippingAddress.phone,
+          }
+        );
+
+        // Step 2: Initiate Razorpay payment with the created order
         await initiateRazorpayPayment(
           {
-            amount: orderTotal * 100, // Convert to paise
-            currency: 'INR',
+            amount: razorpayOrder.amount * 100, // Convert to paise
+            currency: razorpayOrder.currency,
             name: 'MitthuuG',
             description: `Order #${orderNumber}`,
-            order_id: order.id,
+            order_id: razorpayOrder.orderId,
             prefill: {
               name: shippingAddress.name,
               email: user.email || '',
@@ -215,18 +228,32 @@ const CheckoutPage: React.FC = () => {
             },
           },
           async (response) => {
-            // Payment successful - update order status and payment info
-            await supabase
-              .from('orders')
-              .update({
-                status: 'confirmed',
-                payment_status: 'completed',
-                payment_id: response.razorpay_payment_id,
-              })
-              .eq('id', order.id);
+            // Step 3: Verify payment signature via Supabase Edge Function
+            const isValid = await verifyRazorpayPayment(
+              response.razorpay_order_id,
+              response.razorpay_payment_id,
+              response.razorpay_signature
+            );
 
-            clearCart();
-            navigate(`/account/orders/${order.id}`);
+            if (isValid) {
+              // Payment verified - update order status
+              await supabase
+                .from('orders')
+                .update({
+                  status: 'confirmed',
+                  payment_status: 'completed',
+                  payment_id: response.razorpay_payment_id,
+                })
+                .eq('id', order.id);
+
+              clearCart();
+              navigate(`/account/orders/${order.id}`);
+            } else {
+              // Signature verification failed
+              console.error('Payment signature verification failed');
+              alert('Payment verification failed. Please contact support.');
+              setProcessing(false);
+            }
           },
           (error) => {
             // Payment failed

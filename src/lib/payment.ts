@@ -1,5 +1,6 @@
 // Payment Gateway Integration Utilities
 import config from './config';
+import { supabase } from './supabase';
 
 export interface PaymentMethod {
   id: string;
@@ -142,61 +143,63 @@ export const initiateRazorpayPayment = async (
   razorpay.open();
 };
 
-// Create Razorpay order (backend call)
+// Create Razorpay order (using Supabase Edge Function)
 export const createRazorpayOrder = async (
   amount: number,
-  customerId?: string
-): Promise<{ orderId: string; amount: number }> => {
+  receipt?: string,
+  notes?: Record<string, string>
+): Promise<{ orderId: string; amount: number; currency: string }> => {
   try {
-    const response = await fetch('/api/payment/create-order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        amount: amount * 100, // Convert to paise
+    const { data, error } = await supabase.functions.invoke('create-razorpay-order', {
+      body: {
+        amount, // in rupees
         currency: 'INR',
-        customerId,
-      }),
+        receipt: receipt || `order_${Date.now()}`,
+        notes: notes || {},
+      },
     });
 
-    if (!response.ok) {
+    if (error) {
+      console.error('Supabase function error:', error);
       throw new Error('Failed to create order');
     }
 
-    const data = await response.json();
-    return data;
+    if (!data.success || !data.order) {
+      throw new Error(data.error || 'Failed to create order');
+    }
+
+    return {
+      orderId: data.order.id,
+      amount: data.order.amount / 100, // Convert from paise to rupees
+      currency: data.order.currency,
+    };
   } catch (error) {
     console.error('Error creating Razorpay order:', error);
     throw error;
   }
 };
 
-// Verify Razorpay payment signature (backend call)
+// Verify Razorpay payment signature (using Supabase Edge Function)
 export const verifyRazorpayPayment = async (
-  orderId: string,
-  paymentId: string,
-  signature: string
+  razorpay_order_id: string,
+  razorpay_payment_id: string,
+  razorpay_signature: string
 ): Promise<boolean> => {
   try {
-    const response = await fetch('/api/payment/verify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const { data, error } = await supabase.functions.invoke('verify-razorpay-payment', {
+      body: {
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
       },
-      body: JSON.stringify({
-        orderId,
-        paymentId,
-        signature,
-      }),
     });
 
-    if (!response.ok) {
-      throw new Error('Payment verification failed');
+    if (error) {
+      console.error('Supabase function error:', error);
+      return false;
     }
 
-    const data = await response.json();
-    return data.verified === true;
+    return data.success && data.isValid;
   } catch (error) {
     console.error('Error verifying payment:', error);
     return false;

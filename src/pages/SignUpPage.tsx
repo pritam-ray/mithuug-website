@@ -13,7 +13,8 @@ const SignUpPage: React.FC = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signUp } = useAuth();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const { signUp, signInWithGoogle, signInWithFacebook } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +49,28 @@ const SignUpPage: React.FC = () => {
         return;
       }
 
-      // Success - redirect to login or account
-      navigate('/login');
+      // Success - show verification message
+      setShowSuccess(true);
     } catch (err) {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError('');
+    const { error } = await signInWithGoogle();
+    if (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    setError('');
+    const { error } = await signInWithFacebook();
+    if (error) {
+      setError(error.message);
     }
   };
 
@@ -66,18 +83,87 @@ const SignUpPage: React.FC = () => {
       />
       
       <div className="max-w-md w-full">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-ochre-500 to-ochre-600 rounded-full mb-4">
-            <Sparkles className="w-8 h-8 text-white" />
+        {/* Success Message - Email Verification */}
+        {showSuccess ? (
+          <div className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-green-200">
+            <div className="text-center">
+              {/* Success Icon */}
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full mb-6">
+                <CheckCircle className="w-10 h-10 text-white" />
+              </div>
+
+              {/* Success Title */}
+              <h2 className="text-3xl font-playfair font-bold text-chocolate-900 mb-4">
+                Account Created! 🎉
+              </h2>
+
+              {/* Email Verification Message */}
+              <div className="bg-ochre-50 border-2 border-ochre-200 rounded-2xl p-6 mb-6">
+                <Mail className="w-12 h-12 text-ochre-600 mx-auto mb-3" />
+                <p className="text-chocolate-800 font-semibold mb-2">
+                  Verification Email Sent
+                </p>
+                <p className="text-chocolate-600 text-sm">
+                  We've sent a verification link to:
+                </p>
+                <p className="text-ochre-700 font-bold mt-2 break-all">
+                  {formData.email}
+                </p>
+              </div>
+
+              {/* Instructions */}
+              <div className="text-left bg-ivory-50 rounded-xl p-5 mb-6 space-y-3">
+                <p className="text-chocolate-700 font-semibold flex items-start">
+                  <span className="inline-block w-6 h-6 bg-ochre-500 text-white rounded-full text-center text-sm mr-3 flex-shrink-0">1</span>
+                  <span>Check your email inbox</span>
+                </p>
+                <p className="text-chocolate-700 font-semibold flex items-start">
+                  <span className="inline-block w-6 h-6 bg-ochre-500 text-white rounded-full text-center text-sm mr-3 flex-shrink-0">2</span>
+                  <span>Click the verification link</span>
+                </p>
+                <p className="text-chocolate-700 font-semibold flex items-start">
+                  <span className="inline-block w-6 h-6 bg-ochre-500 text-white rounded-full text-center text-sm mr-3 flex-shrink-0">3</span>
+                  <span>Login and start shopping!</span>
+                </p>
+              </div>
+
+              {/* Note */}
+              <p className="text-sm text-chocolate-600 mb-6">
+                <strong>Didn't receive the email?</strong> Check your spam folder or wait a few minutes.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <Link
+                  to="/login"
+                  className="block w-full bg-gradient-to-r from-ochre-500 to-ochre-600 hover:from-ochre-600 hover:to-ochre-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg"
+                >
+                  Go to Login
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setShowSuccess(false)}
+                  className="block w-full border-2 border-ochre-300 text-ochre-700 font-semibold py-3 px-6 rounded-xl hover:bg-ochre-50 transition-all duration-300"
+                >
+                  Create Another Account
+                </button>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-playfair font-bold text-chocolate-900 mb-3">
-            Join MitthuuG!
-          </h1>
-          <p className="text-chocolate-600">
-            Start your journey to GUD vibes 🌾
-          </p>
-        </div>
+        ) : (
+          <>
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-ochre-500 to-ochre-600 rounded-full mb-4">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-playfair font-bold text-chocolate-900 mb-3">
+                Join MitthuuG!
+              </h1>
+              <p className="text-chocolate-600">
+                Start your journey to GUD vibes 🌾
+              </p>
+            </div>
 
         {/* Signup Card */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-ochre-100">
@@ -221,6 +307,7 @@ const SignUpPage: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <button
               type="button"
+              onClick={handleGoogleSignIn}
               className="flex items-center justify-center px-4 py-3 border-2 border-ochre-200 rounded-xl hover:border-ochre-400 hover:bg-ochre-50 transition-all font-medium text-chocolate-700"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -234,6 +321,7 @@ const SignUpPage: React.FC = () => {
             
             <button
               type="button"
+              onClick={handleFacebookSignIn}
               className="flex items-center justify-center px-4 py-3 border-2 border-ochre-200 rounded-xl hover:border-ochre-400 hover:bg-ochre-50 transition-all font-medium text-chocolate-700"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -291,6 +379,8 @@ const SignUpPage: React.FC = () => {
             <span>Handcrafted</span>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

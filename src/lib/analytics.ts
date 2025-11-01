@@ -8,6 +8,29 @@ declare global {
   }
 }
 
+// Initialize all analytics (GA4 + Meta Pixel)
+export const initializeAnalytics = () => {
+  // Get analytics IDs from environment variables
+  const ga4Id = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  const metaPixelId = import.meta.env.VITE_META_PIXEL_ID;
+
+  // Initialize GA4 if ID is provided
+  if (ga4Id) {
+    initGA4(ga4Id);
+    console.log('✅ Google Analytics 4 initialized:', ga4Id);
+  } else {
+    console.warn('⚠️ GA4 Measurement ID not found. Add VITE_GA_MEASUREMENT_ID to .env');
+  }
+
+  // Initialize Meta Pixel if ID is provided
+  if (metaPixelId) {
+    initMetaPixel(metaPixelId);
+    console.log('✅ Meta Pixel initialized:', metaPixelId);
+  } else {
+    console.warn('⚠️ Meta Pixel ID not found. Add VITE_META_PIXEL_ID to .env');
+  }
+};
+
 // Initialize GA4
 export const initGA4 = (measurementId: string) => {
   if (typeof window === 'undefined') return;
