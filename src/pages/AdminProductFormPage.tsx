@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
 import { supabase } from '../lib/supabase';
 import { ArrowLeft, Save, Loader } from 'lucide-react';
+import ImageUpload from '../components/ImageUpload';
 
 interface ProductFormData {
   sku: string;
@@ -13,6 +14,7 @@ interface ProductFormData {
   long_desc: string;
   price: number;
   image_url: string;
+  images: string[];
   category: string;
   weight: string;
   stock_quantity: number;
@@ -35,6 +37,7 @@ const emptyForm: ProductFormData = {
   long_desc: '',
   price: 0,
   image_url: '',
+  images: [],
   category: 'gud-bites',
   weight: '250g',
   stock_quantity: 0,
@@ -94,6 +97,7 @@ export default function AdminProductFormPage() {
         long_desc: data.long_desc || '',
         price: data.price || 0,
         image_url: data.image_url || '',
+        images: data.images || (data.image_url ? [data.image_url] : []),
         category: data.category || 'gud-bites',
         weight: data.weight || '250g',
         stock_quantity: data.stock_quantity || 0,
@@ -123,6 +127,8 @@ export default function AdminProductFormPage() {
         ...formData,
         bullets: formData.bullets.filter(b => b.trim()),
         ingredients: formData.ingredients.filter(i => i.trim()),
+        image_url: formData.images.length > 0 ? formData.images[0] : formData.image_url,
+        images: formData.images,
       };
 
       if (isEditMode && id) {
@@ -338,29 +344,14 @@ export default function AdminProductFormPage() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Images */}
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-chocolate-900 mb-4">Image</h2>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Image URL <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="url"
-                required
-                value={formData.image_url}
-                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ochre-500"
-                placeholder="https://example.com/image.jpg"
-              />
-              {formData.image_url && (
-                <img
-                  src={formData.image_url}
-                  alt="Preview"
-                  className="mt-4 w-48 h-48 object-cover rounded-lg"
-                />
-              )}
-            </div>
+            <ImageUpload
+              images={formData.images}
+              onImagesChange={(images) => setFormData({ ...formData, images })}
+              maxImages={5}
+              maxSizeMB={2}
+            />
           </div>
 
           {/* Bullets */}

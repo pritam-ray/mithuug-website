@@ -18,6 +18,7 @@ const ProductDetailPage: React.FC = () => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState<number>(0);
   const { addToCart } = useCart();
   const { user } = useAuth();
 
@@ -168,14 +169,14 @@ const ProductDetailPage: React.FC = () => {
         title={`${product.name} - Premium Til-Gud | MitthuuG`}
         description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹500.`}
         keywords={`${product.name}, buy ${product.name} online, til gud, traditional indian sweets`}
-        ogImage={product.image_url}
+        ogImage={product.images?.[0] || product.image_url}
       />
       
       {/* Structured Data for SEO */}
       <ProductSchema
         name={product.name}
         description={product.description || `Handcrafted ${product.name} made with 100% natural ingredients`}
-        image={[product.image_url]}
+        image={product.images && product.images.length > 0 ? product.images : [product.image_url]}
         price={product.price}
         currency="INR"
         availability={product.stock_quantity > 0 ? 'InStock' : 'OutOfStock'}
@@ -199,24 +200,50 @@ const ProductDetailPage: React.FC = () => {
         </Link>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {/* Product Image */}
-          <div className="relative bg-white rounded-2xl p-4 shadow-xl">
-            <div className="aspect-square overflow-hidden rounded-xl">
-              <img
-                src={product.image_url}
-                alt={product.name}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-              />
-            </div>
-            {product.is_new && (
-              <div className="absolute top-8 left-8 bg-ochre text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest flex items-center space-x-2 shadow-lg">
-                <Sparkles className="w-4 h-4" />
-                <span>NEW ARRIVAL</span>
+          {/* Product Image Gallery */}
+          <div className="space-y-4">
+            {/* Main Image */}
+            <div className="relative bg-white rounded-2xl p-4 shadow-xl">
+              <div className="aspect-square overflow-hidden rounded-xl">
+                <img
+                  src={(product.images && product.images.length > 0) ? product.images[selectedImage] : product.image_url}
+                  alt={product.name}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                />
               </div>
-            )}
-            {product.is_bestseller && !product.is_new && (
-              <div className="absolute top-8 left-8 bg-gold text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest shadow-lg">
-                ⭐ BESTSELLER
+              {product.is_new && (
+                <div className="absolute top-8 left-8 bg-ochre text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest flex items-center space-x-2 shadow-lg">
+                  <Sparkles className="w-4 h-4" />
+                  <span>NEW ARRIVAL</span>
+                </div>
+              )}
+              {product.is_bestseller && !product.is_new && (
+                <div className="absolute top-8 left-8 bg-gold text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest shadow-lg">
+                  ⭐ BESTSELLER
+                </div>
+              )}
+            </div>
+            
+            {/* Thumbnail Gallery */}
+            {product.images && product.images.length > 1 && (
+              <div className="grid grid-cols-5 gap-2">
+                {product.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      selectedImage === index 
+                        ? 'border-ochre shadow-lg scale-105' 
+                        : 'border-chocolate-200 hover:border-ochre-300'
+                    }`}
+                  >
+                    <img
+                      src={image}
+                      alt={`${product.name} ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
               </div>
             )}
           </div>
