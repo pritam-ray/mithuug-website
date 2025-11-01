@@ -34,6 +34,7 @@ const ReturnPolicyPage = lazy(() => import('./pages/ReturnPolicyPage'));
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
 const AdminProductsPage = lazy(() => import('./pages/AdminProductsPage'));
 const AdminProductFormPage = lazy(() => import('./pages/AdminProductFormPage'));
+const AdminOrdersPage = lazy(() => import('./pages/AdminOrdersPage'));
 
 // Loading component
 const PageLoader = () => (
@@ -83,6 +84,7 @@ function App() {
                       <Route path="/admin/products" element={<AdminProductsPage />} />
                       <Route path="/admin/products/new" element={<AdminProductFormPage />} />
                       <Route path="/admin/products/edit/:id" element={<AdminProductFormPage />} />
+                      <Route path="/admin/orders" element={<AdminOrdersPage />} />
                       
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
