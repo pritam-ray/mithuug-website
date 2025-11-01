@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { AdminProvider } from './context/AdminContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
+import { ComparisonProvider } from './context/ComparisonContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -27,6 +28,7 @@ const AccountPage = lazy(() => import('./pages/AccountPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
+const ProductComparisonPage = lazy(() => import('./pages/ProductComparisonPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
@@ -63,14 +65,15 @@ function App() {
           <AdminProvider>
             <CartProvider>
               <WishlistProvider>
-                <ToastProvider>
-                  <div className="min-h-screen bg-white">
-                    <Navbar onCartClick={() => setIsCartOpen(true)} />
-                    <Breadcrumb />
-                    <Suspense fallback={<PageLoader />}>
-                    <Routes>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/shop" element={<ShopPage />} />
+                <ComparisonProvider>
+                  <ToastProvider>
+                    <div className="min-h-screen bg-white">
+                      <Navbar onCartClick={() => setIsCartOpen(true)} />
+                      <Breadcrumb />
+                      <Suspense fallback={<PageLoader />}>
+                      <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/shop" element={<ShopPage />} />
                       <Route path="/product/:id" element={<ProductDetailPage />} />
                       <Route path="/about" element={<AboutPage />} />
                       <Route path="/blog" element={<BlogPage />} />
@@ -84,6 +87,7 @@ function App() {
                       <Route path="/checkout" element={<CheckoutPage />} />
                       <Route path="/wishlist" element={<WishlistPage />} />
                       <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
+                      <Route path="/compare" element={<ProductComparisonPage />} />
                       <Route path="/privacy" element={<PrivacyPolicyPage />} />
                       <Route path="/terms" element={<TermsPage />} />
                       <Route path="/shipping" element={<ShippingPolicyPage />} />
@@ -107,11 +111,12 @@ function App() {
                   <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
                 </div>
               </ToastProvider>
-            </WishlistProvider>
-          </CartProvider>
-        </AdminProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </HelmetProvider>
+            </ComparisonProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </AdminProvider>
+    </AuthProvider>
+  </BrowserRouter>
+</HelmetProvider>
   );
 }export default App;

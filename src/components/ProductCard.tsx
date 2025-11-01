@@ -4,6 +4,7 @@ import { Product } from '../types/database';
 import { ShoppingBag, Sparkles, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useComparison } from '../context/ComparisonContext';
 
 interface ProductCardProps {
   product: Product;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { isInComparison, addToComparison, removeFromComparison, comparisonItems } = useComparison();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -25,7 +27,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     toggleWishlist(product.id);
   };
 
+  const handleToggleComparison = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    if (isInComparison(product.id)) {
+      removeFromComparison(product.id);
+    } else {
+      addToComparison(product);
+    }
+  };
+
   const inWishlist = isInWishlist(product.id);
+  const inComparison = isInComparison(product.id);
+  const comparisonFull = comparisonItems.length >= 4 && !inComparison;
 
   return (
     <Link
@@ -70,6 +83,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className={inWishlist ? 'fill-current' : ''} 
           />
         </button>
+
+        {/* Compare Checkbox */}
+        <div className="absolute bottom-4 left-4 z-10">
+          <label className="flex items-center gap-2 bg-white px-3 py-2 rounded-full shadow-lg cursor-pointer hover:bg-chocolate-50 transition-all duration-300">
+            <input
+              type="checkbox"
+              checked={inComparison}
+              onChange={handleToggleComparison}
+              onClick={(e) => e.stopPropagation()}
+              disabled={comparisonFull}
+              className="w-4 h-4 accent-ochre cursor-pointer disabled:cursor-not-allowed"
+            />
+            <span className={`text-xs font-semibold ${comparisonFull ? 'text-gray-400' : 'text-chocolate-600'}`}>
+              Compare
+            </span>
+          </label>
+        </div>
 
         {/* Add to Cart Button */}
         <button
