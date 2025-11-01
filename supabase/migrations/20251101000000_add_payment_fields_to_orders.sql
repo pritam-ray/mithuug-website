@@ -52,19 +52,27 @@ CREATE INDEX IF NOT EXISTS idx_orders_payment_status ON orders(payment_status);
 -- Create index on status for order management
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 
--- Add check constraint for payment method
+-- Add check constraint for payment method (drop first if exists)
+ALTER TABLE orders
+  DROP CONSTRAINT IF EXISTS valid_payment_method;
+  
 ALTER TABLE orders
   ADD CONSTRAINT valid_payment_method 
   CHECK (payment_method IN ('razorpay', 'cod', 'upi', 'bank_transfer'));
 
--- Add check constraint for payment status
+-- Add check constraint for payment status (drop first if exists)
+ALTER TABLE orders
+  DROP CONSTRAINT IF EXISTS valid_payment_status;
+
 ALTER TABLE orders
   ADD CONSTRAINT valid_payment_status 
   CHECK (payment_status IN ('pending', 'processing', 'completed', 'failed', 'refunded'));
 
 -- Add check constraint for order status
 ALTER TABLE orders
-  DROP CONSTRAINT IF EXISTS valid_order_status,
+  DROP CONSTRAINT IF EXISTS valid_order_status;
+  
+ALTER TABLE orders
   ADD CONSTRAINT valid_order_status 
   CHECK (status IN ('pending', 'payment_pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded'));
 
@@ -94,6 +102,7 @@ CREATE TRIGGER orders_updated_at_trigger
 
 -- Add policy for admin to update payment status (you'll need to implement admin role)
 -- For now, users can update their own orders (for COD orders)
+DROP POLICY IF EXISTS "Users can update own order status" ON orders;
 CREATE POLICY "Users can update own order status"
   ON orders FOR UPDATE
   TO authenticated
