@@ -26,6 +26,7 @@ const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const AccountPage = lazy(() => import('./pages/AccountPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
+const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
@@ -82,6 +83,7 @@ function App() {
                       <Route path="/account/*" element={<AccountPage />} />
                       <Route path="/checkout" element={<CheckoutPage />} />
                       <Route path="/wishlist" element={<WishlistPage />} />
+                      <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
                       <Route path="/privacy" element={<PrivacyPolicyPage />} />
                       <Route path="/terms" element={<TermsPage />} />
                       <Route path="/shipping" element={<ShippingPolicyPage />} />
