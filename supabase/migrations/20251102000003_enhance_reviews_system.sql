@@ -46,30 +46,6 @@ CREATE POLICY "Anyone can view approved reviews"
   TO public
   USING (is_approved = true);
 
--- Add admin policy to view all reviews (for moderation)
-CREATE POLICY "Admins can view all reviews"
-  ON reviews FOR SELECT
-  TO authenticated
-  USING (
-    EXISTS (
-      SELECT 1 FROM user_roles
-      WHERE user_id = auth.uid()
-      AND role = 'admin'
-    )
-  );
-
--- Add admin policy to update any review
-CREATE POLICY "Admins can update any review"
-  ON reviews FOR UPDATE
-  TO authenticated
-  USING (
-    EXISTS (
-      SELECT 1 FROM user_roles
-      WHERE user_id = auth.uid()
-      AND role = 'admin'
-    )
-  );
-
 -- Function to update helpful_count when votes change
 CREATE OR REPLACE FUNCTION update_review_helpful_count()
 RETURNS TRIGGER AS $$

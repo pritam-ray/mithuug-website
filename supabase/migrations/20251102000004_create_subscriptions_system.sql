@@ -62,29 +62,6 @@ CREATE POLICY "Users can delete own subscriptions"
   TO authenticated
   USING (auth.uid() = user_id);
 
--- Admin policies
-CREATE POLICY "Admins can view all subscriptions"
-  ON subscriptions FOR SELECT
-  TO authenticated
-  USING (
-    EXISTS (
-      SELECT 1 FROM user_roles
-      WHERE user_id = auth.uid()
-      AND role = 'admin'
-    )
-  );
-
-CREATE POLICY "Admins can update all subscriptions"
-  ON subscriptions FOR UPDATE
-  TO authenticated
-  USING (
-    EXISTS (
-      SELECT 1 FROM user_roles
-      WHERE user_id = auth.uid()
-      AND role = 'admin'
-    )
-  );
-
 -- Trigger to update updated_at
 CREATE TRIGGER update_subscriptions_updated_at
   BEFORE UPDATE ON subscriptions
