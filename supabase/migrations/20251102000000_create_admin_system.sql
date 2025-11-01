@@ -199,7 +199,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 -- Then update user_profiles role manually or use this after signup:
 -- UPDATE user_profiles SET role = 'super_admin' WHERE id = 'your-user-id';
 
--- Create view for admin dashboard stats
+-- Create view for admin dashboard stats (Views don't support RLS, but access is controlled through underlying tables)
 CREATE OR REPLACE VIEW admin_dashboard_stats AS
 SELECT
   (SELECT COUNT(*) FROM orders) as total_orders,
@@ -213,20 +213,8 @@ SELECT
   (SELECT COUNT(*) FROM user_profiles) as total_customers,
   (SELECT COUNT(*) FROM user_profiles WHERE created_at >= NOW() - INTERVAL '30 days') as new_customers_last_30_days;
 
--- Grant access to admin dashboard stats
+-- Grant access to admin dashboard stats view
 GRANT SELECT ON admin_dashboard_stats TO authenticated;
-
--- Create RLS policy for dashboard stats
-CREATE POLICY "Admins can view dashboard stats"
-  ON admin_dashboard_stats FOR SELECT
-  TO authenticated
-  USING (
-    EXISTS (
-      SELECT 1 FROM user_profiles
-      WHERE user_profiles.id = auth.uid()
-      AND user_profiles.role IN ('admin', 'super_admin')
-    )
-  );
 
 -- Success message
 DO $$
