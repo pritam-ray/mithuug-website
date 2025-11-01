@@ -7,7 +7,9 @@ TRUNCATE TABLE products RESTART IDENTITY CASCADE;
 -- Insert 5 MitthuuG Products
 INSERT INTO products (
   sku,
+  name,
   title,
+  description,
   short_desc,
   long_desc,
   bullets,
@@ -30,6 +32,8 @@ INSERT INTO products (
 (
   'MG-TIL-CL-100',
   'Classic Til-Gud Bites',
+  'Classic Til-Gud Bites',
+  'Crispy sesame & jaggery bites made for everyday snacking.',
   'Crispy sesame & jaggery bites made for everyday snacking.',
   'Our signature Til-Gud Bites combine earthy sesame seeds with pure jaggery, delivering warmth, crunch, and nostalgia in every bite. Handcrafted in small batches using traditional recipes passed down through generations, these golden nuggets are your perfect companion for chai-time or gifting during festivals. No refined sugar, no preservatives – just pure, honest ingredients that taste like home.',
   ARRAY[
@@ -66,6 +70,8 @@ INSERT INTO products (
 (
   'MG-TIL-CR-100',
   'Cardamom Til-Gud Bites',
+  'Cardamom Til-Gud Bites',
+  'Aromatic cardamom meets sesame & jaggery bliss.',
   'Aromatic cardamom meets sesame & jaggery bliss.',
   'Elevate your snacking with our Cardamom Til-Gud Bites – where the royal spice of cardamom infuses every bite with warmth and aroma. These premium bites blend roasted sesame, natural jaggery, and freshly ground cardamom for a sophisticated twist on the classic. Perfect for those who appreciate the finer nuances of traditional Indian flavors with a modern, artisanal touch.',
   ARRAY[
@@ -102,6 +108,8 @@ INSERT INTO products (
 (
   'MG-TIL-AL-100',
   'Almond Til-Gud Bites',
+  'Almond Til-Gud Bites',
+  'Nutty almond richness in every crunchy bite.',
   'Nutty almond richness in every crunchy bite.',
   'Indulge in luxury with our Almond Til-Gud Bites – a premium blend of roasted California almonds, sesame seeds, and golden jaggery. Each bite delivers a satisfying crunch and rich, nutty flavor that makes this our most premium offering. Packed with protein and healthy fats, these bites are as nutritious as they are delicious. Perfect for corporate gifting or treating yourself to something special.',
   ARRAY[
@@ -138,6 +146,8 @@ INSERT INTO products (
 (
   'MG-TRIAL-50',
   'GUD Bites Trial Pack',
+  'GUD Bites Trial Pack',
+  'First time trying MitthuuG? Start your journey here!',
   'First time trying MitthuuG? Start your journey here!',
   'Not sure which flavor to pick? Our Trial Pack is your perfect introduction to the world of MitthuuG! This 50g sampler includes a mix of our Classic and Cardamom Til-Gud Bites, giving you a taste of tradition and innovation in one convenient pack. Perfect for first-timers, travel snacking, or tucking into your desk drawer for those 4pm cravings. Welcome aboard the Mitthu Express!',
   ARRAY[
@@ -172,6 +182,8 @@ INSERT INTO products (
 (
   'MG-GIFT-500',
   'Premium Gift Box (500g)',
+  'Premium Gift Box (500g)',
+  'Share GUD vibes with our luxurious festive hamper.',
   'Share GUD vibes with our luxurious festive hamper.',
   'Make every occasion special with our Premium Gift Box – a beautifully curated 500g hamper featuring all three of our signature flavors: Classic, Cardamom, and Almond Til-Gud Bites. Packaged in an elegant ochre and gold box with traditional motifs, this is gifting done right. Perfect for Diwali, weddings, corporate events, or showing someone you care. Each box includes a handwritten note option and premium jute packaging. Because some traditions deserve to be shared in style.',
   ARRAY[
