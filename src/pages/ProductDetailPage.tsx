@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles } from 'lucide-react';
 import ReviewSection from '../components/ReviewSection';
+import RatingBreakdown from '../components/RatingBreakdown';
 import SEO from '../components/SEO';
 import Breadcrumb from '../components/Breadcrumb';
 import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
@@ -392,9 +393,16 @@ const ProductDetailPage: React.FC = () => {
           </div>
         </div>
 
-        <ReviewSection
-          product_id={product.id}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2">
+            <ReviewSection
+              product_id={product.id}
+            />
+          </div>
+          <div>
+            <RatingBreakdown productId={product.id} />
+          </div>
+        </div>
       </div>
     </div>
   );
