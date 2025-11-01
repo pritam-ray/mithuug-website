@@ -39,7 +39,7 @@ INSERT INTO products (
     'Rich in calcium and iron',
     'Ideal for gifting and snacking'
   ],
-  'Sesame seeds (49%), Jaggery (49%), Cardamom, Ghee',
+  ARRAY['Sesame seeds (49%)', 'Jaggery (49%)', 'Cardamom', 'Ghee'],
   '{
     "Energy": "420 kcal/100g",
     "Protein": "10g",
@@ -75,7 +75,7 @@ INSERT INTO products (
     'Great for festive gifting',
     'Perfect post-meal digestive treat'
   ],
-  'Sesame seeds (47%), Jaggery (47%), Green Cardamom (4%), Ghee, Himalayan Pink Salt',
+  ARRAY['Sesame seeds (47%)', 'Jaggery (47%)', 'Green Cardamom (4%)', 'Ghee', 'Himalayan Pink Salt'],
   '{
     "Energy": "425 kcal/100g",
     "Protein": "11g",
@@ -111,7 +111,7 @@ INSERT INTO products (
     'Energy-packed superfood snack',
     'No refined sugar or preservatives'
   ],
-  'Sesame seeds (40%), Jaggery (35%), California Almonds (23%), Ghee, Rock Salt',
+  ARRAY['Sesame seeds (40%)', 'Jaggery (35%)', 'California Almonds (23%)', 'Ghee', 'Rock Salt'],
   '{
     "Energy": "485 kcal/100g",
     "Protein": "14g",
@@ -147,7 +147,7 @@ INSERT INTO products (
     'Great for desk snacking',
     'Money-back satisfaction guarantee'
   ],
-  'Mix of Classic and Cardamom Til-Gud Bites (see individual products for full ingredients)',
+  ARRAY['Mix of Classic and Cardamom Til-Gud Bites (see individual products for full ingredients)'],
   '{
     "Energy": "422 kcal/100g (average)",
     "Protein": "10.5g",
@@ -181,7 +181,7 @@ INSERT INTO products (
     'Perfect for festivals and corporate gifting',
     'Eco-friendly jute packaging'
   ],
-  'Contains all three variants – Classic, Cardamom, and Almond Til-Gud Bites',
+  ARRAY['Contains all three variants – Classic, Cardamom, and Almond Til-Gud Bites'],
   '{
     "Energy": "443 kcal/100g (average)",
     "Protein": "11.8g",
