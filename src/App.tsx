@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
+import { AdminProvider } from './context/AdminContext';
 import { CartProvider } from './context/CartContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
@@ -29,6 +30,10 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ShippingPolicyPage = lazy(() => import('./pages/ShippingPolicyPage'));
 const ReturnPolicyPage = lazy(() => import('./pages/ReturnPolicyPage'));
 
+// Admin pages
+const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
+const AdminProductsPage = lazy(() => import('./pages/AdminProductsPage'));
+
 // Loading component
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-cream-50">
@@ -46,38 +51,45 @@ function App() {
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
-          <CartProvider>
-            <ToastProvider>
-              <div className="min-h-screen bg-white">
-                <Navbar onCartClick={() => setIsCartOpen(true)} />
-                <Breadcrumb />
-                <Suspense fallback={<PageLoader />}>
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/shop" element={<ShopPage />} />
-                    <Route path="/product/:id" element={<ProductDetailPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/blog" element={<BlogPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/faq" element={<FAQPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignUpPage />} />
-                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                    <Route path="/reset-password" element={<ResetPasswordPage />} />
-                    <Route path="/account/*" element={<AccountPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/privacy" element={<PrivacyPolicyPage />} />
-                    <Route path="/terms" element={<TermsPage />} />
-                    <Route path="/shipping" element={<ShippingPolicyPage />} />
-                    <Route path="/returns" element={<ReturnPolicyPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Routes>
-                </Suspense>
-                <Footer />
-                <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-              </div>
-        </ToastProvider>
-          </CartProvider>
+          <AdminProvider>
+            <CartProvider>
+              <ToastProvider>
+                <div className="min-h-screen bg-white">
+                  <Navbar onCartClick={() => setIsCartOpen(true)} />
+                  <Breadcrumb />
+                  <Suspense fallback={<PageLoader />}>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/shop" element={<ShopPage />} />
+                      <Route path="/product/:id" element={<ProductDetailPage />} />
+                      <Route path="/about" element={<AboutPage />} />
+                      <Route path="/blog" element={<BlogPage />} />
+                      <Route path="/contact" element={<ContactPage />} />
+                      <Route path="/faq" element={<FAQPage />} />
+                      <Route path="/login" element={<LoginPage />} />
+                      <Route path="/signup" element={<SignUpPage />} />
+                      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                      <Route path="/reset-password" element={<ResetPasswordPage />} />
+                      <Route path="/account/*" element={<AccountPage />} />
+                      <Route path="/checkout" element={<CheckoutPage />} />
+                      <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                      <Route path="/terms" element={<TermsPage />} />
+                      <Route path="/shipping" element={<ShippingPolicyPage />} />
+                      <Route path="/returns" element={<ReturnPolicyPage />} />
+                      
+                      {/* Admin Routes */}
+                      <Route path="/admin" element={<AdminDashboardPage />} />
+                      <Route path="/admin/products" element={<AdminProductsPage />} />
+                      
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                  </Suspense>
+                  <Footer />
+                  <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                </div>
+              </ToastProvider>
+            </CartProvider>
+          </AdminProvider>
         </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>
