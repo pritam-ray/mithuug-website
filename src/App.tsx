@@ -7,6 +7,7 @@ import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ComparisonProvider } from './context/ComparisonContext';
 import { SubscriptionProvider } from './context/SubscriptionContext';
+import { ReferralProvider } from './context/ReferralContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -31,6 +32,7 @@ const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
 const ProductComparisonPage = lazy(() => import('./pages/ProductComparisonPage'));
 const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'));
+const ReferralPage = lazy(() => import('./pages/ReferralPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
@@ -71,10 +73,11 @@ function App() {
                 <WishlistProvider>
                   <ComparisonProvider>
                     <SubscriptionProvider>
-                      <div className="min-h-screen bg-white">
-                        <Navbar onCartClick={() => setIsCartOpen(true)} />
-                        <Breadcrumb />
-                        <Suspense fallback={<PageLoader />}>
+                      <ReferralProvider>
+                        <div className="min-h-screen bg-white">
+                          <Navbar onCartClick={() => setIsCartOpen(true)} />
+                          <Breadcrumb />
+                          <Suspense fallback={<PageLoader />}>
                       <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/shop" element={<ShopPage />} />
@@ -90,10 +93,11 @@ function App() {
                       <Route path="/account/*" element={<AccountPage />} />
                       <Route path="/checkout" element={<CheckoutPage />} />
                       <Route path="/wishlist" element={<WishlistPage />} />
-                      <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
-                      <Route path="/compare" element={<ProductComparisonPage />} />
-                      <Route path="/subscriptions" element={<SubscriptionPage />} />
-                      <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                        <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
+                        <Route path="/compare" element={<ProductComparisonPage />} />
+                        <Route path="/subscriptions" element={<SubscriptionPage />} />
+                        <Route path="/referrals" element={<ReferralPage />} />
+                        <Route path="/privacy" element={<PrivacyPolicyPage />} />
                       <Route path="/terms" element={<TermsPage />} />
                       <Route path="/shipping" element={<ShippingPolicyPage />} />
                       <Route path="/returns" element={<ReturnPolicyPage />} />
@@ -113,11 +117,12 @@ function App() {
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                   </Suspense>
-                  <Footer />
-                  <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-                </div>
-              </SubscriptionProvider>
-            </ComparisonProvider>
+                                      <Footer />
+                    <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                  </div>
+                      </ReferralProvider>
+                    </SubscriptionProvider>
+                  </ComparisonProvider>
           </WishlistProvider>
         </CartProvider>
       </AdminProvider>
