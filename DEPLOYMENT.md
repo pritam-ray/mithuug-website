@@ -1,22 +1,67 @@
 # MitthuuG Deployment Guide
 
-## 🚀 Production Deployment Checklist
+## 🚀 Quick Deploy to Netlify
+
+### Option 1: Deploy via Netlify Dashboard (Recommended)
+
+1. **Create Netlify Account**
+   - Go to [https://www.netlify.com/](https://www.netlify.com/)
+   - Sign up with GitHub
+
+2. **Import Project**
+   - Click "Add new site" → "Import an existing project"
+   - Select "Deploy with GitHub"
+   - Choose `pritam-ray/mithuug-website`
+
+3. **Configure Build Settings** (auto-detected from `netlify.toml`):
+   - Branch: `main`
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+
+4. **Add Environment Variables** (CRITICAL!)
+   ```
+   VITE_SUPABASE_URL = https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY = your-anon-key-here
+   ```
+   
+   Find these in: Supabase Dashboard → Settings → API
+
+5. **Deploy!** 🎉
+   - Click "Deploy site"
+   - Your site will be live in 2-3 minutes at `your-site.netlify.app`
+
+### Option 2: Deploy via Netlify CLI
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Deploy
+netlify deploy --prod
+```
+
+---
+
+## 📋 Production Deployment Checklist
 
 ### Pre-Deployment Requirements
 
 #### 1. Environment Variables Setup
-Create `.env.production` with all required keys:
+Configure these in Netlify Dashboard (Site Settings → Environment Variables):
 
 ```bash
-# Supabase Configuration
+# Supabase Configuration (REQUIRED)
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your_anon_key_here
 
-# Payment Gateway
+# Payment Gateway (Optional - for production payments)
 VITE_RAZORPAY_KEY_ID=rzp_live_xxxxx
 VITE_RAZORPAY_KEY_SECRET=xxxxx  # Server-side only, never expose
 
-# Analytics & Marketing
+# Analytics & Marketing (Optional)
 VITE_GA4_ID=G-XXXXXXXXXX
 VITE_GTM_ID=GTM-XXXXXXX
 VITE_META_PIXEL_ID=XXXXXXXXXXXXXXX
