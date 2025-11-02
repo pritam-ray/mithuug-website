@@ -8,10 +8,12 @@ import { WishlistProvider } from './context/WishlistContext';
 import { ComparisonProvider } from './context/ComparisonContext';
 import { SubscriptionProvider } from './context/SubscriptionContext';
 import { ReferralProvider } from './context/ReferralContext';
+import { ChatProvider } from './context/ChatContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
+import { ChatWidget } from './components/ChatWidget';
 import Breadcrumb from './components/Breadcrumb';
 
 // Lazy load all page components for better performance
@@ -49,6 +51,7 @@ const AdminReviewModerationPage = lazy(() => import('./pages/AdminReviewModerati
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
 const AdminBulkOperationsPage = lazy(() => import('./pages/AdminBulkOperationsPage'));
+const AdminChatPage = lazy(() => import('./pages/AdminChatPage'));
 
 // Loading component
 const PageLoader = () => (
@@ -74,9 +77,10 @@ function App() {
                   <ComparisonProvider>
                     <SubscriptionProvider>
                       <ReferralProvider>
-                        <div className="min-h-screen bg-white">
-                          <Navbar onCartClick={() => setIsCartOpen(true)} />
-                          <Breadcrumb />
+                        <ChatProvider>
+                          <div className="min-h-screen bg-white">
+                            <Navbar onCartClick={() => setIsCartOpen(true)} />
+                            <Breadcrumb />
                           <Suspense fallback={<PageLoader />}>
                       <Routes>
                         <Route path="/" element={<HomePage />} />
@@ -113,22 +117,27 @@ function App() {
                       <Route path="/admin/settings" element={<AdminSettingsPage />} />
                       <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
                       <Route path="/admin/bulk-operations" element={<AdminBulkOperationsPage />} />
+                      <Route path="/admin/chat" element={<AdminChatPage />} />
                       
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                   </Suspense>
                                       <Footer />
                     <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-                  </div>
+                    <ChatWidget />
+                          </div>
+                        </ChatProvider>
                       </ReferralProvider>
                     </SubscriptionProvider>
                   </ComparisonProvider>
-          </WishlistProvider>
-        </CartProvider>
-      </AdminProvider>
-    </AuthProvider>
-  </ToastProvider>
-  </BrowserRouter>
-</HelmetProvider>
+                </WishlistProvider>
+              </CartProvider>
+            </AdminProvider>
+          </AuthProvider>
+        </ToastProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
-}export default App;
+}
+
+export default App;
