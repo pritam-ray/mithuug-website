@@ -64,13 +64,13 @@ function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <AuthProvider>
-          <AdminProvider>
-            <CartProvider>
-              <WishlistProvider>
-                <ComparisonProvider>
-                  <SubscriptionProvider>
-                    <ToastProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <AdminProvider>
+              <CartProvider>
+                <WishlistProvider>
+                  <ComparisonProvider>
+                    <SubscriptionProvider>
                       <div className="min-h-screen bg-white">
                         <Navbar onCartClick={() => setIsCartOpen(true)} />
                         <Breadcrumb />
@@ -116,13 +116,13 @@ function App() {
                   <Footer />
                   <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
                 </div>
-              </ToastProvider>
-            </SubscriptionProvider>
-          </ComparisonProvider>
-        </WishlistProvider>
-      </CartProvider>
-    </AdminProvider>
+              </SubscriptionProvider>
+            </ComparisonProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </AdminProvider>
     </AuthProvider>
+  </ToastProvider>
   </BrowserRouter>
 </HelmetProvider>
   );
