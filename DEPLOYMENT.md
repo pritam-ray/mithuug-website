@@ -30,7 +30,13 @@
    - Click "Deploy site"
    - Your site will be live in 2-3 minutes at `your-site.netlify.app`
 
-### Option 2: Deploy via Netlify CLI
+6. **Disable Auto-Deploy (Optional)**
+   - Go to Site Settings → Build & deploy → Continuous deployment
+   - Click "Stop auto publishing"
+   - Or set "Branches and deploy contexts" to deploy from a different branch (e.g., `production`)
+   - Now you control when to deploy manually
+
+### Option 2: Deploy via Netlify CLI (Manual Deploys)
 
 ```bash
 # Install Netlify CLI
@@ -41,6 +47,52 @@ netlify login
 
 # Deploy
 netlify deploy --prod
+```
+
+---
+
+## 🎛️ Controlling Netlify Deployments
+
+### Disable Automatic Deployments
+
+**Method 1: Stop Auto-Publishing (Recommended)**
+1. Go to Netlify Dashboard → Your Site
+2. Click "Site settings"
+3. Go to "Build & deploy" → "Continuous deployment"
+4. Under "Build settings", click "Stop auto publishing"
+5. Now GitHub pushes won't trigger builds
+6. Deploy manually via CLI: `netlify deploy --prod`
+
+**Method 2: Deploy from Specific Branch Only**
+1. Go to "Build & deploy" → "Continuous deployment"
+2. Under "Deploy contexts", click "Edit settings"
+3. Set "Production branch" to a different branch (e.g., `production` or `release`)
+4. Your `main` branch will not auto-deploy
+5. Only pushes to `production` branch will trigger deploys
+
+**Method 3: Use Deploy Previews Only**
+1. Keep auto-publishing stopped
+2. Set up "Branch deploys" for `main` (creates preview URLs)
+3. Manually promote preview to production when ready
+4. Go to "Deploys" → Select preview → "Publish deploy"
+
+### Manual Deployment Workflow
+
+```bash
+# When you're ready to deploy:
+
+# Option 1: Via Netlify CLI
+netlify deploy --prod
+
+# Option 2: Via Netlify Dashboard
+# 1. Go to Deploys tab
+# 2. Click "Trigger deploy" → "Deploy site"
+
+# Option 3: Promote a Preview
+# 1. Push to main (creates preview)
+# 2. Test preview URL
+# 3. Go to Netlify → Deploys → Select preview
+# 4. Click "Publish deploy"
 ```
 
 ---
