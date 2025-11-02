@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useAdmin } from '../context/AdminContext';
 import { useWishlist } from '../context/WishlistContext';
 import { LanguageSelector } from './LanguageSelector';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -24,9 +25,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   console.log('Navbar - adminLoading:', adminLoading);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors">
       {/* Top Bar - Offers & Announcements */}
-      <div className="bg-gradient-to-r from-ochre to-gold text-white">
+      <div className="bg-gradient-to-r from-ochre to-gold text-white dark:from-ochre-700 dark:to-gold-700">
         <div className="max-w-7xl mx-auto px-4 py-2">
           <div className="flex items-center justify-center space-x-2 text-xs font-semibold tracking-wide">
             <Sparkles className="w-4 h-4" />
@@ -41,23 +42,23 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-3xl font-playfair font-bold text-chocolate">
-              Mitthuug<span className="text-ochre italic">_</span>
+            <div className="text-3xl font-playfair font-bold text-chocolate dark:text-ochre-300">
+              Mitthuug<span className="text-ochre dark:text-ochre-400 italic">_</span>
             </div>
           </Link>
 
           {/* Primary Navigation - Desktop */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/shop" className="text-sm font-bold tracking-widest text-chocolate hover:text-ochre transition-colors">
+            <Link to="/shop" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               SHOP
             </Link>
-            <Link to="/about" className="text-sm font-bold tracking-widest text-chocolate hover:text-ochre transition-colors">
+            <Link to="/about" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               ABOUT
             </Link>
-            <Link to="/blog" className="text-sm font-bold tracking-widest text-chocolate hover:text-ochre transition-colors">
+            <Link to="/blog" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               BLOG
             </Link>
-            <a href="#contact" className="text-sm font-bold tracking-widest text-chocolate hover:text-ochre transition-colors">
+            <a href="#contact" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               CONTACT
             </a>
           </div>
@@ -107,6 +108,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
                 </span>
               )}
             </Link>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Language Selector */}
             <LanguageSelector />

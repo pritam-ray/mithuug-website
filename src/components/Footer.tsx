@@ -4,19 +4,19 @@ import { Instagram, Mail, MapPin, Phone, Heart, Leaf } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer id="contact" className="bg-gradient-to-br from-chocolate to-chocolate-800 text-ivory py-16 px-4">
+    <footer id="contact" className="bg-gradient-to-br from-chocolate to-chocolate-800 dark:from-gray-900 dark:to-gray-950 text-ivory dark:text-gray-200 py-16 px-4 transition-colors">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <div>
-            <h3 className="text-3xl font-playfair font-bold text-ochre mb-4">
+            <h3 className="text-3xl font-playfair font-bold text-ochre dark:text-ochre-400 mb-4">
               Mitthuug<span className="italic">_</span>
             </h3>
-            <p className="text-sm leading-relaxed text-ivory-200 mb-4">
+            <p className="text-sm leading-relaxed text-ivory-200 dark:text-gray-400 mb-4">
               Handcrafted GUD Bites that bring warmth, crunch, and nostalgia in every bite. 
               Where tradition meets modern artisan craft.
             </p>
-            <div className="flex items-center space-x-2 text-xs text-ochre-200">
+            <div className="flex items-center space-x-2 text-xs text-ochre-200 dark:text-ochre-400">
               <Leaf className="w-4 h-4" />
               <span>FSSAI Certified | No Refined Sugar</span>
             </div>

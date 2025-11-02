@@ -9,6 +9,7 @@ import { ComparisonProvider } from './context/ComparisonContext';
 import { SubscriptionProvider } from './context/SubscriptionContext';
 import { ReferralProvider } from './context/ReferralContext';
 import { ChatProvider } from './context/ChatContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -70,18 +71,19 @@ function App() {
     <HelmetProvider>
       <BrowserRouter>
         <ToastProvider>
-          <AuthProvider>
-            <AdminProvider>
-              <CartProvider>
-                <WishlistProvider>
-                  <ComparisonProvider>
-                    <SubscriptionProvider>
-                      <ReferralProvider>
-                        <ChatProvider>
-                          <div className="min-h-screen bg-white">
-                            <Navbar onCartClick={() => setIsCartOpen(true)} />
-                            <Breadcrumb />
-                          <Suspense fallback={<PageLoader />}>
+          <ThemeProvider>
+            <AuthProvider>
+              <AdminProvider>
+                <CartProvider>
+                  <WishlistProvider>
+                    <ComparisonProvider>
+                      <SubscriptionProvider>
+                        <ReferralProvider>
+                          <ChatProvider>
+                            <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+                              <Navbar onCartClick={() => setIsCartOpen(true)} />
+                              <Breadcrumb />
+                            <Suspense fallback={<PageLoader />}>
                       <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/shop" element={<ShopPage />} />
@@ -125,15 +127,16 @@ function App() {
                                       <Footer />
                     <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
                     <ChatWidget />
-                          </div>
-                        </ChatProvider>
-                      </ReferralProvider>
-                    </SubscriptionProvider>
-                  </ComparisonProvider>
-                </WishlistProvider>
-              </CartProvider>
-            </AdminProvider>
-          </AuthProvider>
+                            </div>
+                          </ChatProvider>
+                        </ReferralProvider>
+                      </SubscriptionProvider>
+                    </ComparisonProvider>
+                  </WishlistProvider>
+                </CartProvider>
+              </AdminProvider>
+            </AuthProvider>
+          </ThemeProvider>
         </ToastProvider>
       </BrowserRouter>
     </HelmetProvider>
