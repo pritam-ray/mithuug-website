@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "account": "Account",
+    "login": "Login",
+    "logout": "Logout",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "compare": "Compare",
+    "subscriptions": "Subscriptions",
+    "referrals": "Referrals"
+  },
+  "common": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "viewDetails": "View Details",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "price": "Price",
+    "currency": "₹",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "learnMore": "Learn More",
+    "seeAll": "See All"
+  },
+  "home": {
+    "hero": {
+      "title": "Experience Premium Til-Gud Bliss",
+      "subtitle": "Handcrafted with love using finest sesame seeds and pure jaggery",
+      "cta": "Shop Now"
+    },
+    "features": {
+      "natural": {
+        "title": "100% Natural",
+        "desc": "No artificial additives or preservatives"
+      },
+      "certified": {
+        "title": "FSSAI Certified",
+        "desc": "Guaranteed quality and hygiene standards"
+      },
+      "handmade": {
+        "title": "Handcrafted",
+        "desc": "Made with traditional recipes and care"
+      }
+    }
+  },
+  "product": {
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "reviews": "Reviews",
+    "rating": "Rating",
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "nutritionFacts": "Nutrition Facts",
+    "relatedProducts": "Related Products",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "share": "Share",
+    "quantity": "Quantity"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping",
+    "remove": "Remove",
+    "update": "Update Cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping Address",
+    "billingAddress": "Billing Address",
+    "paymentMethod": "Payment Method",
+    "orderSummary": "Order Summary",
+    "placeOrder": "Place Order",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "zipCode": "ZIP Code",
+    "country": "Country"
+  },
+  "account": {
+    "profile": "Profile",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "settings": "Settings",
+    "orderHistory": "Order History",
+    "orderDetails": "Order Details",
+    "trackOrder": "Track Order",
+    "reorder": "Reorder",
+    "viewInvoice": "View Invoice"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "createAccount": "Create Account",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "rememberMe": "Remember me"
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "empty": "Your wishlist is empty",
+    "addedToWishlist": "Added to wishlist",
+    "removedFromWishlist": "Removed from wishlist",
+    "moveToCart": "Move to Cart"
+  },
+  "comparison": {
+    "title": "Product Comparison",
+    "empty": "No products to compare",
+    "addToCompare": "Add to Compare",
+    "removeFromCompare": "Remove from Compare",
+    "compare": "Compare",
+    "features": "Features",
+    "specifications": "Specifications"
+  },
+  "subscriptions": {
+    "title": "My Subscriptions",
+    "empty": "No active subscriptions",
+    "frequency": "Delivery Frequency",
+    "nextDelivery": "Next Delivery",
+    "pause": "Pause Subscription",
+    "resume": "Resume Subscription",
+    "cancel": "Cancel Subscription",
+    "modify": "Modify Subscription",
+    "subscribe": "Subscribe & Save",
+    "savePercent": "Save {{percent}}%"
+  },
+  "referrals": {
+    "title": "Referral Program",
+    "yourCode": "Your Referral Code",
+    "shareLink": "Share Link",
+    "copyLink": "Copy Link",
+    "earnRewards": "Earn Rewards",
+    "totalReferrals": "Total Referrals",
+    "totalEarnings": "Total Earnings",
+    "referFriend": "Refer a Friend",
+    "howItWorks": "How It Works"
+  },
+  "chat": {
+    "startChat": "Start Chat",
+    "closeChat": "Close Chat",
+    "sendMessage": "Send Message",
+    "typing": "Typing...",
+    "online": "Online",
+    "offline": "Offline",
+    "chatWithUs": "Chat with us"
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "shipping": "Shipping Policy",
+    "returns": "Returns & Refunds",
+    "followUs": "Follow Us",
+    "newsletter": "Subscribe to Newsletter",
+    "enterEmail": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© {{year}} MitthuuG. All rights reserved."
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "customers": "Customers",
+    "reviews": "Reviews",
+    "settings": "Settings",
+    "analytics": "Analytics",
+    "bulkOperations": "Bulk Operations",
+    "chat": "Live Chat"
+  },
+  "errors": {
+    "general": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "notFound": "Page not found",
+    "unauthorized": "You are not authorized to access this page.",
+    "validation": "Please check your input and try again."
+  },
+  "success": {
+    "saved": "Successfully saved!",
+    "updated": "Successfully updated!",
+    "deleted": "Successfully deleted!",
+    "added": "Successfully added!"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "home": "होम",
+    "shop": "खरीदारी",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें",
+    "blog": "ब्लॉग",
+    "faq": "सवाल-जवाब",
+    "account": "खाता",
+    "login": "लॉग इन करें",
+    "logout": "लॉग आउट",
+    "cart": "कार्ट",
+    "wishlist": "पसंदीदा",
+    "compare": "तुलना करें",
+    "subscriptions": "सदस्यता",
+    "referrals": "रेफरल"
+  },
+  "common": {
+    "addToCart": "कार्ट में जोड़ें",
+    "buyNow": "अभी खरीदें",
+    "viewDetails": "विवरण देखें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "sort": "क्रमबद्ध करें",
+    "price": "कीमत",
+    "currency": "₹",
+    "loading": "लोड हो रहा है...",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "submit": "जमा करें",
+    "close": "बंद करें",
+    "yes": "हाँ",
+    "no": "नहीं",
+    "learnMore": "और जानें",
+    "seeAll": "सभी देखें"
+  },
+  "home": {
+    "hero": {
+      "title": "प्रीमियम तिल-गुड़ का आनंद लें",
+      "subtitle": "बेहतरीन तिल के बीज और शुद्ध गुड़ से प्यार से हस्तनिर्मित",
+      "cta": "अभी खरीदें"
+    },
+    "features": {
+      "natural": {
+        "title": "100% प्राकृतिक",
+        "desc": "कोई कृत्रिम योजक या परिरक्षक नहीं"
+      },
+      "certified": {
+        "title": "FSSAI प्रमाणित",
+        "desc": "गारंटीड गुणवत्ता और स्वच्छता मानक"
+      },
+      "handmade": {
+        "title": "हस्तनिर्मित",
+        "desc": "पारंपरिक व्यंजनों और देखभाल के साथ बनाया गया"
+      }
+    }
+  },
+  "product": {
+    "inStock": "उपलब्ध",
+    "outOfStock": "स्टॉक में नहीं",
+    "reviews": "समीक्षाएं",
+    "rating": "रेटिंग",
+    "description": "विवरण",
+    "ingredients": "सामग्री",
+    "nutritionFacts": "पोषण तथ्य",
+    "relatedProducts": "संबंधित उत्पाद",
+    "addToWishlist": "पसंदीदा में जोड़ें",
+    "removeFromWishlist": "पसंदीदा से हटाएं",
+    "share": "शेयर करें",
+    "quantity": "मात्रा"
+  },
+  "cart": {
+    "title": "शॉपिंग कार्ट",
+    "empty": "आपकी कार्ट खाली है",
+    "subtotal": "उप योग",
+    "shipping": "शिपिंग",
+    "tax": "कर",
+    "total": "कुल",
+    "checkout": "चेकआउट पर जाएं",
+    "continueShopping": "खरीदारी जारी रखें",
+    "remove": "हटाएं",
+    "update": "कार्ट अपडेट करें"
+  },
+  "checkout": {
+    "title": "चेकआउट",
+    "shippingAddress": "शिपिंग पता",
+    "billingAddress": "बिलिंग पता",
+    "paymentMethod": "भुगतान विधि",
+    "orderSummary": "ऑर्डर सारांश",
+    "placeOrder": "ऑर्डर करें",
+    "firstName": "पहला नाम",
+    "lastName": "अंतिम नाम",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "address": "पता",
+    "city": "शहर",
+    "state": "राज्य",
+    "zipCode": "पिन कोड",
+    "country": "देश"
+  },
+  "account": {
+    "profile": "प्रोफाइल",
+    "orders": "ऑर्डर",
+    "addresses": "पते",
+    "settings": "सेटिंग्स",
+    "orderHistory": "ऑर्डर इतिहास",
+    "orderDetails": "ऑर्डर विवरण",
+    "trackOrder": "ऑर्डर ट्रैक करें",
+    "reorder": "फिर से ऑर्डर करें",
+    "viewInvoice": "चालान देखें"
+  },
+  "auth": {
+    "signIn": "साइन इन करें",
+    "signUp": "साइन अप करें",
+    "signOut": "साइन आउट",
+    "email": "ईमेल पता",
+    "password": "पासवर्ड",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "resetPassword": "पासवर्ड रीसेट करें",
+    "createAccount": "खाता बनाएं",
+    "haveAccount": "पहले से खाता है?",
+    "noAccount": "खाता नहीं है?",
+    "rememberMe": "मुझे याद रखें"
+  },
+  "wishlist": {
+    "title": "मेरी पसंदीदा सूची",
+    "empty": "आपकी पसंदीदा सूची खाली है",
+    "addedToWishlist": "पसंदीदा में जोड़ा गया",
+    "removedFromWishlist": "पसंदीदा से हटाया गया",
+    "moveToCart": "कार्ट में ले जाएं"
+  },
+  "comparison": {
+    "title": "उत्पाद तुलना",
+    "empty": "तुलना करने के लिए कोई उत्पाद नहीं",
+    "addToCompare": "तुलना में जोड़ें",
+    "removeFromCompare": "तुलना से हटाएं",
+    "compare": "तुलना करें",
+    "features": "विशेषताएं",
+    "specifications": "विशिष्टताएं"
+  },
+  "subscriptions": {
+    "title": "मेरी सदस्यताएं",
+    "empty": "कोई सक्रिय सदस्यता नहीं",
+    "frequency": "डिलीवरी आवृत्ति",
+    "nextDelivery": "अगली डिलीवरी",
+    "pause": "सदस्यता रोकें",
+    "resume": "सदस्यता फिर से शुरू करें",
+    "cancel": "सदस्यता रद्द करें",
+    "modify": "सदस्यता संशोधित करें",
+    "subscribe": "सब्सक्राइब करें और बचत करें",
+    "savePercent": "{{percent}}% बचाएं"
+  },
+  "referrals": {
+    "title": "रेफरल कार्यक्रम",
+    "yourCode": "आपका रेफरल कोड",
+    "shareLink": "लिंक शेयर करें",
+    "copyLink": "लिंक कॉपी करें",
+    "earnRewards": "पुरस्कार कमाएं",
+    "totalReferrals": "कुल रेफरल",
+    "totalEarnings": "कुल कमाई",
+    "referFriend": "दोस्त को रेफर करें",
+    "howItWorks": "यह कैसे काम करता है"
+  },
+  "chat": {
+    "startChat": "चैट शुरू करें",
+    "closeChat": "चैट बंद करें",
+    "sendMessage": "संदेश भेजें",
+    "typing": "टाइप कर रहे हैं...",
+    "online": "ऑनलाइन",
+    "offline": "ऑफलाइन",
+    "chatWithUs": "हमसे चैट करें"
+  },
+  "footer": {
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें",
+    "privacy": "गोपनीयता नीति",
+    "terms": "नियम और शर्तें",
+    "shipping": "शिपिंग नीति",
+    "returns": "वापसी और रिफंड",
+    "followUs": "हमें फॉलो करें",
+    "newsletter": "न्यूज़लेटर की सदस्यता लें",
+    "enterEmail": "अपना ईमेल दर्ज करें",
+    "subscribe": "सदस्यता लें",
+    "copyright": "© {{year}} मिट्ठूग। सर्वाधिकार सुरक्षित।"
+  },
+  "admin": {
+    "dashboard": "डैशबोर्ड",
+    "products": "उत्पाद",
+    "orders": "ऑर्डर",
+    "customers": "ग्राहक",
+    "reviews": "समीक्षाएं",
+    "settings": "सेटिंग्स",
+    "analytics": "एनालिटिक्स",
+    "bulkOperations": "बल्क ऑपरेशंस",
+    "chat": "लाइव चैट"
+  },
+  "errors": {
+    "general": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+    "network": "नेटवर्क त्रुटि। कृपया अपना कनेक्शन जांचें।",
+    "notFound": "पृष्ठ नहीं मिला",
+    "unauthorized": "आपके पास इस पृष्ठ को एक्सेस करने का अधिकार नहीं है।",
+    "validation": "कृपया अपना इनपुट जांचें और पुनः प्रयास करें।"
+  },
+  "success": {
+    "saved": "सफलतापूर्वक सहेजा गया!",
+    "updated": "सफलतापूर्वक अपडेट किया गया!",
+    "deleted": "सफलतापूर्वक हटाया गया!",
+    "added": "सफलतापूर्वक जोड़ा गया!"
+  }
+}

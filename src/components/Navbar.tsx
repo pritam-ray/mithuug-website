@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useAdmin } from '../context/AdminContext';
 import { useWishlist } from '../context/WishlistContext';
+import { LanguageSelector } from './LanguageSelector';
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -106,6 +107,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
                 </span>
               )}
             </Link>
+
+            {/* Language Selector */}
+            <LanguageSelector />
 
             {/* Shopping Cart */}
             <button
