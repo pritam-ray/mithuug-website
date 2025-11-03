@@ -19,6 +19,7 @@ import Breadcrumb from './components/Breadcrumb';
 import BottomNav from './components/mobile/BottomNav';
 import CartDrawer from './components/mobile/CartDrawer';
 import PageLoader from './components/PageLoader';
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy load all page components for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -63,6 +64,7 @@ function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <ToastProvider>
           <ThemeProvider>
             <AuthProvider>
