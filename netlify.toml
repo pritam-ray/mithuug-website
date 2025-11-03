@@ -12,6 +12,7 @@
 # Environment variables (you'll need to set these in Netlify dashboard)
 [build.environment]
   NODE_VERSION = "18"
+  VITE_DEPLOY_TARGET = "netlify"
 
 # Redirect rules for single-page application
 [[redirects]]
