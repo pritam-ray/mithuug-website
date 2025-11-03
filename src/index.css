@@ -266,6 +266,53 @@
     overflow: hidden;
   }
 
+  /* Mobile Touch Targets */
+  .touch-target {
+    @apply min-w-touch min-h-touch inline-flex items-center justify-center;
+  }
+  
+  .touch-target-lg {
+    @apply min-w-touch-lg min-h-touch-lg inline-flex items-center justify-center;
+  }
+  
+  /* Safe Area Utilities */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  
+  /* Mobile Animations */
+  .slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fade-in-fast {
+    animation: fadeIn 0.15s ease-in;
+  }
+  
+  /* Smooth Scrolling */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Hide Scrollbar (Mobile) */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   @keyframes slideIn {
     from {
       transform: translateX(100%);
@@ -277,11 +324,47 @@
     }
   }
 
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .animate-slideIn {
     animation: slideIn 0.3s ease-out;
   }
 }
 
+/* Mobile-First Typography */
 html {
   scroll-behavior: smooth;
+  /* Prevent zoom on input focus (iOS) */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Ensure inputs don't trigger zoom on iOS */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Fix for iOS Safari viewport height with address bar */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen-mobile {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
 }

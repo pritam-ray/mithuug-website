@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import Cart from './components/Cart';
 import { ChatWidget } from './components/ChatWidget';
 import Breadcrumb from './components/Breadcrumb';
+import BottomNav from './components/mobile/BottomNav';
 
 // Lazy load all page components for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -83,6 +84,9 @@ function App() {
                             <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
                               <Navbar onCartClick={() => setIsCartOpen(true)} />
                               <Breadcrumb />
+                              
+                              {/* Main Content with bottom padding for mobile nav */}
+                              <div className="pb-0 md:pb-0 mb-16 md:mb-0">
                             <Suspense fallback={<PageLoader />}>
                       <Routes>
                         <Route path="/" element={<HomePage />} />
@@ -124,9 +128,15 @@ function App() {
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                   </Suspense>
-                                      <Footer />
-                    <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-                    <ChatWidget />
+                              </div>
+                              {/* End Main Content */}
+                              
+                              <Footer />
+                              <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                              <ChatWidget />
+                              
+                              {/* Mobile Bottom Navigation */}
+                              <BottomNav />
                             </div>
                           </ChatProvider>
                         </ReferralProvider>

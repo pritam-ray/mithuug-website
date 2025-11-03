@@ -3,6 +3,14 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
+    screens: {
+      'xs': '375px',   // iPhone SE (smallest common)
+      'sm': '390px',   // iPhone 12/13/14
+      'md': '768px',   // Tablets
+      'lg': '1024px',  // Desktop
+      'xl': '1280px',  
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         // MitthuuG Brand Colors - Enhanced Design System
@@ -83,6 +91,21 @@ export default {
         '88': '22rem',
         '112': '28rem',
         '128': '32rem',
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+        'nav-bottom': '64px',
+        'nav-top': '56px',
+      },
+      minHeight: {
+        'touch': '44px',
+        'touch-lg': '48px',
+        'screen-safe': 'calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+      },
+      minWidth: {
+        'touch': '44px',
+        'touch-lg': '48px',
       },
       boxShadow: {
         'mitthuug': '0 4px 20px rgba(198, 134, 46, 0.15)',
