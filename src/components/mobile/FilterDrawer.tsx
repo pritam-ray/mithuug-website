@@ -121,7 +121,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
           />
 
           {/* Drawer */}
@@ -134,7 +134,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={0.2}
             onDragEnd={handleDragEnd}
-            className="fixed inset-x-0 bottom-0 z-[61] bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl max-h-[85vh] flex flex-col"
+            className="fixed inset-x-0 bottom-0 z-30 bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl max-h-[85vh] flex flex-col"
           >
             {/* Drag Handle */}
             <div className="flex justify-center py-3 cursor-grab active:cursor-grabbing">
