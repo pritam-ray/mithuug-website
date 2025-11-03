@@ -38,14 +38,14 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-[60] lg:hidden"
           onClick={onClose}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 bg-white shadow-xl z-50 transition-transform duration-300 overflow-y-auto ${
+        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 bg-white shadow-xl z-[61] transition-transform duration-300 overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         } lg:top-24`}
       >
