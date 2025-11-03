@@ -7,6 +7,9 @@ import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
 import { Search, X, Filter } from 'lucide-react';
 import SEO from '../components/SEO';
 import FilterSidebar from '../components/FilterSidebar';
+import FilterDrawer from '../components/mobile/FilterDrawer';
+import { usePullToRefresh } from '../hooks/usePullToRefresh';
+import PullToRefreshIndicator from '../components/mobile/PullToRefreshIndicator';
 import { trackSearch } from '../lib/analytics';
 
 const ShopPage: React.FC = () => {
@@ -24,6 +27,15 @@ const ShopPage: React.FC = () => {
   const [showInStock, setShowInStock] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Pull-to-refresh functionality
+  const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh({
+    onRefresh: async () => {
+      await loadData();
+    },
+    threshold: 80,
+    resistance: 2.5,
+  });
 
   useEffect(() => {
     loadData();
@@ -147,6 +159,14 @@ const ShopPage: React.FC = () => {
         keywords="buy til gud online, tilgul sweets, indian sweets online, traditional sweets, sesame jaggery ladoo, makar sankranti sweets, order sweets online"
       />
       
+      {/* Pull-to-Refresh Indicator */}
+      <PullToRefreshIndicator
+        isPulling={isPulling}
+        isRefreshing={isRefreshing}
+        pullDistance={pullDistance}
+        pullProgress={pullProgress}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -159,11 +179,30 @@ const ShopPage: React.FC = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* New Filter Sidebar Component */}
-          <FilterSidebar
+          {/* Desktop Filter Sidebar */}
+          <div className="hidden lg:block">
+            <FilterSidebar
+              isOpen={showFilters}
+              onClose={() => setShowFilters(false)}
+              categories={categories.map(c => ({ id: c.slug, name: c.name }))}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+              priceRange={priceRange}
+              onPriceRangeChange={setPriceRange}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+              showInStock={showInStock}
+              onInStockChange={setShowInStock}
+              showNewOnly={showNewOnly}
+              onNewOnlyChange={setShowNewOnly}
+            />
+          </div>
+
+          {/* Mobile Filter Drawer */}
+          <FilterDrawer
             isOpen={showFilters}
             onClose={() => setShowFilters(false)}
-            categories={categories.map(c => ({ id: c.slug, name: c.name }))}
+            categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
             priceRange={priceRange}
@@ -174,12 +213,20 @@ const ShopPage: React.FC = () => {
             onInStockChange={setShowInStock}
             showNewOnly={showNewOnly}
             onNewOnlyChange={setShowNewOnly}
+            onReset={() => {
+              setSelectedCategory('all');
+              setPriceRange([0, 1000]);
+              setSortBy('newest');
+              setShowInStock(false);
+              setShowNewOnly(false);
+            }}
           />
 
-          {/* Mobile Filter Toggle */}
+          {/* Mobile Filter Toggle Button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="lg:hidden fixed bottom-6 right-6 bg-ochre text-white p-4 rounded-full shadow-2xl z-50 hover:bg-ochre-600 transition-all"
+            className="lg:hidden fixed bottom-20 right-6 bg-ochre text-white p-4 rounded-full shadow-2xl z-40 hover:bg-ochre-600 transition-all active:scale-95"
+            aria-label="Toggle filters"
           >
             <Filter className="w-6 h-6" />
           </button>

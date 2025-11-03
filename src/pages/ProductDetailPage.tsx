@@ -11,6 +11,8 @@ import SEO from '../components/SEO';
 import Breadcrumb from '../components/Breadcrumb';
 import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
 import { trackViewItem, trackAddToCart } from '../lib/analytics';
+import StickyAddToCart from '../components/mobile/StickyAddToCart';
+import ProductGallery from '../components/mobile/ProductGallery';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +21,6 @@ const ProductDetailPage: React.FC = () => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState<number>(0);
   const { addToCart } = useCart();
   const { user } = useAuth();
 
@@ -203,48 +204,25 @@ const ProductDetailPage: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Product Image Gallery */}
           <div className="space-y-4">
-            {/* Main Image */}
-            <div className="relative bg-white rounded-2xl p-4 shadow-xl">
-              <div className="aspect-square overflow-hidden rounded-xl">
-                <img
-                  src={(product.images && product.images.length > 0) ? product.images[selectedImage] : product.image_url}
-                  alt={product.name}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                />
+            <ProductGallery
+              images={
+                product.images && product.images.length > 0
+                  ? product.images
+                  : [product.image_url]
+              }
+              productName={product.name}
+            />
+
+            {/* Badges Overlay */}
+            {product.is_new && (
+              <div className="absolute top-8 left-8 bg-ochre text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest flex items-center space-x-2 shadow-lg z-10">
+                <Sparkles className="w-4 h-4" />
+                <span>NEW ARRIVAL</span>
               </div>
-              {product.is_new && (
-                <div className="absolute top-8 left-8 bg-ochre text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest flex items-center space-x-2 shadow-lg">
-                  <Sparkles className="w-4 h-4" />
-                  <span>NEW ARRIVAL</span>
-                </div>
-              )}
-              {product.is_bestseller && !product.is_new && (
-                <div className="absolute top-8 left-8 bg-gold text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest shadow-lg">
-                  ⭐ BESTSELLER
-                </div>
-              )}
-            </div>
-            
-            {/* Thumbnail Gallery */}
-            {product.images && product.images.length > 1 && (
-              <div className="grid grid-cols-5 gap-2">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                      selectedImage === index 
-                        ? 'border-ochre shadow-lg scale-105' 
-                        : 'border-chocolate-200 hover:border-ochre-300'
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`${product.name} ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+            )}
+            {product.is_bestseller && !product.is_new && (
+              <div className="absolute top-8 left-8 bg-gold text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest shadow-lg z-10">
+                ⭐ BESTSELLER
               </div>
             )}
           </div>
@@ -403,6 +381,11 @@ const ProductDetailPage: React.FC = () => {
             <RatingBreakdown productId={product.id} />
           </div>
         </div>
+      </div>
+
+      {/* Mobile Sticky Add to Cart Bar */}
+      <div className="md:hidden">
+        <StickyAddToCart product={product} showThreshold={300} />
       </div>
     </div>
   );

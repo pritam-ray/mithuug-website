@@ -17,6 +17,8 @@ import Cart from './components/Cart';
 import { ChatWidget } from './components/ChatWidget';
 import Breadcrumb from './components/Breadcrumb';
 import BottomNav from './components/mobile/BottomNav';
+import CartDrawer from './components/mobile/CartDrawer';
+import PageLoader from './components/PageLoader';
 
 // Lazy load all page components for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -54,16 +56,6 @@ const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
 const AdminBulkOperationsPage = lazy(() => import('./pages/AdminBulkOperationsPage'));
 const AdminChatPage = lazy(() => import('./pages/AdminChatPage'));
-
-// Loading component
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-cream-50">
-    <div className="text-center">
-      <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-ochre border-t-transparent mb-4"></div>
-      <p className="text-chocolate font-playfair text-lg">Loading sweetness...</p>
-    </div>
-  </div>
-);
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -132,7 +124,17 @@ function App() {
                               {/* End Main Content */}
                               
                               <Footer />
-                              <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                              
+                              {/* Desktop Cart Modal */}
+                              <div className="hidden md:block">
+                                <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                              </div>
+                              
+                              {/* Mobile Cart Drawer */}
+                              <div className="md:hidden">
+                                <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                              </div>
+                              
                               <ChatWidget />
                               
                               {/* Mobile Bottom Navigation */}

@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabase';
 import { Address } from '../types/database';
 import { CreditCard, Lock, Truck, Tag, AlertCircle, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
+import CheckoutWizard from '../components/mobile/CheckoutWizard';
 import { 
   createRazorpayOrder,
   verifyRazorpayPayment,
@@ -309,19 +310,42 @@ const CheckoutPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-ivory">
+    <>
       <SEO 
         title="Secure Checkout | MitthuuG"
         description="Complete your order securely. Fast shipping, multiple payment options, and guaranteed freshness on all Til-Gud sweets."
         keywords="checkout, buy til gud, order sweets, secure payment"
       />
-      
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
-          Checkout
-        </h1>
 
-        <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
+      {/* Mobile Wizard - Hidden on Desktop */}
+      <div className="md:hidden">
+        <CheckoutWizard
+          cartTotal={cartTotal}
+          cartItems={cart}
+          shippingAddress={shippingAddress}
+          setShippingAddress={setShippingAddress}
+          billingAddress={billingAddress}
+          setBillingAddress={setBillingAddress}
+          sameAsShipping={sameAsShipping}
+          setSameAsShipping={setSameAsShipping}
+          paymentMethod={paymentMethod}
+          setPaymentMethod={setPaymentMethod}
+          onSubmit={async () => {
+            // Call the existing handleSubmit with synthetic event
+            await handleSubmit({ preventDefault: () => {} } as React.FormEvent);
+          }}
+          processing={processing}
+        />
+      </div>
+
+      {/* Desktop Form - Hidden on Mobile */}
+      <div className="hidden md:block min-h-screen pt-20 bg-ivory">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
+            Checkout
+          </h1>
+
+          <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-white rounded-lg p-8 shadow-sm">
               <h2 className="text-2xl font-light text-stone-900 mb-6">
@@ -796,7 +820,9 @@ const CheckoutPage: React.FC = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
 export default CheckoutPage;
+

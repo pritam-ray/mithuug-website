@@ -10,11 +10,22 @@ import Testimonials from '../components/Testimonials';
 import Newsletter from '../components/Newsletter';
 import HeroSection from '../components/HeroSection';
 import USPGrid from '../components/USPGrid';
+import { usePullToRefresh } from '../hooks/usePullToRefresh';
+import PullToRefreshIndicator from '../components/mobile/PullToRefreshIndicator';
 
 const HomePage: React.FC = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([]);
   const [bestsellers, setBestsellers] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Pull-to-refresh functionality
+  const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh({
+    onRefresh: async () => {
+      await loadProducts();
+    },
+    threshold: 80,
+    resistance: 2.5,
+  });
 
   useEffect(() => {
     loadProducts();
@@ -50,6 +61,14 @@ const HomePage: React.FC = () => {
         description="Discover authentic, handcrafted Til-Gud (sesame jaggery sweets) and traditional Indian delicacies. Made with 100% natural ingredients, celebrating India's sweet heritage with every bite."
         keywords="til gud, tilgul, sesame jaggery sweets, indian sweets, traditional sweets, natural sweets, handcrafted sweets, makar sankranti sweets"
         ogImage="https://pritam-ray.github.io/mithuug-website/og-image.jpg"
+      />
+      
+      {/* Pull-to-Refresh Indicator */}
+      <PullToRefreshIndicator
+        isPulling={isPulling}
+        isRefreshing={isRefreshing}
+        pullDistance={pullDistance}
+        pullProgress={pullProgress}
       />
       
       {/* Hero Section - New Component */}
