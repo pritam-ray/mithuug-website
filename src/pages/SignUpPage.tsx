@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, User, AlertCircle, Sparkles, Leaf, CheckCircle } from 'lucide-react';
+import { Mail, Lock, User, AlertCircle, Sparkles, Leaf, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const SignUpPage: React.FC = () => {
@@ -14,6 +14,8 @@ const SignUpPage: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { signUp, signInWithGoogle, signInWithFacebook } = useAuth();
   const navigate = useNavigate();
 
@@ -221,14 +223,22 @@ const SignUpPage: React.FC = () => {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-ochre-500" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-12 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre-500 focus:border-transparent transition-all"
                   placeholder="At least 6 characters"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-ochre-500 hover:text-ochre-700 transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
             </div>
 
@@ -240,14 +250,22 @@ const SignUpPage: React.FC = () => {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-ochre-500" />
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-12 py-3 border-2 border-ochre-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ochre-500 focus:border-transparent transition-all"
                   placeholder="Re-enter your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-ochre-500 hover:text-ochre-700 transition-colors"
+                  aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                >
+                  {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
             </div>
 
