@@ -205,132 +205,127 @@ const ProductDetailPage: React.FC = () => {
       />
       <BreadcrumbSchema items={breadcrumbItems} />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Auto Breadcrumb */}
-        <Breadcrumb />
-
-        <Link
-          to="/shop"
-          className="inline-flex items-center space-x-2 text-chocolate-600 hover:text-ochre mb-8 transition-colors font-semibold"
-        >
-          <ChevronLeft className="w-5 h-5" />
-          <span>Back to Shop</span>
+      {/* Product Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
+        {/* Back Button */}
+        <Link to="/shop" className="inline-flex items-center text-chocolate hover:text-ochre mb-4 md:mb-8 transition-colors">
+          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 mr-1" />
+          <span className="font-semibold text-sm md:text-base">Back to Shop</span>
         </Link>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 mb-8 md:mb-16">
           {/* Product Image Gallery */}
-          <div className="space-y-4">
-            <ProductGallery
-              images={
-                product.images && product.images.length > 0
-                  ? product.images
-                  : [product.image_url]
-              }
+          <div className="relative">
+            {/* Badges */}
+            {(product.is_new || product.discount_percentage > 0) && (
+              <div className="absolute top-2 left-2 md:top-8 md:left-8 z-10 flex flex-col gap-1 md:gap-2">
+                {product.is_new && (
+                  <span className="bg-olive text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold shadow-md">
+                    NEW
+                  </span>
+                )}
+                {product.discount_percentage > 0 && (
+                  <span className="bg-red-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold shadow-md">
+                    {product.discount_percentage}% OFF
+                  </span>
+                )}
+              </div>
+            )}
+            
+            <ProductGallery 
+              images={product.images?.length ? product.images : [product.image_url]} 
               productName={product.name}
             />
-
-            {/* Badges Overlay */}
-            {product.is_new && (
-              <div className="absolute top-8 left-8 bg-ochre text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest flex items-center space-x-2 shadow-lg z-10">
-                <Sparkles className="w-4 h-4" />
-                <span>NEW ARRIVAL</span>
-              </div>
-            )}
-            {product.is_bestseller && !product.is_new && (
-              <div className="absolute top-8 left-8 bg-gold text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest shadow-lg z-10">
-                ⭐ BESTSELLER
-              </div>
-            )}
           </div>
 
-          {/* Product Information */}
-          <div className="flex flex-col">
-            <h1 className="text-5xl font-playfair font-bold text-chocolate mb-4 leading-tight">
+          {/* Product Info */}
+          <div>
+                        <h1 className="text-2xl md:text-5xl font-playfair font-bold text-chocolate mb-3 md:mb-4 leading-tight">
               {product.name}
             </h1>
 
-            <div className="flex items-center space-x-4 mb-6">
+            {/* Rating */}
+            <div className="flex items-center space-x-2 md:space-x-4 mb-4 md:mb-6">
               <div className="flex items-center space-x-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-5 h-5 ${
+                    className={`w-4 h-4 md:w-5 md:h-5 ${
                       i < Math.round(averageRating)
-                        ? 'fill-gold text-gold'
-                        : 'text-chocolate-300'
+                        ? 'fill-ochre text-ochre'
+                        : 'text-gray-300'
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-chocolate-600 font-semibold">
-                {reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}
+              <span className="text-chocolate-600 font-medium text-sm md:text-base">
+                ({reviews.length} reviews)
               </span>
             </div>
 
-            <div className="mb-6 flex items-baseline space-x-3">
-              <p className="text-4xl font-playfair font-bold text-ochre">₹{product.price}</p>
-              <span className="text-sm text-chocolate-500 font-semibold">({product.weight})</span>
-            </div>
+            <p className="text-2xl md:text-4xl font-playfair font-bold text-ochre mb-4 md:mb-6">
+              ₹{product.price}
+            </p>
 
-            <p className="text-chocolate-700 mb-8 leading-relaxed text-lg border-l-4 border-ochre pl-4 bg-white/50 p-4 rounded-r-lg">
+            <p className="text-chocolate-700 mb-4 md:mb-8 leading-relaxed text-sm md:text-lg">
               {product.description}
             </p>
 
             {/* Product Highlights - Simple Version */}
             {product.ingredients && product.ingredients.length > 0 && (
-              <div className="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 className="font-playfair font-bold text-chocolate text-xl mb-4">Why You'll Love This</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start space-x-3">
-                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
-                    <span className="text-chocolate-700">100% Natural Ingredients - No Preservatives</span>
+              <div className="mb-4 md:mb-8 bg-white rounded-xl p-4 md:p-6 shadow-md">
+                <h3 className="font-playfair font-bold text-chocolate text-base md:text-xl mb-3 md:mb-4">Why You'll Love This</h3>
+                <ul className="space-y-2 md:space-y-3">
+                  <li className="flex items-start space-x-2 md:space-x-3">
+                    <Leaf className="w-4 h-4 md:w-5 md:h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700 text-sm md:text-base">100% Natural Ingredients - No Preservatives</span>
                   </li>
-                  <li className="flex items-start space-x-3">
-                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
-                    <span className="text-chocolate-700">Handcrafted in Small Batches</span>
+                  <li className="flex items-start space-x-2 md:space-x-3">
+                    <Leaf className="w-4 h-4 md:w-5 md:h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700 text-sm md:text-base">Handcrafted in Small Batches</span>
                   </li>
-                  <li className="flex items-start space-x-3">
-                    <Leaf className="w-5 h-5 text-olive flex-shrink-0 mt-0.5" />
-                    <span className="text-chocolate-700">Traditional Recipe with Modern Quality Standards</span>
+                  <li className="flex items-start space-x-2 md:space-x-3">
+                    <Leaf className="w-4 h-4 md:w-5 md:h-5 text-olive flex-shrink-0 mt-0.5" />
+                    <span className="text-chocolate-700 text-sm md:text-base">Traditional Recipe with Modern Quality Standards</span>
                   </li>
                 </ul>
               </div>
             )}
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 md:space-y-4 mb-4 md:mb-8">
               {/* Ingredients */}
-              <div className="bg-white rounded-xl p-6 shadow-md">
-                <h3 className="font-playfair font-bold text-chocolate text-lg mb-3 flex items-center space-x-2">
-                  <Leaf className="w-5 h-5 text-olive" />
+              <div className="bg-white rounded-xl p-4 md:p-6 shadow-md">
+                <h3 className="font-playfair font-bold text-chocolate text-base md:text-lg mb-2 md:mb-3 flex items-center space-x-2">
+                  <Leaf className="w-4 h-4 md:w-5 md:h-5 text-olive" />
                   <span>Pure Ingredients</span>
                 </h3>
-                <p className="text-chocolate-700 leading-relaxed">
+                <p className="text-chocolate-700 leading-relaxed text-sm md:text-base">
                   {product.ingredients.join(', ')}
                 </p>
               </div>
 
               {/* Stock Status */}
-              <div className="flex items-center justify-between py-4 px-6 bg-white rounded-xl shadow-md">
-                <span className="text-chocolate-600 font-semibold">Stock Status</span>
-                <span className={`font-bold ${product.stock_quantity > 0 ? 'text-olive' : 'text-red-600'}`}>
-                  {product.stock_quantity > 0 ? `In Stock (${product.stock_quantity} available)` : 'Out of Stock'}
+              <div className="flex items-center justify-between py-3 px-4 md:py-4 md:px-6 bg-white rounded-xl shadow-md">
+                <span className="text-chocolate-600 font-semibold text-sm md:text-base">Stock Status</span>
+                <span className={`font-bold text-xs md:text-base ${product.stock_quantity > 0 ? 'text-olive' : 'text-red-600'}`}>
+                  {product.stock_quantity > 0 ? `In Stock (${product.stock_quantity})` : 'Out of Stock'}
                 </span>
               </div>
             </div>
 
             {/* Quantity Selector */}
-            <div className="flex items-center space-x-4 mb-8">
+            <div className="flex items-center space-x-4 mb-4 md:mb-8">
               <div className="flex items-center border-2 border-ochre rounded-full bg-white shadow-md">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-5 py-3 hover:bg-ochre-50 transition-colors font-bold text-chocolate text-lg"
+                  className="px-3 py-2 md:px-5 md:py-3 hover:bg-ochre-50 transition-colors font-bold text-chocolate text-base md:text-lg"
                 >
                   −
                 </button>
-                <span className="px-8 py-3 border-x-2 border-ochre font-bold text-chocolate text-lg">{quantity}</span>
+                <span className="px-4 py-2 md:px-8 md:py-3 border-x-2 border-ochre font-bold text-chocolate text-base md:text-lg">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock_quantity, quantity + 1))}
-                  className="px-5 py-3 hover:bg-ochre-50 transition-colors font-bold text-chocolate text-lg"
+                  className="px-3 py-2 md:px-5 md:py-3 hover:bg-ochre-50 transition-colors font-bold text-chocolate text-base md:text-lg"
                   disabled={quantity >= product.stock_quantity}
                 >
                   +
@@ -339,68 +334,68 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Add to Cart & Wishlist */}
-            <div className="flex flex-col space-y-3 mb-8">
+            <div className="flex flex-col space-y-2 md:space-y-3 mb-4 md:mb-8">
               {/* Buy Now Button - Primary CTA */}
               <button
                 onClick={handleBuyNow}
                 disabled={product.stock_quantity === 0}
-                className="w-full bg-gradient-to-r from-ochre to-ochre-600 text-white py-4 px-6 rounded-full hover:from-ochre-600 hover:to-ochre-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg group"
+                className="w-full bg-gradient-to-r from-ochre to-ochre-600 text-white py-3 px-4 md:py-4 md:px-6 rounded-full hover:from-ochre-600 hover:to-ochre-700 transition-all duration-300 flex items-center justify-center space-x-2 md:space-x-3 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed font-bold text-base md:text-lg group"
               >
-                <Zap className="w-6 h-6 group-hover:animate-pulse" />
+                <Zap className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
                 <span className="tracking-wide">BUY NOW</span>
               </button>
 
               {/* Add to Cart & Wishlist Row */}
-              <div className="flex space-x-3">
+              <div className="flex space-x-2 md:space-x-3">
                 <button
                   onClick={handleAddToCart}
                   disabled={product.stock_quantity === 0}
-                  className="flex-1 bg-white text-ochre py-4 px-6 rounded-full border-2 border-ochre hover:bg-ochre hover:text-white transition-all duration-300 flex items-center justify-center space-x-3 shadow-md disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg"
+                  className="flex-1 bg-white text-ochre py-3 px-3 md:py-4 md:px-6 rounded-full border-2 border-ochre hover:bg-ochre hover:text-white transition-all duration-300 flex items-center justify-center space-x-2 md:space-x-3 shadow-md disabled:opacity-50 disabled:cursor-not-allowed font-bold text-sm md:text-lg"
                 >
-                  <ShoppingBag className="w-6 h-6" />
+                  <ShoppingBag className="w-5 h-5 md:w-6 md:h-6" />
                   <span className="tracking-wide">ADD TO CART</span>
                 </button>
 
                 {user && (
                   <button
                     onClick={toggleWishlist}
-                    className={`px-6 py-4 rounded-full border-2 transition-all duration-300 shadow-md ${
+                    className={`px-4 py-3 md:px-6 md:py-4 rounded-full border-2 transition-all duration-300 shadow-md ${
                       isInWishlist
                         ? 'border-red-500 bg-red-50 text-red-500'
                         : 'border-ochre-300 bg-white text-chocolate hover:border-ochre'
                     }`}
                   >
-                    <Heart className={`w-6 h-6 ${isInWishlist ? 'fill-current' : ''}`} />
+                    <Heart className={`w-5 h-5 md:w-6 md:h-6 ${isInWishlist ? 'fill-current' : ''}`} />
                   </button>
                 )}
               </div>
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t-2 border-ochre-100">
+            <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 md:pt-8 border-t-2 border-ochre-100">
               <div className="text-center">
-                <div className="bg-ochre-50 rounded-full p-4 inline-block mb-2">
-                  <Package className="w-8 h-8 mx-auto text-ochre" />
+                <div className="bg-ochre-50 rounded-full p-2 md:p-4 inline-block mb-1 md:mb-2">
+                  <Package className="w-5 h-5 md:w-8 md:h-8 mx-auto text-ochre" />
                 </div>
-                <p className="text-xs font-semibold text-chocolate-600">Premium Packaging</p>
+                <p className="text-[10px] md:text-xs font-semibold text-chocolate-600">Premium Packaging</p>
               </div>
               <div className="text-center">
-                <div className="bg-ochre-50 rounded-full p-4 inline-block mb-2">
-                  <Truck className="w-8 h-8 mx-auto text-ochre" />
+                <div className="bg-ochre-50 rounded-full p-2 md:p-4 inline-block mb-1 md:mb-2">
+                  <Truck className="w-5 h-5 md:w-8 md:h-8 mx-auto text-ochre" />
                 </div>
-                <p className="text-xs font-semibold text-chocolate-600">Free Shipping</p>
+                <p className="text-[10px] md:text-xs font-semibold text-chocolate-600">Free Shipping</p>
               </div>
               <div className="text-center">
-                <div className="bg-ochre-50 rounded-full p-4 inline-block mb-2">
-                  <Shield className="w-8 h-8 mx-auto text-ochre" />
+                <div className="bg-ochre-50 rounded-full p-2 md:p-4 inline-block mb-1 md:mb-2">
+                  <Shield className="w-5 h-5 md:w-8 md:h-8 mx-auto text-ochre" />
                 </div>
-                <p className="text-xs font-semibold text-chocolate-600">Quality Assured</p>
+                <p className="text-[10px] md:text-xs font-semibold text-chocolate-600">Quality Assured</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-12">
           <div className="lg:col-span-2">
             <ReviewSection
               product_id={product.id}
