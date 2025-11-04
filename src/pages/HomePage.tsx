@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { dataCache } from '../lib/dataCache';
 import { Product } from '../types/database';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
@@ -21,6 +21,8 @@ const HomePage: React.FC = () => {
   // Pull-to-refresh functionality
   const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh({
     onRefresh: async () => {
+      // Clear cache and reload on pull-to-refresh
+      dataCache.invalidatePattern('products:');
       await loadProducts();
     },
     threshold: 80,
@@ -32,21 +34,16 @@ const HomePage: React.FC = () => {
   }, []);
 
   const loadProducts = async () => {
+    setLoading(true);
     try {
-      const { data: newData } = await supabase
-        .from('products')
-        .select('*')
-        .eq('is_new', true)
-        .limit(3);
+      // Use cached data - instant if available
+      const [newData, bestsellerData] = await Promise.all([
+        dataCache.getNewProducts(3),
+        dataCache.getBestsellers(3),
+      ]);
 
-      const { data: bestsellerData } = await supabase
-        .from('products')
-        .select('*')
-        .eq('is_bestseller', true)
-        .limit(3);
-
-      if (newData) setNewProducts(newData);
-      if (bestsellerData) setBestsellers(bestsellerData);
+      setNewProducts(newData);
+      setBestsellers(bestsellerData);
     } catch (error) {
       console.error('Error loading products:', error);
     } finally {

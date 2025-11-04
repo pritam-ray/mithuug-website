@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { dataCache } from '../lib/dataCache';
 import { Product, Category } from '../types/database';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
@@ -32,6 +32,9 @@ const ShopPage: React.FC = () => {
   // Pull-to-refresh functionality
   const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh({
     onRefresh: async () => {
+      // Clear cache on pull-to-refresh
+      dataCache.invalidatePattern('products:');
+      dataCache.invalidatePattern('categories:');
       await loadData();
     },
     threshold: 80,
@@ -69,18 +72,14 @@ const ShopPage: React.FC = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      // Fetch all data once and cache it
-      const [{ data: productsData }, { data: categoriesData }] = await Promise.all([
-        supabase.from('products').select('*').order('created_at', { ascending: false }),
-        supabase.from('categories').select('*'),
+      // Use cached data - instant if cache hit
+      const [productsData, categoriesData] = await Promise.all([
+        dataCache.getAllProducts(),
+        dataCache.getCategories(),
       ]);
 
-      if (productsData) {
-        setAllProducts(productsData);
-      }
-      if (categoriesData) {
-        setCategories(categoriesData);
-      }
+      setAllProducts(productsData);
+      setCategories(categoriesData);
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {

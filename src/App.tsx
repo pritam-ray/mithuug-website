@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
@@ -20,6 +20,7 @@ import BottomNav from './components/mobile/BottomNav';
 import CartDrawer from './components/mobile/CartDrawer';
 import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
+import { dataCache } from './lib/dataCache';
 
 // Lazy load all page components for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -60,6 +61,11 @@ const AdminChatPage = lazy(() => import('./pages/AdminChatPage'));
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Prefetch common data on app initialization for instant loading
+  useEffect(() => {
+    dataCache.prefetchCommonData();
+  }, []);
 
   return (
     <HelmetProvider>

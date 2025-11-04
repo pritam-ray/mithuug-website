@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { dataCache } from '../lib/dataCache';
 import { Product, Review } from '../types/database';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -33,25 +34,21 @@ const ProductDetailPage: React.FC = () => {
   }, [id, user]);
 
   const loadProduct = async () => {
+    setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('id', id)
-        .single();
-
-      if (error) throw error;
+      // Use cached product data
+      const data = await dataCache.getProduct(id!);
+      
+      if (!data) throw new Error('Product not found');
       setProduct(data);
       
       // Track product view
-      if (data) {
-        trackViewItem({
-          id: data.id,
-          name: data.name,
-          price: data.price,
-          category: 'Til-Gud Bites',
-        });
-      }
+      trackViewItem({
+        id: data.id,
+        name: data.name,
+        price: data.price,
+        category: 'Til-Gud Bites',
+      });
     } catch (error) {
       console.error('Error loading product:', error);
     } finally {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, TrendingUp, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
+import { dataCache } from '../../lib/dataCache';
 import { Product, Category } from '../../types/database';
 import { trackSearch } from '../../lib/analytics';
 
@@ -14,6 +14,7 @@ interface SearchOverlayProps {
 const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]); // Cache all products
   const [trendingProducts, setTrendingProducts] = useState<Product[]>([]);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -56,17 +57,16 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        const [{ data: trending }, { data: cats }] = await Promise.all([
-          supabase
-            .from('products')
-            .select('*')
-            .eq('is_bestseller', true)
-            .limit(4),
-          supabase.from('categories').select('*'),
+        // Use cached data for instant loading
+        const [trending, cats, allProds] = await Promise.all([
+          dataCache.getBestsellers(4),
+          dataCache.getCategories(),
+          dataCache.getAllProducts(),
         ]);
 
-        if (trending) setTrendingProducts(trending);
-        if (cats) setCategories(cats);
+        setTrendingProducts(trending);
+        setCategories(cats);
+        setAllProducts(allProds);
       } catch (error) {
         console.error('Error loading initial data:', error);
       }
@@ -77,32 +77,30 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  // Instant search with debounce
+  // Instant client-side search with debounce
   useEffect(() => {
     if (searchQuery.length < 2) {
       setSearchResults([]);
       return;
     }
 
-    const timer = setTimeout(async () => {
+    const timer = setTimeout(() => {
       setLoading(true);
       try {
-        let query = supabase.from('products').select('*');
+        // Filter from cached products (instant, no DB call)
+        let filtered = allProducts;
 
         if (selectedCategory !== 'all') {
-          query = query.eq('category', selectedCategory);
+          filtered = filtered.filter(p => p.category === selectedCategory);
         }
 
-        const { data } = await query;
-
-        if (data) {
-          const filtered = data.filter(
-            (product) =>
-              product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              product.description.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-          setSearchResults(filtered);
-        }
+        filtered = filtered.filter(
+          (product) =>
+            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        
+        setSearchResults(filtered);
       } catch (error) {
         console.error('Error searching products:', error);
       } finally {
@@ -111,9 +109,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     }, 300); // 300ms debounce
 
     return () => clearTimeout(timer);
-  }, [searchQuery, selectedCategory]);
-
-  // Save search to recent searches
+  }, [searchQuery, selectedCategory, allProducts]);  // Save search to recent searches
   const saveRecentSearch = (query: string) => {
     if (!query.trim() || query.length < 2) return;
 
