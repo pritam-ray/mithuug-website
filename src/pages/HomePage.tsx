@@ -99,7 +99,7 @@ const HomePage: React.FC = () => {
                 {loading ? (
                   <ProductGridSkeleton count={3} />
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
                     {newProducts.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
@@ -132,7 +132,7 @@ const HomePage: React.FC = () => {
                 {loading ? (
                   <ProductGridSkeleton count={3} />
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
                     {bestsellers.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
