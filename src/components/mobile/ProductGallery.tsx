@@ -118,12 +118,12 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           className="w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden bg-ivory"
         >
           {images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className="swiper-zoom-container">
+            <SwiperSlide key={index} className="!h-auto">
+              <div className="swiper-zoom-container w-full h-full">
                 <img
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}
-                  className="w-full h-full object-cover cursor-zoom-in"
+                  className="w-full h-full object-contain cursor-zoom-in"
                   onClick={() => openLightbox(index)}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
