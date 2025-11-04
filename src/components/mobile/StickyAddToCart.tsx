@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Plus, Minus } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, Zap } from 'lucide-react';
 import { Product } from '../../types/database';
 import { useCart } from '../../context/CartContext';
 
@@ -17,6 +18,7 @@ const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   // Show/hide based on scroll position
   useEffect(() => {
@@ -67,6 +69,18 @@ const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
     setTimeout(() => {
       setShowSuccess(false);
     }, 2000);
+  };
+
+  // Handle buy now
+  const handleBuyNow = () => {
+    // Add product to cart
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    hapticFeedback([10, 50, 10]);
+    
+    // Navigate to checkout
+    navigate('/checkout');
   };
 
   // Increment quantity
@@ -137,22 +151,40 @@ const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
                 </button>
               </div>
 
-              {/* Add to Cart Button */}
-              <motion.button
-                onClick={handleAddToCart}
-                disabled={product.stock_quantity === 0}
-                whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all shadow-md ${
-                  product.stock_quantity === 0
-                    ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
-                    : 'bg-ochre hover:bg-ochre-600 text-white active:shadow-lg'
-                }`}
-              >
-                <ShoppingCart className="w-5 h-5" />
-                <span className="hidden sm:inline">
-                  {product.stock_quantity === 0 ? 'Out of Stock' : 'Add to Cart'}
-                </span>
-              </motion.button>
+              {/* Action Buttons */}
+              <div className="flex gap-2">
+                {/* Buy Now Button */}
+                <motion.button
+                  onClick={handleBuyNow}
+                  disabled={product.stock_quantity === 0}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all shadow-md ${
+                    product.stock_quantity === 0
+                      ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-ochre to-ochre-600 hover:from-ochre-600 hover:to-ochre-700 text-white active:shadow-lg'
+                  }`}
+                >
+                  <Zap className="w-5 h-5" />
+                  <span className="hidden sm:inline">Buy Now</span>
+                </motion.button>
+
+                {/* Add to Cart Button */}
+                <motion.button
+                  onClick={handleAddToCart}
+                  disabled={product.stock_quantity === 0}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all shadow-md ${
+                    product.stock_quantity === 0
+                      ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
+                      : 'bg-white dark:bg-gray-700 border-2 border-ochre text-ochre hover:bg-ochre hover:text-white active:shadow-lg'
+                  }`}
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  <span className="hidden sm:inline">
+                    {product.stock_quantity === 0 ? 'Out of Stock' : 'Add'}
+                  </span>
+                </motion.button>
+              </div>
             </div>
           </div>
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { dataCache } from '../lib/dataCache';
 import { Product, Review } from '../types/database';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles } from 'lucide-react';
+import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles, Zap } from 'lucide-react';
 import ReviewSection from '../components/ReviewSection';
 import RatingBreakdown from '../components/RatingBreakdown';
 import SEO from '../components/SEO';
@@ -18,6 +18,7 @@ import { PageLoader } from '../components/LoadingComponents';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [isInWishlist, setIsInWishlist] = useState(false);
@@ -128,6 +129,27 @@ const ProductDetailPage: React.FC = () => {
       quantity: quantity,
       category: 'Til-Gud Bites',
     });
+  };
+
+  const handleBuyNow = () => {
+    if (!product) return;
+    
+    // Add to cart
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    
+    // Track add to cart event
+    trackAddToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      category: 'Til-Gud Bites',
+    });
+    
+    // Navigate directly to checkout
+    navigate('/checkout');
   };
 
   const averageRating = reviews.length > 0
@@ -317,28 +339,41 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Add to Cart & Wishlist */}
-            <div className="flex space-x-4 mb-8">
+            <div className="flex flex-col space-y-3 mb-8">
+              {/* Buy Now Button - Primary CTA */}
               <button
-                onClick={handleAddToCart}
+                onClick={handleBuyNow}
                 disabled={product.stock_quantity === 0}
-                className="flex-1 bg-ochre text-white py-4 px-6 rounded-full hover:bg-ochre-600 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg"
+                className="w-full bg-gradient-to-r from-ochre to-ochre-600 text-white py-4 px-6 rounded-full hover:from-ochre-600 hover:to-ochre-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg group"
               >
-                <ShoppingBag className="w-6 h-6" />
-                <span className="tracking-wide">ADD TO CART</span>
+                <Zap className="w-6 h-6 group-hover:animate-pulse" />
+                <span className="tracking-wide">BUY NOW</span>
               </button>
 
-              {user && (
+              {/* Add to Cart & Wishlist Row */}
+              <div className="flex space-x-3">
                 <button
-                  onClick={toggleWishlist}
-                  className={`px-6 py-4 rounded-full border-2 transition-all duration-300 shadow-md ${
-                    isInWishlist
-                      ? 'border-red-500 bg-red-50 text-red-500'
-                      : 'border-ochre-300 bg-white text-chocolate hover:border-ochre'
-                  }`}
+                  onClick={handleAddToCart}
+                  disabled={product.stock_quantity === 0}
+                  className="flex-1 bg-white text-ochre py-4 px-6 rounded-full border-2 border-ochre hover:bg-ochre hover:text-white transition-all duration-300 flex items-center justify-center space-x-3 shadow-md disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg"
                 >
-                  <Heart className={`w-6 h-6 ${isInWishlist ? 'fill-current' : ''}`} />
+                  <ShoppingBag className="w-6 h-6" />
+                  <span className="tracking-wide">ADD TO CART</span>
                 </button>
-              )}
+
+                {user && (
+                  <button
+                    onClick={toggleWishlist}
+                    className={`px-6 py-4 rounded-full border-2 transition-all duration-300 shadow-md ${
+                      isInWishlist
+                        ? 'border-red-500 bg-red-50 text-red-500'
+                        : 'border-ochre-300 bg-white text-chocolate hover:border-ochre'
+                    }`}
+                  >
+                    <Heart className={`w-6 h-6 ${isInWishlist ? 'fill-current' : ''}`} />
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Trust Badges */}
