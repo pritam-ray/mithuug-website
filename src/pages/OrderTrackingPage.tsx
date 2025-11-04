@@ -10,10 +10,10 @@ import {
   MapPin,
   Calendar,
   ArrowLeft,
-  Loader2,
   AlertCircle
 } from 'lucide-react';
 import SEO from '../components/SEO';
+import { PageLoader } from '../components/LoadingComponents';
 
 interface Order {
   id: string;
@@ -155,11 +155,7 @@ const OrderTrackingPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen pt-20 bg-ivory flex items-center justify-center">
-        <Loader2 size={48} className="animate-spin text-ochre" />
-      </div>
-    );
+    return <PageLoader text="Loading order tracking..." />;
   }
 
   if (error || !order) {

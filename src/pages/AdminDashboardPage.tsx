@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
 import { supabase } from '../lib/supabase';
 import { Package, ShoppingCart, Users, DollarSign, TrendingUp, AlertTriangle } from 'lucide-react';
+import { PageLoader } from '../components/LoadingComponents';
 
 interface DashboardStats {
   total_orders: number;
@@ -82,11 +83,7 @@ export default function AdminDashboardPage() {
   };
 
   if (adminLoading || loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ochre"></div>
-      </div>
-    );
+    return <PageLoader text="Loading dashboard..." />;
   }
 
   if (!isAdmin) {

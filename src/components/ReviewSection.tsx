@@ -2,6 +2,7 @@
 import { Star } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
+import { ButtonLoader, InlineLoader } from './LoadingComponents';
 
 interface Review {
   id: string;
@@ -27,6 +28,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
   const [comment, setComment] = useState('');
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
     loadReviews();
@@ -34,6 +36,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
 
   const loadReviews = async () => {
     try {
+      setLoading(true);
       const { data } = await supabase
         .from('reviews')
         .select('*, user:profiles(full_name)')
@@ -42,6 +45,8 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
       if (data) setReviews(data);
     } catch (error) {
       console.error('Error loading reviews:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,11 +78,15 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
 
   const averageRating = reviews.length > 0 ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length : 0;
 
+  if (loading) {
+    return <InlineLoader text="Loading reviews..." />;
+  }
+
   return (
     <div className="space-y-8">
       <div className="border-t border-stone-200 pt-8">
-        <h2 className="text-3xl font-light text-stone-900 mb-6">Customer Reviews</h2>
-        <div className="bg-stone-50 rounded-lg p-6 mb-8">
+        <h2 className="text-3xl font-light text-stone-900 dark:text-gray-100 mb-6">Customer Reviews</h2>
+        <div className="bg-stone-50 dark:bg-gray-800 rounded-lg p-6 mb-8">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-2 mb-2">
@@ -117,8 +126,20 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
               <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={4} className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-ochre-500 focus:border-transparent" placeholder="Tell us what you think" required />
             </div>
             <div className="flex space-x-3">
-              <button type="submit" disabled={submitting || rating === 0} className="bg-ochre-500 text-white px-6 py-3 rounded-full hover:bg-ochre-600 transition-colors disabled:opacity-50">{submitting ? 'Submitting...' : 'Submit Review'}</button>
-              <button type="button" onClick={() => { setShowReviewForm(false); setRating(0); setTitle(''); setComment(''); }} className="border border-stone-300 text-stone-700 px-6 py-3 rounded-full hover:bg-stone-50 transition-colors">Cancel</button>
+              <button 
+                type="submit" 
+                disabled={submitting || rating === 0} 
+                className="bg-ochre-500 text-white px-6 py-3 rounded-full hover:bg-ochre-600 transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                {submitting ? <ButtonLoader /> : 'Submit Review'}
+              </button>
+              <button 
+                type="button" 
+                onClick={() => { setShowReviewForm(false); setRating(0); setTitle(''); setComment(''); }} 
+                className="border border-stone-300 text-stone-700 px-6 py-3 rounded-full hover:bg-stone-50 transition-colors"
+              >
+                Cancel
+              </button>
             </div>
           </form>
         )}

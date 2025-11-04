@@ -14,6 +14,7 @@ import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
 import { trackViewItem, trackAddToCart } from '../lib/analytics';
 import StickyAddToCart from '../components/mobile/StickyAddToCart';
 import ProductGallery from '../components/mobile/ProductGallery';
+import { PageLoader } from '../components/LoadingComponents';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -134,11 +135,7 @@ const ProductDetailPage: React.FC = () => {
     : 0;
 
   if (loading) {
-    return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
-        <div className="text-stone-600">Loading...</div>
-      </div>
-    );
+    return <PageLoader text="Loading product details..." />;
   }
 
   if (!product) {
