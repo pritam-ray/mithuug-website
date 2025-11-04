@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Gift, Sparkles, Shield, Heart, Search } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, Gift, Sparkles, Search } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { useAdmin } from '../context/AdminContext';
-import { useWishlist } from '../context/WishlistContext';
 import { LanguageSelector } from './LanguageSelector';
 import { ThemeToggle } from './ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,9 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { cartCount } = useCart();
-  const { wishlistItems } = useWishlist();
   const { user } = useAuth();
-  const { isAdmin, isLoading: adminLoading } = useAdmin();
 
   // Handle scroll for navbar shadow
   useEffect(() => {
@@ -76,6 +72,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
             <Link to="/shop" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               SHOP
             </Link>
+            <Link to="/shop?category=gift-sets" className="text-sm font-bold tracking-widest text-gold dark:text-gold-400 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
+              GIFT PACKS
+            </Link>
             <Link to="/about" className="text-sm font-bold tracking-widest text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 transition-colors">
               ABOUT
             </Link>
@@ -89,49 +88,6 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
 
           {/* Secondary Actions - Optimized for Mobile */}
           <div className="flex items-center space-x-2 md:space-x-4">
-            {/* Admin Dashboard - Desktop Only */}
-            {isAdmin && (
-              <Link
-                to="/admin"
-                className="hidden md:flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 transition-all rounded-lg font-semibold text-sm touch-target"
-                title="Admin Dashboard"
-              >
-                <Shield className="w-4 h-4" />
-                <span>Admin</span>
-              </Link>
-            )}
-
-            {/* Gift Packs Link - Desktop Only */}
-            <Link
-              to="/shop?category=gift-sets"
-              className="hidden lg:flex items-center space-x-2 px-4 py-2 border-2 border-gold text-gold hover:bg-gold hover:text-white transition-all rounded-full font-semibold text-sm touch-target"
-            >
-              <Gift className="w-4 h-4" />
-              <span>Gift Packs</span>
-            </Link>
-
-            {/* Desktop Actions - Hidden on Mobile (now in bottom nav) */}
-            <Link
-              to={user ? '/account' : '/login'}
-              className="hidden md:flex text-chocolate dark:text-gray-300 hover:text-ochre dark:hover:text-ochre-400 transition-colors touch-target"
-              title={user ? 'My Account' : 'Sign In'}
-            >
-              <User className="w-6 h-6" />
-            </Link>
-
-            <Link
-              to="/wishlist"
-              className="relative hidden md:flex text-chocolate dark:text-gray-300 hover:text-ochre dark:hover:text-ochre-400 transition-colors touch-target"
-              title="Wishlist"
-            >
-              <Heart className="w-6 h-6" />
-              {wishlistItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-lg">
-                  {wishlistItems.length > 9 ? '9+' : wishlistItems.length}
-                </span>
-              )}
-            </Link>
-
             {/* Theme & Language - Desktop Only */}
             <div className="hidden md:flex items-center space-x-2">
               <ThemeToggle />
@@ -186,24 +142,6 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
             className="fixed inset-0 top-[56px] md:top-[88px] md:hidden bg-white dark:bg-gray-900 z-40 overflow-y-auto"
           >
             <div className="px-4 py-6 space-y-2">
-              {/* Admin Dashboard - Only for admins */}
-              {isAdmin && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <Link 
-                    to="/admin" 
-                    className="flex items-center space-x-3 py-4 text-sm font-bold tracking-wide text-white bg-purple-600 hover:bg-purple-700 px-4 rounded-xl transition-all touch-target"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Shield className="w-5 h-5" />
-                    <span>Admin Dashboard</span>
-                  </Link>
-                </motion.div>
-              )}
-
               {/* Main Navigation Links */}
               {[
                 { to: '/shop', label: 'Shop All', icon: null },

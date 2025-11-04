@@ -20,6 +20,7 @@ import BottomNav from './components/mobile/BottomNav';
 import CartDrawer from './components/mobile/CartDrawer';
 import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
+import AdminFAB from './components/AdminFAB';
 import { dataCache } from './lib/dataCache';
 
 // Lazy load all page components for better performance
@@ -144,6 +145,9 @@ function App() {
                               </div>
                               
                               <ChatWidget />
+                              
+                              {/* Admin Floating Action Button */}
+                              <AdminFAB />
                               
                               {/* Mobile Bottom Navigation */}
                               <BottomNav />
