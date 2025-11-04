@@ -14,7 +14,8 @@ import { trackSearch } from '../lib/analytics';
 
 const ShopPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]); // Cache all products
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,9 +42,12 @@ const ShopPage: React.FC = () => {
     loadData();
   }, []);
 
+  // Client-side filtering - no database calls
   useEffect(() => {
-    filterAndSortProducts();
-  }, [selectedCategory, sortBy, searchQuery, priceRange, showInStock, showNewOnly]);
+    if (allProducts.length > 0) {
+      applyFiltersAndSort();
+    }
+  }, [allProducts, selectedCategory, sortBy, searchQuery, priceRange, showInStock, showNewOnly]);
 
   // Track search with debounce
   useEffect(() => {
@@ -63,14 +67,20 @@ const ShopPage: React.FC = () => {
   }, [searchQuery]);
 
   const loadData = async () => {
+    setLoading(true);
     try {
+      // Fetch all data once and cache it
       const [{ data: productsData }, { data: categoriesData }] = await Promise.all([
-        supabase.from('products').select('*'),
+        supabase.from('products').select('*').order('created_at', { ascending: false }),
         supabase.from('categories').select('*'),
       ]);
 
-      if (productsData) setProducts(productsData);
-      if (categoriesData) setCategories(categoriesData);
+      if (productsData) {
+        setAllProducts(productsData);
+      }
+      if (categoriesData) {
+        setCategories(categoriesData);
+      }
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {
@@ -78,67 +88,64 @@ const ShopPage: React.FC = () => {
     }
   };
 
-  const filterAndSortProducts = async () => {
-    setLoading(true);
-    try {
-      let query = supabase.from('products').select('*');
+  // Client-side filtering and sorting (instant, no database calls)
+  const applyFiltersAndSort = () => {
+    let filtered = [...allProducts];
 
-      if (selectedCategory !== 'all') {
-        query = query.eq('category', selectedCategory);
-      }
-
-      if (searchParams.get('filter') === 'new' || showNewOnly) {
-        query = query.eq('is_new', true);
-      } else if (searchParams.get('filter') === 'bestsellers') {
-        query = query.eq('is_bestseller', true);
-      }
-
-      if (showInStock) {
-        query = query.gt('stock_quantity', 0);
-      }
-
-      query = query.gte('price', priceRange[0]).lte('price', priceRange[1]);
-
-      const { data } = await query;
-
-      if (data) {
-        let filtered = data;
-
-        if (searchQuery) {
-          filtered = filtered.filter((product) =>
-            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            product.description.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-        }
-
-        switch (sortBy) {
-          case 'price-low':
-            filtered.sort((a, b) => a.price - b.price);
-            break;
-          case 'price-high':
-            filtered.sort((a, b) => b.price - a.price);
-            break;
-          case 'name':
-            filtered.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-          case 'popular':
-          case 'bestsellers':
-            filtered.sort((a, b) => (b.is_bestseller ? 1 : 0) - (a.is_bestseller ? 1 : 0));
-            break;
-          case 'newest':
-          default:
-            filtered.sort((a, b) =>
-              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-            );
-        }
-
-        setProducts(filtered);
-      }
-    } catch (error) {
-      console.error('Error filtering products:', error);
-    } finally {
-      setLoading(false);
+    // Category filter
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(product => product.category === selectedCategory);
     }
+
+    // New/Bestseller filter
+    if (searchParams.get('filter') === 'new' || showNewOnly) {
+      filtered = filtered.filter(product => product.is_new === true);
+    } else if (searchParams.get('filter') === 'bestsellers') {
+      filtered = filtered.filter(product => product.is_bestseller === true);
+    }
+
+    // Stock filter
+    if (showInStock) {
+      filtered = filtered.filter(product => product.stock_quantity > 0);
+    }
+
+    // Price range filter
+    filtered = filtered.filter(product => 
+      product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    // Search filter
+    if (searchQuery) {
+      const lowerQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(lowerQuery) ||
+        product.description.toLowerCase().includes(lowerQuery)
+      );
+    }
+
+    // Sorting
+    switch (sortBy) {
+      case 'price-low':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 'name':
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'popular':
+      case 'bestsellers':
+        filtered.sort((a, b) => (b.is_bestseller ? 1 : 0) - (a.is_bestseller ? 1 : 0));
+        break;
+      case 'newest':
+      default:
+        filtered.sort((a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+    }
+
+    setFilteredProducts(filtered);
   };
 
   const handleCategoryChange = (category: string) => {
@@ -257,7 +264,7 @@ const ShopPage: React.FC = () => {
             
             <div className="mb-6 flex items-center justify-between">
               <p className="text-chocolate-600 font-semibold">
-                {products.length} {products.length === 1 ? 'Product' : 'Products'} Found
+                {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
               </p>
               
               {/* Active Filters Display */}
@@ -279,14 +286,14 @@ const ShopPage: React.FC = () => {
 
             {loading ? (
               <ProductGridSkeleton count={6} />
-            ) : products.length === 0 ? (
+            ) : filteredProducts.length === 0 ? (
               <div className="text-center py-24 bg-white rounded-2xl border-2 border-ochre-100">
                 <p className="text-chocolate-600 text-lg font-playfair mb-4">No products found</p>
                 <p className="text-chocolate-500 text-sm">Try adjusting your filters or search query</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
