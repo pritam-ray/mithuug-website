@@ -50,8 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
         scrolled ? 'shadow-lg' : 'shadow-md'
       }`}
     >
-      {/* Top Bar - Offers & Announcements - Simplified for Mobile */}
-      <div className="bg-gradient-to-r from-ochre to-gold text-white dark:from-ochre-700 dark:to-gold-700">
+      {/* Top Bar - Offers & Announcements - Hidden on Mobile */}
+      <div className="hidden md:block bg-gradient-to-r from-ochre to-gold text-white dark:from-ochre-700 dark:to-gold-700">
         <div className="max-w-7xl mx-auto px-3 py-1.5 md:py-2">
           <div className="flex items-center justify-center space-x-1 md:space-x-2 text-[10px] md:text-xs font-semibold tracking-wide">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
@@ -183,7 +183,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed inset-0 top-[88px] md:hidden bg-white dark:bg-gray-900 z-40 overflow-y-auto"
+            className="fixed inset-0 top-[56px] md:top-[88px] md:hidden bg-white dark:bg-gray-900 z-40 overflow-y-auto"
           >
             <div className="px-4 py-6 space-y-2">
               {/* Admin Dashboard - Only for admins */}
