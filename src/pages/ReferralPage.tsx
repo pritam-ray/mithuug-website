@@ -21,7 +21,7 @@ const ReferralPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-20 bg-ivory flex items-center justify-center">
+      <div className="min-h-screen pt-16 bg-ivory flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-ochre mx-auto mb-4" />
           <p className="text-chocolate-600">Loading referral program...</p>
@@ -31,7 +31,7 @@ const ReferralPage = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-ivory">
+    <div className="min-h-screen pt-16 bg-ivory">
       <SEO title="Referral Program - MitthuuG" description="Refer friends and earn rewards" />
       
       <div className="max-w-7xl mx-auto px-4 py-12">

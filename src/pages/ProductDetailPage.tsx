@@ -163,7 +163,7 @@ const ProductDetailPage: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="min-h-screen pt-16 flex items-center justify-center">
         <SEO title="Product Not Found | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl text-stone-900 mb-4">Product not found</h2>
@@ -183,7 +183,7 @@ const ProductDetailPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20 bg-ivory">
+    <div className="min-h-screen pt-16 bg-ivory">
       <SEO 
         title={`${product.name} - Premium Til-Gud | MitthuuG`}
         description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹500.`}
