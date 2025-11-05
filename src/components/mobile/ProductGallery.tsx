@@ -77,26 +77,24 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   return (
     <>
       {/* Main Gallery */}
-      <div className="relative w-full" style={{ height: '400px', overflow: 'hidden' }}>
-        {/* Simple Image Display - No Swiper for now */}
+      <div className="relative w-full">
+        {/* Simple Image Display - No Swiper */}
         <div 
-          className="w-full h-full rounded-2xl overflow-hidden bg-ivory flex items-center justify-center"
-          style={{ height: '400px' }}
+          className="w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden bg-ivory flex items-center justify-center relative"
         >
           <img
             src={images[activeIndex] || images[0]}
             alt={`${productName} - Image ${activeIndex + 1}`}
-            className="object-contain cursor-pointer max-w-full max-h-full"
+            className="object-contain cursor-pointer w-full h-full"
             onClick={() => openLightbox(activeIndex)}
             loading="eager"
-            style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto', display: 'block' }}
             draggable={false}
             onDragStart={(e) => e.preventDefault()}
           />
           
           {/* Image Counter */}
           {images.length > 1 && (
-            <div className="absolute bottom-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold">
+            <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-2 py-1 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-semibold">
               {activeIndex + 1} / {images.length}
             </div>
           )}
@@ -104,17 +102,17 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           {/* Fullscreen Button */}
           <button
             onClick={() => openLightbox(activeIndex)}
-            className="absolute bottom-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-all active:scale-95"
+            className="absolute bottom-2 right-2 md:bottom-4 md:right-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-all active:scale-95"
             aria-label="View fullscreen"
           >
-            <ZoomIn className="w-5 h-5" />
+            <ZoomIn className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         </div>
       </div>
 
       {/* Thumbnail Navigation */}
       {images.length > 1 && (
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
+        <div className="mt-2 md:mt-4 flex gap-1.5 md:gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
           {images.map((image, index) => (
             <button
               key={index}
@@ -122,7 +120,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
                 setActiveIndex(index);
                 hapticFeedback(10);
               }}
-              className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+              className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${
                 activeIndex === index
                   ? 'border-ochre shadow-md scale-105'
                   : 'border-ochre-100 hover:border-ochre-300'
