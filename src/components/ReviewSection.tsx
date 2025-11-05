@@ -12,7 +12,7 @@ interface Review {
   title: string;
   comment: string;
   created_at: string;
-  user?: { full_name: string };
+  user_profile?: { full_name: string };
 }
 
 interface ReviewSectionProps {
@@ -37,11 +37,19 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
   const loadReviews = async () => {
     try {
       setLoading(true);
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('reviews')
-        .select('*, user:profiles(full_name)')
+        .select(`
+          *,
+          user_profile:user_profiles(full_name)
+        `)
         .eq('product_id', product_id)
         .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error('Error loading reviews:', error);
+      }
+      
       if (data) setReviews(data);
     } catch (error) {
       console.error('Error loading reviews:', error);
@@ -161,7 +169,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product_id }) => {
                   <span className="text-sm text-stone-500">{new Date(review.created_at).toLocaleDateString()}</span>
                 </div>
                 <p className="text-stone-700 mb-2">{review.comment}</p>
-                <p className="text-sm text-stone-500">By {review.user?.full_name || 'Anonymous'}</p>
+                <p className="text-sm text-stone-500">By {review.user_profile?.full_name || 'Anonymous'}</p>
               </div>
             ))
           )}
