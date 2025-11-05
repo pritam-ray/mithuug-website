@@ -91,7 +91,7 @@ const FAQPage: React.FC = () => {
     : faqs.filter(faq => faq.category === selectedCategory);
 
   return (
-    <div className="min-h-screen pt-8 bg-ivory-50">
+    <div className="min-h-screen pt-4 bg-ivory-50">
       <SEO 
         title="Frequently Asked Questions (FAQ) | MitthuuG"
         description="Find answers to common questions about MitthuuG products, shipping, returns, and more. Get help with your til-gud orders."

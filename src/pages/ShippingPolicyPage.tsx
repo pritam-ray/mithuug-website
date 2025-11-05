@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 const ShippingPolicyPage: React.FC = () => {
   return (
-    <div className="min-h-screen pt-8 bg-ivory-50">
+    <div className="min-h-screen pt-4 bg-ivory-50">
       <SEO 
         title="Shipping Policy | MitthuuG"
         description="Learn about MitthuuG's shipping policy, delivery zones, shipping charges, and estimated delivery times across India. Free shipping on orders above ₹500."

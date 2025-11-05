@@ -10,7 +10,7 @@ const ProductComparisonPage = () => {
 
   if (comparisonItems.length === 0) {
     return (
-      <div className="min-h-screen pt-8 bg-ivory">
+      <div className="min-h-screen pt-4 bg-ivory">
         <SEO 
           title="Compare Products - MitthuuG"
           description="Compare your favorite products side by side"
@@ -47,7 +47,7 @@ const ProductComparisonPage = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-8 bg-ivory">
+    <div className="min-h-screen pt-4 bg-ivory">
       <SEO 
         title="Product Comparison - MitthuuG"
         description={`Compare ${comparisonItems.length} products`}
