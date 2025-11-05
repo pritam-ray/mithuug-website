@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
-    <div className="min-h-screen pt-12 bg-ivory-50">
+    <div className="min-h-screen pt-8 bg-ivory-50">
       <SEO 
         title="Privacy Policy | MitthuuG"
         description="Read MitthuuG's privacy policy to understand how we collect, use, and protect your personal information. Your privacy and data security are our priorities."

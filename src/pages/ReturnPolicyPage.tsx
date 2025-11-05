@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 const ReturnPolicyPage: React.FC = () => {
   return (
-    <div className="min-h-screen pt-12 bg-ivory-50">
+    <div className="min-h-screen pt-8 bg-ivory-50">
       <SEO 
         title="Return & Refund Policy | MitthuuG"
         description="MitthuuG's return and refund policy. 7-day return window, easy refund process, and customer satisfaction guaranteed. Learn about eligible items and return procedures."

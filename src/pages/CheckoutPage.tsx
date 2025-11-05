@@ -277,7 +277,7 @@ const CheckoutPage: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen pt-12 flex items-center justify-center bg-ivory">
+      <div className="min-h-screen pt-8 flex items-center justify-center bg-ivory">
         <SEO title="Checkout - Sign In Required | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl text-stone-900 mb-4">Please sign in to checkout</h2>
@@ -294,7 +294,7 @@ const CheckoutPage: React.FC = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen pt-12 flex items-center justify-center bg-ivory">
+      <div className="min-h-screen pt-8 flex items-center justify-center bg-ivory">
         <SEO title="Checkout | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl font-playfair text-chocolate mb-4">Your cart is empty</h2>
@@ -339,7 +339,7 @@ const CheckoutPage: React.FC = () => {
       </div>
 
       {/* Desktop View - Hidden on mobile */}
-      <div className="hidden md:block min-h-screen pt-12 bg-ivory">
+      <div className="hidden md:block min-h-screen pt-8 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
             Checkout

@@ -51,7 +51,7 @@ const SubscriptionPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-12 bg-ivory flex items-center justify-center">
+      <div className="min-h-screen pt-8 bg-ivory flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-ochre mx-auto mb-4" />
           <p className="text-chocolate-600">Loading subscriptions...</p>
@@ -61,7 +61,7 @@ const SubscriptionPage = () => {
   }
 
   return (
-    <div className="min-h-screen pt-12 bg-ivory">
+    <div className="min-h-screen pt-8 bg-ivory">
       <SEO title="My Subscriptions - MitthuuG" description="Manage your subscription orders" />
       
       <div className="max-w-7xl mx-auto px-4 py-12">

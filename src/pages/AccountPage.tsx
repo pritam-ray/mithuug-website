@@ -68,7 +68,7 @@ const AccountPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-12 bg-stone-50 dark:bg-gray-900">
+    <div className="min-h-screen pt-8 bg-stone-50 dark:bg-gray-900">
       <SEO 
         title="My Account | MitthuuG"
         description="Manage your MitthuuG account, view orders, track shipments, and update your profile settings."
