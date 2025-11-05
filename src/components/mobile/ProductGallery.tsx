@@ -87,14 +87,20 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   return (
     <>
       {/* Main Gallery */}
-      <div className="relative w-full md:aspect-[4/3]" style={{ height: '400px' }}>
+      <div className="relative w-full md:aspect-[4/3]" style={{ height: '400px', overflow: 'hidden' }}>
         {/* Main Swiper */}
         <Swiper
           modules={[Navigation, Pagination, Thumbs]}
           spaceBetween={10}
           slidesPerView={1}
           loop={false}
-          allowTouchMove={true}
+          allowTouchMove={images.length > 1}
+          simulateTouch={images.length > 1}
+          touchRatio={1}
+          resistance={true}
+          resistanceRatio={0}
+          edgeSwipeDetection={true}
+          preventInteractionOnTransition={true}
           navigation={{
             prevEl: '.swiper-button-prev-custom',
             nextEl: '.swiper-button-next-custom',
@@ -112,19 +118,20 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
             hapticFeedback(10);
           }}
           className="rounded-2xl overflow-hidden bg-ivory"
-          style={{ width: '100%', height: '400px' }}
+          style={{ width: '100%', height: '400px', touchAction: 'pan-y pinch-zoom' }}
         >
           {images.map((image, index) => (
-            <SwiperSlide key={index} style={{ height: '400px', overflow: 'hidden' }}>
-              <div className="flex items-center justify-center" style={{ width: '100%', height: '400px', overflow: 'hidden' }}>
+            <SwiperSlide key={index} style={{ height: '400px', overflow: 'hidden', width: '100%' }}>
+              <div className="flex items-center justify-center" style={{ width: '100%', height: '400px', overflow: 'hidden', position: 'relative' }}>
                 <img
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}
                   className="object-contain cursor-pointer"
                   onClick={() => openLightbox(index)}
                   loading={index === 0 ? 'eager' : 'lazy'}
-                  style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto' }}
+                  style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto', display: 'block' }}
                   draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
                 />
               </div>
             </SwiperSlide>
