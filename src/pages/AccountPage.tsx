@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useAdmin } from '../context/AdminContext';
@@ -68,7 +68,7 @@ const AccountPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-16 bg-stone-50 dark:bg-gray-900">
+    <div className="min-h-screen pt-12 bg-stone-50 dark:bg-gray-900">
       <SEO 
         title="My Account | MitthuuG"
         description="Manage your MitthuuG account, view orders, track shipments, and update your profile settings."
@@ -146,7 +146,7 @@ const AccountPage: React.FC = () => {
                         <p className="text-sm text-stone-600 dark:text-gray-400">{new Date(order.created_at).toLocaleDateString()}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium text-stone-900 dark:text-gray-100">₹{order.total_amount}</p>
+                        <p className="font-medium text-stone-900 dark:text-gray-100">?{order.total_amount}</p>
                         <p className="text-sm text-stone-600 dark:text-gray-400 capitalize">{order.status}</p>
                       </div>
                     </div>

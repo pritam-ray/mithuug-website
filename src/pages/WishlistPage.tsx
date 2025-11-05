@@ -16,7 +16,7 @@ const WishlistPage = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen pt-16 bg-ivory">
+      <div className="min-h-screen pt-12 bg-ivory">
         <SEO 
           title="Wishlist - MitthuuG"
           description="View your saved products"
@@ -42,14 +42,14 @@ const WishlistPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-16 bg-ivory flex items-center justify-center">
+      <div className="min-h-screen pt-12 bg-ivory flex items-center justify-center">
         <Loader2 size={48} className="animate-spin text-ochre" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-16 bg-ivory">
+    <div className="min-h-screen pt-12 bg-ivory">
       <SEO 
         title="My Wishlist - MitthuuG"
         description="Your saved favorite products"

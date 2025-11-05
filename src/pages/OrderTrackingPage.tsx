@@ -160,7 +160,7 @@ const OrderTrackingPage = () => {
 
   if (error || !order) {
     return (
-      <div className="min-h-screen pt-16 bg-ivory">
+      <div className="min-h-screen pt-12 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <AlertCircle size={64} className="mx-auto text-red-500 mb-4" />
           <h1 className="text-3xl font-playfair font-bold text-chocolate-900 mb-4">
@@ -182,7 +182,7 @@ const OrderTrackingPage = () => {
   const currentStep = getCurrentStep(order.shipping_status);
 
   return (
-    <div className="min-h-screen pt-16 bg-ivory">
+    <div className="min-h-screen pt-12 bg-ivory">
       <SEO 
         title={`Track Order ${order.order_number} - MitthuuG`}
         description="Track your order status and delivery"

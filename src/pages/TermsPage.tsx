@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 const TermsPage: React.FC = () => {
   return (
-    <div className="min-h-screen pt-16 bg-ivory-50">
+    <div className="min-h-screen pt-12 bg-ivory-50">
       <SEO 
         title="Terms & Conditions | MitthuuG"
         description="Read MitthuuG's terms and conditions for using our website, ordering products, shipping policies, and return guidelines."

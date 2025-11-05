@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="min-h-screen pt-16 bg-ivory">
+    <div className="min-h-screen pt-12 bg-ivory">
       <SEO 
         title="About MitthuuG - The Mitthu Express Journey | Our Story"
         description="Discover the story behind MitthuuG - from a childhood memory to India's premium Til-Gud brand. Learn about our commitment to authentic recipes, natural ingredients, and bringing GUD vibes to every home."

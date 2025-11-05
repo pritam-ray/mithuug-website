@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -143,7 +143,7 @@ const CheckoutPage: React.FC = () => {
 
     // Validate COD eligibility if COD selected
     if (paymentMethod === 'cod' && !isCODEligible(cartTotal, shippingAddress.postal_code)) {
-      alert(`COD is not available for this order. Min: ₹99, Max: ₹10,000`);
+      alert(`COD is not available for this order. Min: ?99, Max: ?10,000`);
       return;
     }
 
@@ -277,7 +277,7 @@ const CheckoutPage: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen pt-16 flex items-center justify-center bg-ivory">
+      <div className="min-h-screen pt-12 flex items-center justify-center bg-ivory">
         <SEO title="Checkout - Sign In Required | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl text-stone-900 mb-4">Please sign in to checkout</h2>
@@ -294,7 +294,7 @@ const CheckoutPage: React.FC = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen pt-16 flex items-center justify-center bg-ivory">
+      <div className="min-h-screen pt-12 flex items-center justify-center bg-ivory">
         <SEO title="Checkout | MitthuuG" />
         <div className="text-center">
           <h2 className="text-2xl font-playfair text-chocolate mb-4">Your cart is empty</h2>
@@ -339,7 +339,7 @@ const CheckoutPage: React.FC = () => {
       </div>
 
       {/* Desktop View - Hidden on mobile */}
-      <div className="hidden md:block min-h-screen pt-16 bg-ivory">
+      <div className="hidden md:block min-h-screen pt-12 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
             Checkout
@@ -615,14 +615,14 @@ const CheckoutPage: React.FC = () => {
                     {codFee > 0 && (
                       <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded">
                         <p className="text-xs text-amber-800">
-                          COD fee: ₹{codFee} (2% of order value)
+                          COD fee: ?{codFee} (2% of order value)
                         </p>
                       </div>
                     )}
                     {!isCODEligible(cartTotal, shippingAddress.postal_code || '') && (
                       <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded">
                         <p className="text-xs text-red-700">
-                          COD available only for orders between ₹99 and ₹10,000
+                          COD available only for orders between ?99 and ?10,000
                         </p>
                       </div>
                     )}
@@ -650,7 +650,7 @@ const CheckoutPage: React.FC = () => {
                       <p className="text-xs text-chocolate-600">Qty: {item.quantity}</p>
                     </div>
                     <p className="text-sm font-bold text-ochre">
-                      ₹{item.price * item.quantity}
+                      ?{item.price * item.quantity}
                     </p>
                   </div>
                 ))}
@@ -768,13 +768,13 @@ const CheckoutPage: React.FC = () => {
               <div className="border-t-2 border-ochre-100 pt-4 space-y-3 mb-6">
                 <div className="flex justify-between text-chocolate-600">
                   <span>Subtotal</span>
-                  <span className="font-semibold">₹{cartTotal}</span>
+                  <span className="font-semibold">?{cartTotal}</span>
                 </div>
                 
                 {discount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Discount ({appliedPromo.promoCode.code})</span>
-                    <span className="font-semibold">-₹{discount}</span>
+                    <span className="font-semibold">-?{discount}</span>
                   </div>
                 )}
                 
@@ -786,20 +786,20 @@ const CheckoutPage: React.FC = () => {
                     )}
                   </div>
                   <span className={`font-semibold ${finalShippingFee === 0 ? 'text-green-600 line-through' : ''}`}>
-                    {finalShippingFee === 0 ? `₹${shippingFee}` : `₹${finalShippingFee}`}
+                    {finalShippingFee === 0 ? `?${shippingFee}` : `?${finalShippingFee}`}
                   </span>
                 </div>
                 
                 {codFee > 0 && (
                   <div className="flex justify-between text-chocolate-600">
                     <span>COD Fee (2%)</span>
-                    <span className="font-semibold">₹{codFee}</span>
+                    <span className="font-semibold">?{codFee}</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between text-xl font-bold text-chocolate pt-3 border-t-2 border-ochre-200">
                   <span>Total</span>
-                  <span className="text-ochre">₹{orderTotal}</span>
+                  <span className="text-ochre">?{orderTotal}</span>
                 </div>
               </div>
 
@@ -808,12 +808,12 @@ const CheckoutPage: React.FC = () => {
                 disabled={processing || (!!shippingAddress.postal_code && !isValidPincode(shippingAddress.postal_code))}
                 className="w-full bg-gradient-mitthuug text-white py-4 rounded-full hover:shadow-mitthuug-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed tracking-wide font-bold text-lg shadow-mitthuug"
               >
-                {processing ? 'Processing...' : paymentMethod === 'cod' ? 'PLACE ORDER (COD)' : `PAY ₹${orderTotal}`}
+                {processing ? 'Processing...' : paymentMethod === 'cod' ? 'PLACE ORDER (COD)' : `PAY ?${orderTotal}`}
               </button>
 
               <p className="text-xs text-chocolate-500 text-center mt-4">
                 <Lock className="w-3 h-3 inline mr-1" />
-                Secure checkout · 100% safe
+                Secure checkout � 100% safe
               </p>
             </div>
           </div>

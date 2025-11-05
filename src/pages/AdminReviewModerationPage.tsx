@@ -121,7 +121,7 @@ const AdminReviewModerationPage = () => {
   });
 
   return (
-    <div className="min-h-screen pt-16 bg-ivory">
+    <div className="min-h-screen pt-12 bg-ivory">
       <SEO 
         title="Review Moderation - Admin - MitthuuG"
         description="Moderate customer reviews"
