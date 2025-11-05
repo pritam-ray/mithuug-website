@@ -98,7 +98,7 @@ const FAQPage: React.FC = () => {
         keywords="mitthuug faq, til gud questions, product information, shipping info, return policy"
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-4">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-ochre-500 to-ochre-600 rounded-full mb-4">

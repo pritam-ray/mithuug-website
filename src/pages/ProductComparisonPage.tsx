@@ -53,7 +53,7 @@ const ProductComparisonPage = () => {
         description={`Compare ${comparisonItems.length} products`}
       />
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>

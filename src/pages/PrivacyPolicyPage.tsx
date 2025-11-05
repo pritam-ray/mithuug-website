@@ -12,7 +12,7 @@ const PrivacyPolicyPage: React.FC = () => {
         keywords="privacy policy, data protection, user privacy, mitthuug privacy"
       />
       
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-4">
         {/* Back Button */}
         <Link
           to="/"

@@ -34,7 +34,7 @@ const ReferralPage = () => {
     <div className="min-h-screen pt-4 bg-ivory">
       <SEO title="Referral Program - MitthuuG" description="Refer friends and earn rewards" />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-ochre to-gold rounded-full mb-4">
             <Gift size={40} className="text-white" />

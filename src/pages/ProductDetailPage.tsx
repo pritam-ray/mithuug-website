@@ -207,7 +207,7 @@ const ProductDetailPage: React.FC = () => {
       <BreadcrumbSchema items={breadcrumbItems} />
       
       {/* Product Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-4">
         {/* Back Button */}
         <Link to="/shop" className="inline-flex items-center text-chocolate hover:text-ochre mb-4 md:mb-8 transition-colors">
           <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 mr-1" />

@@ -64,7 +64,7 @@ const SubscriptionPage = () => {
     <div className="min-h-screen pt-4 bg-ivory">
       <SEO title="My Subscriptions - MitthuuG" description="Manage your subscription orders" />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-playfair font-bold text-chocolate-900">My Subscriptions</h1>

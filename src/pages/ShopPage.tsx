@@ -173,7 +173,7 @@ const ShopPage: React.FC = () => {
         pullProgress={pullProgress}
       />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-chocolate mb-4">

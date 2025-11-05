@@ -340,7 +340,7 @@ const CheckoutPage: React.FC = () => {
 
       {/* Desktop View - Hidden on mobile */}
       <div className="hidden md:block min-h-screen pt-4 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <h1 className="text-4xl font-light tracking-tight text-stone-900 mb-12">
             Checkout
           </h1>

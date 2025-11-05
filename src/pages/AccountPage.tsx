@@ -74,8 +74,8 @@ const AccountPage: React.FC = () => {
         description="Manage your MitthuuG account, view orders, track shipments, and update your profile settings."
         keywords="my account, order history, profile settings, mitthuug account"
       />
-      
-      <div className="max-w-7xl mx-auto px-4 py-12">
+
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="mb-8">
           <h1 className="text-4xl font-light tracking-tight text-stone-900 dark:text-gray-100 mb-2">My Account</h1>
           <p className="text-stone-600 dark:text-gray-400">Welcome back, {profile?.full_name || 'there'}!</p>

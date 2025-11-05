@@ -127,7 +127,7 @@ const AdminReviewModerationPage = () => {
         description="Moderate customer reviews"
       />
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <h1 className="text-4xl font-playfair font-bold text-chocolate-900 mb-8">
           Review Moderation
         </h1>

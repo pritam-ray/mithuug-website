@@ -188,7 +188,7 @@ const OrderTrackingPage = () => {
         description="Track your order status and delivery"
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
+      <div className="max-w-5xl mx-auto px-4 py-4">
         {/* Header */}
         <Link
           to="/account/orders"

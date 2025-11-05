@@ -12,7 +12,7 @@ const ReturnPolicyPage: React.FC = () => {
         keywords="return policy, refund policy, product returns, money back, customer returns"
       />
       
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-4">
         <Link to="/" className="inline-flex items-center space-x-2 text-ochre-600 hover:text-ochre-700 mb-8">
           <ArrowLeft className="w-5 h-5" />
           <span>Back to Home</span>
