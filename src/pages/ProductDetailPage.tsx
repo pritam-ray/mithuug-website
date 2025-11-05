@@ -62,14 +62,15 @@ const ProductDetailPage: React.FC = () => {
     try {
       const { data, error } = await supabase
         .from('reviews')
-        .select(`
-          *,
-          user_profile:user_profiles(full_name, avatar_url)
-        `)
+        .select('*')
         .eq('product_id', id)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error loading reviews:', error);
+        return;
+      }
+      
       setReviews(data || []);
     } catch (error) {
       console.error('Error loading reviews:', error);
