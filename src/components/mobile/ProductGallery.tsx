@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, Zoom, Thumbs } from 'swiper/modules';
+import { Navigation, Pagination, Thumbs } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -9,8 +9,6 @@ import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/zoom';
-import 'swiper/css/thumbs';
 
 interface ProductGalleryProps {
   images: string[];
@@ -92,9 +90,11 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
       <div className="relative w-full md:aspect-[4/3]" style={{ height: '400px' }}>
         {/* Main Swiper */}
         <Swiper
-          modules={[Navigation, Pagination, Zoom, Thumbs]}
+          modules={[Navigation, Pagination, Thumbs]}
           spaceBetween={10}
           slidesPerView={1}
+          loop={false}
+          allowTouchMove={true}
           navigation={{
             prevEl: '.swiper-button-prev-custom',
             nextEl: '.swiper-button-next-custom',
@@ -102,10 +102,6 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           pagination={{
             clickable: true,
             dynamicBullets: true,
-          }}
-          zoom={{
-            maxRatio: 3,
-            minRatio: 1,
           }}
           thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
           onSwiper={(swiper) => {
@@ -119,15 +115,16 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           style={{ width: '100%', height: '400px' }}
         >
           {images.map((image, index) => (
-            <SwiperSlide key={index} style={{ height: '400px' }}>
-              <div className="flex items-center justify-center" style={{ width: '100%', height: '400px' }}>
+            <SwiperSlide key={index} style={{ height: '400px', overflow: 'hidden' }}>
+              <div className="flex items-center justify-center" style={{ width: '100%', height: '400px', overflow: 'hidden' }}>
                 <img
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}
-                  className="object-contain cursor-zoom-in"
+                  className="object-contain cursor-pointer"
                   onClick={() => openLightbox(index)}
                   loading={index === 0 ? 'eager' : 'lazy'}
-                  style={{ maxWidth: '100%', maxHeight: '400px' }}
+                  style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto' }}
+                  draggable={false}
                 />
               </div>
             </SwiperSlide>
