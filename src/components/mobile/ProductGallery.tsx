@@ -1,14 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, Thumbs } from 'swiper/modules';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 interface ProductGalleryProps {
   images: string[];
@@ -20,10 +12,8 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   productName
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const mainSwiperRef = useRef<SwiperType | null>(null);
 
   // Haptic feedback
   const hapticFeedback = (pattern: number | number[] = 10) => {
@@ -87,131 +77,65 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   return (
     <>
       {/* Main Gallery */}
-      <div className="relative w-full md:aspect-[4/3]" style={{ height: '400px', overflow: 'hidden' }}>
-        {/* Main Swiper */}
-        <Swiper
-          modules={[Navigation, Pagination, Thumbs]}
-          spaceBetween={10}
-          slidesPerView={1}
-          loop={false}
-          allowTouchMove={images.length > 1}
-          simulateTouch={images.length > 1}
-          touchRatio={1}
-          resistance={true}
-          resistanceRatio={0}
-          edgeSwipeDetection={true}
-          preventInteractionOnTransition={true}
-          navigation={{
-            prevEl: '.swiper-button-prev-custom',
-            nextEl: '.swiper-button-next-custom',
-          }}
-          pagination={{
-            clickable: true,
-            dynamicBullets: true,
-          }}
-          thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-          onSwiper={(swiper) => {
-            mainSwiperRef.current = swiper;
-          }}
-          onSlideChange={(swiper) => {
-            setActiveIndex(swiper.activeIndex);
-            hapticFeedback(10);
-          }}
-          className="rounded-2xl overflow-hidden bg-ivory"
-          style={{ width: '100%', height: '400px', touchAction: 'pan-y pinch-zoom' }}
+      <div className="relative w-full" style={{ height: '400px', overflow: 'hidden' }}>
+        {/* Simple Image Display - No Swiper for now */}
+        <div 
+          className="w-full h-full rounded-2xl overflow-hidden bg-ivory flex items-center justify-center"
+          style={{ height: '400px' }}
         >
-          {images.map((image, index) => (
-            <SwiperSlide key={index} style={{ height: '400px', overflow: 'hidden', width: '100%' }}>
-              <div className="flex items-center justify-center" style={{ width: '100%', height: '400px', overflow: 'hidden', position: 'relative' }}>
-                <img
-                  src={image}
-                  alt={`${productName} - Image ${index + 1}`}
-                  className="object-contain cursor-pointer"
-                  onClick={() => openLightbox(index)}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto', display: 'block' }}
-                  draggable={false}
-                  onDragStart={(e) => e.preventDefault()}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* Custom Navigation Buttons - Hidden on Mobile */}
-        <button
-          className="swiper-button-prev-custom hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all active:scale-95"
-          aria-label="Previous image"
-        >
-          <ChevronLeft className="w-6 h-6 text-chocolate" />
-        </button>
-        <button
-          className="swiper-button-next-custom hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all active:scale-95"
-          aria-label="Next image"
-        >
-          <ChevronRight className="w-6 h-6 text-chocolate" />
-        </button>
-
-        {/* Zoom Hint - Mobile Only */}
-        <div className="md:hidden absolute top-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-2 rounded-full text-xs font-semibold flex items-center gap-1">
-          <ZoomIn className="w-4 h-4" />
-          <span>Pinch to zoom</span>
+          <img
+            src={images[activeIndex] || images[0]}
+            alt={`${productName} - Image ${activeIndex + 1}`}
+            className="object-contain cursor-pointer max-w-full max-h-full"
+            onClick={() => openLightbox(activeIndex)}
+            loading="eager"
+            style={{ maxWidth: '100%', maxHeight: '400px', width: 'auto', height: 'auto', display: 'block' }}
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
+          />
+          
+          {/* Image Counter */}
+          {images.length > 1 && (
+            <div className="absolute bottom-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold">
+              {activeIndex + 1} / {images.length}
+            </div>
+          )}
+          
+          {/* Fullscreen Button */}
+          <button
+            onClick={() => openLightbox(activeIndex)}
+            className="absolute bottom-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-all active:scale-95"
+            aria-label="View fullscreen"
+          >
+            <ZoomIn className="w-5 h-5" />
+          </button>
         </div>
-
-        {/* Image Counter */}
-        <div className="absolute bottom-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold">
-          {activeIndex + 1} / {images.length}
-        </div>
-
-        {/* Fullscreen Button */}
-        <button
-          onClick={() => openLightbox(activeIndex)}
-          className="absolute bottom-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-all active:scale-95"
-          aria-label="View fullscreen"
-        >
-          <ZoomIn className="w-5 h-5" />
-        </button>
       </div>
 
       {/* Thumbnail Navigation */}
       {images.length > 1 && (
-        <div className="mt-4">
-          <Swiper
-            modules={[Thumbs]}
-            spaceBetween={8}
-            slidesPerView={4}
-            breakpoints={{
-              640: { slidesPerView: 5 },
-              768: { slidesPerView: 6 },
-              1024: { slidesPerView: 7 },
-            }}
-            watchSlidesProgress
-            onSwiper={setThumbsSwiper}
-            className="thumbs-swiper"
-          >
-            {images.map((image, index) => (
-              <SwiperSlide key={index}>
-                <div
-                  className={`aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
-                    activeIndex === index
-                      ? 'border-ochre shadow-md scale-105'
-                      : 'border-ochre-100 hover:border-ochre-300'
-                  }`}
-                  onClick={() => {
-                    mainSwiperRef.current?.slideTo(index);
-                    hapticFeedback(10);
-                  }}
-                >
-                  <img
-                    src={image}
-                    alt={`${productName} thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <div className="mt-4 flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
+          {images.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setActiveIndex(index);
+                hapticFeedback(10);
+              }}
+              className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                activeIndex === index
+                  ? 'border-ochre shadow-md scale-105'
+                  : 'border-ochre-100 hover:border-ochre-300'
+              }`}
+            >
+              <img
+                src={image}
+                alt={`${productName} thumbnail ${index + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </button>
+          ))}
         </div>
       )}
 
