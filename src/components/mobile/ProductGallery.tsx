@@ -89,7 +89,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   return (
     <>
       {/* Main Gallery */}
-      <div className="relative w-full">
+      <div className="relative w-full aspect-square md:aspect-[4/3]">
         {/* Main Swiper */}
         <Swiper
           modules={[Navigation, Pagination, Zoom, Thumbs]}
@@ -115,17 +115,19 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
             setActiveIndex(swiper.activeIndex);
             hapticFeedback(10);
           }}
-          className="w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden bg-ivory"
+          className="w-full h-full rounded-2xl overflow-hidden bg-ivory"
+          style={{ height: '100%' }}
         >
           {images.map((image, index) => (
-            <SwiperSlide key={index} className="!h-auto">
-              <div className="swiper-zoom-container w-full h-full">
+            <SwiperSlide key={index}>
+              <div className="swiper-zoom-container flex items-center justify-center w-full h-full">
                 <img
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}
-                  className="w-full h-full object-contain cursor-zoom-in"
+                  className="max-w-full max-h-full object-contain cursor-zoom-in"
                   onClick={() => openLightbox(index)}
                   loading={index === 0 ? 'eager' : 'lazy'}
+                  style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                 />
               </div>
             </SwiperSlide>
