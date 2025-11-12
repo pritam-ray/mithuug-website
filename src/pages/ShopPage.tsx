@@ -175,7 +175,7 @@ const ShopPage: React.FC = () => {
       
       <div className="max-w-7xl mx-auto px-4 py-4">
         {/* Header */}
-        <div className="mb-12 text-center">
+        <div className="mb-6 text-center">
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-chocolate mb-4">
             Shop Our Collection
           </h1>

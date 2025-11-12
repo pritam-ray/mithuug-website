@@ -34,7 +34,7 @@ const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-4">
       <SEO 
         title="Reset Your Password | MitthuuG"
         description="Forgot your password? Reset it here to regain access to your MitthuuG account."

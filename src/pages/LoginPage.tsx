@@ -62,7 +62,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-ivory-50 via-ochre-50 to-ivory-100 flex items-center justify-center px-4 py-4">
       <SEO 
         title="Login to Your Account | MitthuuG"
         description="Sign in to your MitthuuG account to track orders, manage your wishlist, and enjoy exclusive offers on premium Til-Gud sweets."

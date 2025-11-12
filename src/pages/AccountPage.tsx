@@ -98,7 +98,7 @@ const AccountPage: React.FC = () => {
                 <Package className="w-5 h-5" />
                 <span>Orders</span>
               </Link>
-              <Link to="/account/wishlist" className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-stone-100 dark:hover:bg-gray-700 text-stone-600 dark:text-gray-400 hover:text-stone-900 dark:hover:text-gray-100 transition-colors">
+              <Link to="/wishlist" className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-stone-100 dark:hover:bg-gray-700 text-stone-600 dark:text-gray-400 hover:text-stone-900 dark:hover:text-gray-100 transition-colors">
                 <Heart className="w-5 h-5" />
                 <span>Wishlist</span>
               </Link>

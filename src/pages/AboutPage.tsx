@@ -13,7 +13,7 @@ const AboutPage: React.FC = () => {
       />
       
       {/* Hero Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-ochre via-gold-100 to-ivory">
+      <section className="py-4 md:py-8 px-4 bg-gradient-to-br from-ochre via-gold-100 to-ivory">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block mb-6 px-6 py-2 border-2 border-chocolate rounded-full bg-white/80 backdrop-blur-sm">
             <span className="text-sm tracking-widest text-chocolate font-bold">OUR STORY</span>
@@ -29,7 +29,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Brand Story Section */}
-      <section className="py-24 px-4">
+      <section className="py-4 md:py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
             <div>
@@ -115,7 +115,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Mitthu Express Stations Timeline */}
-      <section className="py-24 px-4 bg-gradient-to-br from-chocolate to-chocolate-800 text-white">
+      <section className="py-4 md:py-8 px-4 bg-gradient-to-br from-chocolate to-chocolate-800 text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-3 mb-4">
@@ -180,7 +180,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Team & Values Section */}
-      <section className="py-24 px-4">
+      <section className="py-4 md:py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-playfair font-bold text-chocolate mb-4">

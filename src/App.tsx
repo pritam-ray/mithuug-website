@@ -36,6 +36,7 @@ const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const AccountPage = lazy(() => import('./pages/AccountPage'));
+const AccountSettingsPage = lazy(() => import('./pages/AccountSettingsPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
@@ -101,7 +102,8 @@ function App() {
                       <Route path="/signup" element={<SignUpPage />} />
                       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                       <Route path="/reset-password" element={<ResetPasswordPage />} />
-                      <Route path="/account/*" element={<AccountPage />} />
+                      <Route path="/account" element={<AccountPage />} />
+                      <Route path="/account/settings" element={<AccountSettingsPage />} />
                       <Route path="/checkout" element={<CheckoutPage />} />
                       <Route path="/wishlist" element={<WishlistPage />} />
                         <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
