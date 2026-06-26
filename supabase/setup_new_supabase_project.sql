@@ -1,5 +1,5 @@
 -- MITTHUUG CONSOLIDATED SCHEMA SETUP SCRIPT
--- Generated on 2026-06-26T13:15:47.545Z
+-- Generated on 2026-06-26T13:18:44.119Z
 -- Paste this entire script into your Supabase SQL Editor and run it.
 
 -- ==========================================
@@ -125,18 +125,18 @@ CREATE TABLE IF NOT EXISTS products (
 
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view products"
-  ON products FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view products" ON products;
+CREATE POLICY "Anyone can view products" ON products FOR SELECT
   TO public
   USING (true);
 
-CREATE POLICY "Authenticated users can insert products"
-  ON products FOR INSERT
+DROP POLICY IF EXISTS "Authenticated users can insert products" ON products;
+CREATE POLICY "Authenticated users can insert products" ON products FOR INSERT
   TO authenticated
   WITH CHECK (true);
 
-CREATE POLICY "Authenticated users can update products"
-  ON products FOR UPDATE
+DROP POLICY IF EXISTS "Authenticated users can update products" ON products;
+CREATE POLICY "Authenticated users can update products" ON products FOR UPDATE
   TO authenticated
   USING (true)
   WITH CHECK (true);
@@ -153,13 +153,13 @@ CREATE TABLE IF NOT EXISTS categories (
 
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view categories"
-  ON categories FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view categories" ON categories;
+CREATE POLICY "Anyone can view categories" ON categories FOR SELECT
   TO public
   USING (true);
 
-CREATE POLICY "Authenticated users can manage categories"
-  ON categories FOR ALL
+DROP POLICY IF EXISTS "Authenticated users can manage categories" ON categories;
+CREATE POLICY "Authenticated users can manage categories" ON categories FOR ALL
   TO authenticated
   USING (true)
   WITH CHECK (true);
@@ -178,19 +178,19 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 
 ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own profile"
-  ON user_profiles FOR SELECT
+DROP POLICY IF EXISTS "Users can view own profile" ON user_profiles;
+CREATE POLICY "Users can view own profile" ON user_profiles FOR SELECT
   TO authenticated
   USING (auth.uid() = id);
 
-CREATE POLICY "Users can update own profile"
-  ON user_profiles FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own profile" ON user_profiles;
+CREATE POLICY "Users can update own profile" ON user_profiles FOR UPDATE
   TO authenticated
   USING (auth.uid() = id)
   WITH CHECK (auth.uid() = id);
 
-CREATE POLICY "Users can insert own profile"
-  ON user_profiles FOR INSERT
+DROP POLICY IF EXISTS "Users can insert own profile" ON user_profiles;
+CREATE POLICY "Users can insert own profile" ON user_profiles FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = id);
 
@@ -205,18 +205,18 @@ CREATE TABLE IF NOT EXISTS wishlists (
 
 ALTER TABLE wishlists ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own wishlist"
-  ON wishlists FOR SELECT
+DROP POLICY IF EXISTS "Users can view own wishlist" ON wishlists;
+CREATE POLICY "Users can view own wishlist" ON wishlists FOR SELECT
   TO authenticated
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can manage own wishlist"
-  ON wishlists FOR INSERT
+DROP POLICY IF EXISTS "Users can manage own wishlist" ON wishlists;
+CREATE POLICY "Users can manage own wishlist" ON wishlists FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can delete from own wishlist"
-  ON wishlists FOR DELETE
+DROP POLICY IF EXISTS "Users can delete from own wishlist" ON wishlists;
+CREATE POLICY "Users can delete from own wishlist" ON wishlists FOR DELETE
   TO authenticated
   USING (auth.uid() = user_id);
 
@@ -234,24 +234,24 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view reviews"
-  ON reviews FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view reviews" ON reviews;
+CREATE POLICY "Anyone can view reviews" ON reviews FOR SELECT
   TO public
   USING (true);
 
-CREATE POLICY "Authenticated users can create reviews"
-  ON reviews FOR INSERT
+DROP POLICY IF EXISTS "Authenticated users can create reviews" ON reviews;
+CREATE POLICY "Authenticated users can create reviews" ON reviews FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can update own reviews"
-  ON reviews FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own reviews" ON reviews;
+CREATE POLICY "Users can update own reviews" ON reviews FOR UPDATE
   TO authenticated
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can delete own reviews"
-  ON reviews FOR DELETE
+DROP POLICY IF EXISTS "Users can delete own reviews" ON reviews;
+CREATE POLICY "Users can delete own reviews" ON reviews FOR DELETE
   TO authenticated
   USING (auth.uid() = user_id);
 
@@ -270,13 +270,13 @@ CREATE TABLE IF NOT EXISTS orders (
 
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own orders"
-  ON orders FOR SELECT
+DROP POLICY IF EXISTS "Users can view own orders" ON orders;
+CREATE POLICY "Users can view own orders" ON orders FOR SELECT
   TO authenticated
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can create own orders"
-  ON orders FOR INSERT
+DROP POLICY IF EXISTS "Users can create own orders" ON orders;
+CREATE POLICY "Users can create own orders" ON orders FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
@@ -292,8 +292,8 @@ CREATE TABLE IF NOT EXISTS order_items (
 
 ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own order items"
-  ON order_items FOR SELECT
+DROP POLICY IF EXISTS "Users can view own order items" ON order_items;
+CREATE POLICY "Users can view own order items" ON order_items FOR SELECT
   TO authenticated
   USING (
     EXISTS (
@@ -303,8 +303,8 @@ CREATE POLICY "Users can view own order items"
     )
   );
 
-CREATE POLICY "Users can create order items for own orders"
-  ON order_items FOR INSERT
+DROP POLICY IF EXISTS "Users can create order items for own orders" ON order_items;
+CREATE POLICY "Users can create order items for own orders" ON order_items FOR INSERT
   TO authenticated
   WITH CHECK (
     EXISTS (
@@ -514,8 +514,8 @@ CREATE TRIGGER orders_updated_at_trigger
 -- Add policy for admin to update payment status (you'll need to implement admin role)
 -- For now, users can update their own orders (for COD orders)
 DROP POLICY IF EXISTS "Users can update own order status" ON orders;
-CREATE POLICY "Users can update own order status"
-  ON orders FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own order status" ON orders;
+CREATE POLICY "Users can update own order status" ON orders FOR UPDATE
   TO authenticated
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
@@ -556,30 +556,30 @@ DROP POLICY IF EXISTS "Enable update for users based on id" ON user_profiles;
 -- ============================================
 
 -- Policy 1: Allow users to INSERT their own profile during signup
-CREATE POLICY "Users can insert own profile on signup"
-  ON user_profiles
+DROP POLICY IF EXISTS "Users can insert own profile on signup" ON user_profiles;
+CREATE POLICY "Users can insert own profile on signup" ON user_profiles
   FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = id);
 
 -- Policy 2: Allow users to VIEW their own profile
-CREATE POLICY "Users can view own profile"
-  ON user_profiles
+DROP POLICY IF EXISTS "Users can view own profile" ON user_profiles;
+CREATE POLICY "Users can view own profile" ON user_profiles
   FOR SELECT
   TO authenticated
   USING (auth.uid() = id);
 
 -- Policy 3: Allow users to UPDATE their own profile
-CREATE POLICY "Users can update own profile"
-  ON user_profiles
+DROP POLICY IF EXISTS "Users can update own profile" ON user_profiles;
+CREATE POLICY "Users can update own profile" ON user_profiles
   FOR UPDATE
   TO authenticated
   USING (auth.uid() = id)
   WITH CHECK (auth.uid() = id);
 
 -- Policy 4: Allow users to DELETE their own profile (optional)
-CREATE POLICY "Users can delete own profile"
-  ON user_profiles
+DROP POLICY IF EXISTS "Users can delete own profile" ON user_profiles;
+CREATE POLICY "Users can delete own profile" ON user_profiles
   FOR DELETE
   TO authenticated
   USING (auth.uid() = id);
@@ -961,8 +961,8 @@ CREATE TABLE IF NOT EXISTS admin_activity_logs (
 ALTER TABLE admin_activity_logs ENABLE ROW LEVEL SECURITY;
 
 -- Only admins can view activity logs
-CREATE POLICY "Admins can view activity logs"
-  ON admin_activity_logs FOR SELECT
+DROP POLICY IF EXISTS "Admins can view activity logs" ON admin_activity_logs;
+CREATE POLICY "Admins can view activity logs" ON admin_activity_logs FOR SELECT
   TO authenticated
   USING (
     EXISTS (
@@ -973,8 +973,8 @@ CREATE POLICY "Admins can view activity logs"
   );
 
 -- System can insert activity logs
-CREATE POLICY "System can insert activity logs"
-  ON admin_activity_logs FOR INSERT
+DROP POLICY IF EXISTS "System can insert activity logs" ON admin_activity_logs;
+CREATE POLICY "System can insert activity logs" ON admin_activity_logs FOR INSERT
   TO authenticated
   WITH CHECK (true);
 
@@ -984,8 +984,8 @@ DROP POLICY IF EXISTS "Authenticated users can update products" ON products;
 DROP POLICY IF EXISTS "Authenticated users can delete products" ON products;
 
 -- Admins can manage products
-CREATE POLICY "Admins can insert products"
-  ON products FOR INSERT
+DROP POLICY IF EXISTS "Admins can insert products" ON products;
+CREATE POLICY "Admins can insert products" ON products FOR INSERT
   TO authenticated
   WITH CHECK (
     EXISTS (
@@ -995,8 +995,8 @@ CREATE POLICY "Admins can insert products"
     )
   );
 
-CREATE POLICY "Admins can update products"
-  ON products FOR UPDATE
+DROP POLICY IF EXISTS "Admins can update products" ON products;
+CREATE POLICY "Admins can update products" ON products FOR UPDATE
   TO authenticated
   USING (
     EXISTS (
@@ -1013,8 +1013,8 @@ CREATE POLICY "Admins can update products"
     )
   );
 
-CREATE POLICY "Admins can delete products"
-  ON products FOR DELETE
+DROP POLICY IF EXISTS "Admins can delete products" ON products;
+CREATE POLICY "Admins can delete products" ON products FOR DELETE
   TO authenticated
   USING (
     EXISTS (
@@ -1029,8 +1029,8 @@ DROP POLICY IF EXISTS "Users can update own order status" ON orders;
 
 -- Users can view own orders (keep existing)
 -- Admins can view all orders
-CREATE POLICY "Admins can view all orders"
-  ON orders FOR SELECT
+DROP POLICY IF EXISTS "Admins can view all orders" ON orders;
+CREATE POLICY "Admins can view all orders" ON orders FOR SELECT
   TO authenticated
   USING (
     EXISTS (
@@ -1041,8 +1041,8 @@ CREATE POLICY "Admins can view all orders"
   );
 
 -- Admins can update any order
-CREATE POLICY "Admins can update orders"
-  ON orders FOR UPDATE
+DROP POLICY IF EXISTS "Admins can update orders" ON orders;
+CREATE POLICY "Admins can update orders" ON orders FOR UPDATE
   TO authenticated
   USING (
     EXISTS (
@@ -1060,8 +1060,8 @@ CREATE POLICY "Admins can update orders"
   );
 
 -- Super admins can view all user profiles
-CREATE POLICY "Admins can view all user profiles"
-  ON user_profiles FOR SELECT
+DROP POLICY IF EXISTS "Admins can view all user profiles" ON user_profiles;
+CREATE POLICY "Admins can view all user profiles" ON user_profiles FOR SELECT
   TO authenticated
   USING (
     auth.uid() = id OR
@@ -1073,8 +1073,8 @@ CREATE POLICY "Admins can view all user profiles"
   );
 
 -- Super admins can update user roles
-CREATE POLICY "Super admins can update user roles"
-  ON user_profiles FOR UPDATE
+DROP POLICY IF EXISTS "Super admins can update user roles" ON user_profiles;
+CREATE POLICY "Super admins can update user roles" ON user_profiles FOR UPDATE
   TO authenticated
   USING (
     auth.uid() = id OR
@@ -1183,8 +1183,8 @@ BEGIN
     AND tablename = 'objects' 
     AND policyname = 'Public Access to product images'
   ) THEN
-    CREATE POLICY "Public Access to product images"
-    ON storage.objects FOR SELECT
+    DROP POLICY IF EXISTS "Public Access to product images" ON storage.objects;
+CREATE POLICY "Public Access to product images" ON storage.objects FOR SELECT
     USING (bucket_id = 'product-images');
   END IF;
 END $$;
@@ -1198,8 +1198,8 @@ BEGIN
     AND tablename = 'objects' 
     AND policyname = 'Authenticated users can upload product images'
   ) THEN
-    CREATE POLICY "Authenticated users can upload product images"
-    ON storage.objects FOR INSERT
+    DROP POLICY IF EXISTS "Authenticated users can upload product images" ON storage.objects;
+CREATE POLICY "Authenticated users can upload product images" ON storage.objects FOR INSERT
     TO authenticated
     WITH CHECK (bucket_id = 'product-images');
   END IF;
@@ -1214,8 +1214,8 @@ BEGIN
     AND tablename = 'objects' 
     AND policyname = 'Authenticated users can update product images'
   ) THEN
-    CREATE POLICY "Authenticated users can update product images"
-    ON storage.objects FOR UPDATE
+    DROP POLICY IF EXISTS "Authenticated users can update product images" ON storage.objects;
+CREATE POLICY "Authenticated users can update product images" ON storage.objects FOR UPDATE
     TO authenticated
     USING (bucket_id = 'product-images');
   END IF;
@@ -1230,8 +1230,8 @@ BEGIN
     AND tablename = 'objects' 
     AND policyname = 'Authenticated users can delete product images'
   ) THEN
-    CREATE POLICY "Authenticated users can delete product images"
-    ON storage.objects FOR DELETE
+    DROP POLICY IF EXISTS "Authenticated users can delete product images" ON storage.objects;
+CREATE POLICY "Authenticated users can delete product images" ON storage.objects FOR DELETE
     TO authenticated
     USING (bucket_id = 'product-images');
   END IF;
@@ -1269,20 +1269,20 @@ CREATE TABLE IF NOT EXISTS wishlists (
 ALTER TABLE wishlists ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Users can view their own wishlist items
-CREATE POLICY "Users can view own wishlist"
-ON wishlists FOR SELECT
+DROP POLICY IF EXISTS "Users can view own wishlist" ON wishlists;
+CREATE POLICY "Users can view own wishlist" ON wishlists FOR SELECT
 TO authenticated
 USING (auth.uid() = user_id);
 
 -- Policy: Users can add to their wishlist
-CREATE POLICY "Users can add to wishlist"
-ON wishlists FOR INSERT
+DROP POLICY IF EXISTS "Users can add to wishlist" ON wishlists;
+CREATE POLICY "Users can add to wishlist" ON wishlists FOR INSERT
 TO authenticated
 WITH CHECK (auth.uid() = user_id);
 
 -- Policy: Users can remove from their wishlist
-CREATE POLICY "Users can delete from wishlist"
-ON wishlists FOR DELETE
+DROP POLICY IF EXISTS "Users can delete from wishlist" ON wishlists;
+CREATE POLICY "Users can delete from wishlist" ON wishlists FOR DELETE
 TO authenticated
 USING (auth.uid() = user_id);
 
@@ -1333,8 +1333,8 @@ CREATE TABLE IF NOT EXISTS order_status_history (
 ALTER TABLE order_status_history ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Users can view their own order history
-CREATE POLICY "Users can view own order history"
-ON order_status_history FOR SELECT
+DROP POLICY IF EXISTS "Users can view own order history" ON order_status_history;
+CREATE POLICY "Users can view own order history" ON order_status_history FOR SELECT
 TO authenticated
 USING (
   EXISTS (
@@ -1345,8 +1345,8 @@ USING (
 );
 
 -- Policy: Admins can view all order history
-CREATE POLICY "Admins can view all order history"
-ON order_status_history FOR SELECT
+DROP POLICY IF EXISTS "Admins can view all order history" ON order_status_history;
+CREATE POLICY "Admins can view all order history" ON order_status_history FOR SELECT
 TO authenticated
 USING (
   EXISTS (
@@ -1357,8 +1357,8 @@ USING (
 );
 
 -- Policy: Admins can insert order history
-CREATE POLICY "Admins can insert order history"
-ON order_status_history FOR INSERT
+DROP POLICY IF EXISTS "Admins can insert order history" ON order_status_history;
+CREATE POLICY "Admins can insert order history" ON order_status_history FOR INSERT
 TO authenticated
 WITH CHECK (
   EXISTS (
@@ -1422,26 +1422,26 @@ CREATE TABLE IF NOT EXISTS review_helpful_votes (
 ALTER TABLE review_helpful_votes ENABLE ROW LEVEL SECURITY;
 
 -- RLS policies for review_helpful_votes
-CREATE POLICY "Anyone can view helpful votes"
-  ON review_helpful_votes FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view helpful votes" ON review_helpful_votes;
+CREATE POLICY "Anyone can view helpful votes" ON review_helpful_votes FOR SELECT
   TO public
   USING (true);
 
-CREATE POLICY "Authenticated users can vote helpful"
-  ON review_helpful_votes FOR INSERT
+DROP POLICY IF EXISTS "Authenticated users can vote helpful" ON review_helpful_votes;
+CREATE POLICY "Authenticated users can vote helpful" ON review_helpful_votes FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can remove their helpful vote"
-  ON review_helpful_votes FOR DELETE
+DROP POLICY IF EXISTS "Users can remove their helpful vote" ON review_helpful_votes;
+CREATE POLICY "Users can remove their helpful vote" ON review_helpful_votes FOR DELETE
   TO authenticated
   USING (auth.uid() = user_id);
 
 -- Update reviews policy to only show approved reviews to public
 DROP POLICY IF EXISTS "Anyone can view reviews" ON reviews;
 
-CREATE POLICY "Anyone can view approved reviews"
-  ON reviews FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view approved reviews" ON reviews;
+CREATE POLICY "Anyone can view approved reviews" ON reviews FOR SELECT
   TO public
   USING (is_approved = true);
 
@@ -1586,24 +1586,24 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
 
 -- RLS policies
-CREATE POLICY "Users can view own subscriptions"
-  ON subscriptions FOR SELECT
+DROP POLICY IF EXISTS "Users can view own subscriptions" ON subscriptions;
+CREATE POLICY "Users can view own subscriptions" ON subscriptions FOR SELECT
   TO authenticated
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can create own subscriptions"
-  ON subscriptions FOR INSERT
+DROP POLICY IF EXISTS "Users can create own subscriptions" ON subscriptions;
+CREATE POLICY "Users can create own subscriptions" ON subscriptions FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can update own subscriptions"
-  ON subscriptions FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own subscriptions" ON subscriptions;
+CREATE POLICY "Users can update own subscriptions" ON subscriptions FOR UPDATE
   TO authenticated
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can delete own subscriptions"
-  ON subscriptions FOR DELETE
+DROP POLICY IF EXISTS "Users can delete own subscriptions" ON subscriptions;
+CREATE POLICY "Users can delete own subscriptions" ON subscriptions FOR DELETE
   TO authenticated
   USING (auth.uid() = user_id);
 
@@ -1847,45 +1847,45 @@ ALTER TABLE referral_codes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE referrals ENABLE ROW LEVEL SECURITY;
 
 -- RLS policies for referral_codes
-CREATE POLICY "Users can view own referral codes"
-  ON referral_codes FOR SELECT
+DROP POLICY IF EXISTS "Users can view own referral codes" ON referral_codes;
+CREATE POLICY "Users can view own referral codes" ON referral_codes FOR SELECT
   TO authenticated
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can create own referral codes"
-  ON referral_codes FOR INSERT
+DROP POLICY IF EXISTS "Users can create own referral codes" ON referral_codes;
+CREATE POLICY "Users can create own referral codes" ON referral_codes FOR INSERT
   TO authenticated
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can update own referral codes"
-  ON referral_codes FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own referral codes" ON referral_codes;
+CREATE POLICY "Users can update own referral codes" ON referral_codes FOR UPDATE
   TO authenticated
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Anyone can view active referral codes by code"
-  ON referral_codes FOR SELECT
+DROP POLICY IF EXISTS "Anyone can view active referral codes by code" ON referral_codes;
+CREATE POLICY "Anyone can view active referral codes by code" ON referral_codes FOR SELECT
   TO public
   USING (is_active = true AND (expires_at IS NULL OR expires_at > now()));
 
 -- RLS policies for referrals
-CREATE POLICY "Users can view own referrals as referrer"
-  ON referrals FOR SELECT
+DROP POLICY IF EXISTS "Users can view own referrals as referrer" ON referrals;
+CREATE POLICY "Users can view own referrals as referrer" ON referrals FOR SELECT
   TO authenticated
   USING (auth.uid() = referrer_id);
 
-CREATE POLICY "Users can view own referrals as referred"
-  ON referrals FOR SELECT
+DROP POLICY IF EXISTS "Users can view own referrals as referred" ON referrals;
+CREATE POLICY "Users can view own referrals as referred" ON referrals FOR SELECT
   TO authenticated
   USING (auth.uid() = referred_user_id);
 
-CREATE POLICY "System can create referrals"
-  ON referrals FOR INSERT
+DROP POLICY IF EXISTS "System can create referrals" ON referrals;
+CREATE POLICY "System can create referrals" ON referrals FOR INSERT
   TO authenticated
   WITH CHECK (true);
 
-CREATE POLICY "System can update referrals"
-  ON referrals FOR UPDATE
+DROP POLICY IF EXISTS "System can update referrals" ON referrals;
+CREATE POLICY "System can update referrals" ON referrals FOR UPDATE
   TO authenticated
   USING (true);
 
@@ -2099,24 +2099,24 @@ ALTER TABLE chat_messages ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for chat_sessions
 -- Users can view their own chat sessions
-CREATE POLICY "Users can view own chat sessions"
-  ON chat_sessions FOR SELECT
+DROP POLICY IF EXISTS "Users can view own chat sessions" ON chat_sessions;
+CREATE POLICY "Users can view own chat sessions" ON chat_sessions FOR SELECT
   USING (auth.uid() = user_id);
 
 -- Users can create their own chat sessions
-CREATE POLICY "Users can create own chat sessions"
-  ON chat_sessions FOR INSERT
+DROP POLICY IF EXISTS "Users can create own chat sessions" ON chat_sessions;
+CREATE POLICY "Users can create own chat sessions" ON chat_sessions FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
 -- Users can update their own chat sessions
-CREATE POLICY "Users can update own chat sessions"
-  ON chat_sessions FOR UPDATE
+DROP POLICY IF EXISTS "Users can update own chat sessions" ON chat_sessions;
+CREATE POLICY "Users can update own chat sessions" ON chat_sessions FOR UPDATE
   USING (auth.uid() = user_id);
 
 -- RLS Policies for chat_messages
 -- Users can view messages in their chat sessions
-CREATE POLICY "Users can view own chat messages"
-  ON chat_messages FOR SELECT
+DROP POLICY IF EXISTS "Users can view own chat messages" ON chat_messages;
+CREATE POLICY "Users can view own chat messages" ON chat_messages FOR SELECT
   USING (
     EXISTS (
       SELECT 1 FROM chat_sessions
@@ -2126,8 +2126,8 @@ CREATE POLICY "Users can view own chat messages"
   );
 
 -- Users can create messages in their chat sessions
-CREATE POLICY "Users can create own chat messages"
-  ON chat_messages FOR INSERT
+DROP POLICY IF EXISTS "Users can create own chat messages" ON chat_messages;
+CREATE POLICY "Users can create own chat messages" ON chat_messages FOR INSERT
   WITH CHECK (
     EXISTS (
       SELECT 1 FROM chat_sessions
