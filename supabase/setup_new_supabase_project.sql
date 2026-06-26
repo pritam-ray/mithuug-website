@@ -1,6 +1,25 @@
 -- MITTHUUG CONSOLIDATED SCHEMA SETUP SCRIPT
--- Generated on 2026-06-26T13:12:07.406Z
+-- Generated on 2026-06-26T13:15:47.545Z
 -- Paste this entire script into your Supabase SQL Editor and run it.
+
+-- ==========================================
+-- CLEANUP BLOCK (Drop existing tables to allow a clean setup rerun)
+-- ==========================================
+DROP TABLE IF EXISTS subscriptions CASCADE;
+DROP TABLE IF EXISTS referral_codes CASCADE;
+DROP TABLE IF EXISTS referrals CASCADE;
+DROP TABLE IF EXISTS review_helpful_votes CASCADE;
+DROP TABLE IF EXISTS wishlists CASCADE;
+DROP TABLE IF EXISTS order_status_history CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS user_profiles CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS chat_messages CASCADE;
+DROP TABLE IF EXISTS chat_sessions CASCADE;
+DROP TABLE IF EXISTS admin_activity_logs CASCADE;
 
 
 -- ==========================================
