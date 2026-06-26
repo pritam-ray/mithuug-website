@@ -74,74 +74,70 @@ const HomePage: React.FC = () => {
       {/* USPs Section - New Component */}
       <USPGrid />
 
-      {!loading && (
-        <>
-          {/* New Arrivals Section */}
-          {newProducts.length > 0 && (
-            <section className="py-24 px-4 bg-ivory">
-              <div className="max-w-7xl mx-auto">
-                <div className="flex items-center justify-between mb-12">
-                  <div className="flex items-center space-x-3">
-                    <Sparkles className="w-8 h-8 text-ochre" />
-                    <h2 className="text-4xl font-playfair font-bold text-chocolate">
-                      New Arrivals
-                    </h2>
-                  </div>
-                  <Link
-                    to="/shop?filter=new"
-                    className="text-chocolate-600 hover:text-ochre transition-colors flex items-center space-x-2 font-semibold"
-                  >
-                    <span>View All</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
-
-                {loading ? (
-                  <ProductGridSkeleton count={3} />
-                ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
-                    {newProducts.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                )}
+      {/* New Arrivals Section */}
+      {(loading || newProducts.length > 0) && (
+        <section className="py-24 px-4 bg-ivory">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center space-x-3">
+                <Sparkles className="w-8 h-8 text-ochre" />
+                <h2 className="text-4xl font-playfair font-bold text-chocolate">
+                  New Arrivals
+                </h2>
               </div>
-            </section>
-          )}
+              <Link
+                to="/shop?filter=new"
+                className="text-chocolate-600 hover:text-ochre transition-colors flex items-center space-x-2 font-semibold"
+              >
+                <span>View All</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
 
-          {/* Bestsellers Section */}
-          {bestsellers.length > 0 && (
-            <section className="py-24 px-4 bg-white">
-              <div className="max-w-7xl mx-auto">
-                <div className="flex items-center justify-between mb-12">
-                  <div className="flex items-center space-x-3">
-                    <TrendingUp className="w-8 h-8 text-ochre" />
-                    <h2 className="text-4xl font-playfair font-bold text-chocolate">
-                      Customer Favorites
-                    </h2>
-                  </div>
-                  <Link
-                    to="/shop?filter=bestsellers"
-                    className="text-chocolate-600 hover:text-ochre transition-colors flex items-center space-x-2 font-semibold"
-                  >
-                    <span>View All</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
-
-                {loading ? (
-                  <ProductGridSkeleton count={3} />
-                ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
-                    {bestsellers.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                )}
+            {loading ? (
+              <ProductGridSkeleton count={4} />
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
+                {newProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-            </section>
-          )}
-        </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Bestsellers Section */}
+      {(loading || bestsellers.length > 0) && (
+        <section className="py-24 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center space-x-3">
+                <TrendingUp className="w-8 h-8 text-ochre" />
+                <h2 className="text-4xl font-playfair font-bold text-chocolate">
+                  Customer Favorites
+                </h2>
+              </div>
+              <Link
+                to="/shop?filter=bestsellers"
+                className="text-chocolate-600 hover:text-ochre transition-colors flex items-center space-x-2 font-semibold"
+              >
+                <span>View All</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            {loading ? (
+              <ProductGridSkeleton count={4} />
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
+                {bestsellers.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
       )}
 
       {/* Testimonials Section */}

@@ -5,7 +5,7 @@ import { useAdmin } from '../context/AdminContext';
 import { supabase } from '../lib/supabase';
 import { User, Package, Heart, Settings, LogOut, Shield } from 'lucide-react';
 import SEO from '../components/SEO';
-import { PageLoader } from '../components/LoadingComponents';
+import { AccountPageSkeleton } from '../components/LoadingComponents';
 
 interface Order {
   id: string;
@@ -64,7 +64,7 @@ const AccountPage: React.FC = () => {
   };
 
   if (loading) {
-    return <PageLoader text="Loading your account..." />;
+    return <AccountPageSkeleton />;
   }
 
   return (

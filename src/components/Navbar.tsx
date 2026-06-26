@@ -41,10 +41,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
   }, [isMenuOpen]);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 transition-all duration-300 ${
-        scrolled ? 'shadow-lg' : 'shadow-md'
-      }`}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 transition-all duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'
+        }`}
     >
       {/* Top Bar - Offers & Announcements - Hidden on Mobile */}
       <div className="hidden md:block bg-gradient-to-r from-ochre to-gold text-white dark:from-ochre-700 dark:to-gold-700">
@@ -63,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
           {/* Logo - Responsive sizing */}
           <Link to="/" className="flex items-center space-x-2 touch-target-lg">
             <div className="text-xl md:text-3xl font-playfair font-bold text-chocolate dark:text-ochre-300">
-              Mitthuug<span className="text-ochre dark:text-ochre-400 italic">_</span>
+              MitthuuG<span className="text-ochre dark:text-ochre-400 italic"></span>
             </div>
           </Link>
 
@@ -165,7 +164,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * (index + 1) }}
                 >
-                  <Link 
+                  <Link
                     to={item.to}
                     className="flex items-center space-x-3 py-4 text-base font-semibold text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 hover:bg-ochre-50 dark:hover:bg-gray-800 px-4 rounded-xl transition-all touch-target"
                     onClick={() => setIsMenuOpen(false)}
@@ -198,8 +197,8 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
                 </div>
 
                 {/* Account Link */}
-                <Link 
-                  to={user ? '/account' : '/login'} 
+                <Link
+                  to={user ? '/account' : '/login'}
                   className="flex items-center justify-between py-4 text-base font-semibold text-chocolate dark:text-gray-200 hover:text-ochre dark:hover:text-ochre-400 hover:bg-ochre-50 dark:hover:bg-gray-800 px-4 rounded-xl transition-all touch-target"
                   onClick={() => setIsMenuOpen(false)}
                 >

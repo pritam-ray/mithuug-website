@@ -14,7 +14,7 @@ import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
 import { trackViewItem, trackAddToCart } from '../lib/analytics';
 import StickyAddToCart from '../components/mobile/StickyAddToCart';
 import ProductGallery from '../components/mobile/ProductGallery';
-import { PageLoader } from '../components/LoadingComponents';
+import { ProductDetailSkeleton } from '../components/LoadingComponents';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -158,7 +158,7 @@ const ProductDetailPage: React.FC = () => {
     : 0;
 
   if (loading) {
-    return <PageLoader text="Loading product details..." />;
+    return <ProductDetailSkeleton />;
   }
 
   if (!product) {
