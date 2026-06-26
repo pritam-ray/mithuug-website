@@ -56,7 +56,7 @@ interface ChatProviderProps {
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const { user } = useAuth();
-  const { showToast } = useToast();
+  const { success, error } = useToast();
   const [currentSession, setCurrentSession] = useState<ChatSession | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -144,15 +144,15 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
     try {
       setLoading(true);
-      const { data, error } = await supabase
+      const { data, error: dbError } = await supabase
         .rpc('create_chat_session', {
           p_user_id: user.id,
           p_subject: subject
         });
 
-      if (error) {
-        console.error('Error creating chat session:', error);
-        showToast('Failed to create chat session', 'error');
+      if (dbError) {
+        console.error('Error creating chat session:', dbError);
+        error('Failed to create chat session');
         return;
       }
 
@@ -171,10 +171,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       setCurrentSession(sessionData);
       await loadMessages(data);
       setIsChatOpen(true);
-      showToast('Chat session started', 'success');
-    } catch (error) {
-      console.error('Error creating chat session:', error);
-      showToast('Failed to create chat session', 'error');
+      success('Chat session started');
+    } catch (err) {
+      console.error('Error creating chat session:', err);
+      error('Failed to create chat session');
     } finally {
       setLoading(false);
     }
@@ -185,7 +185,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     if (!user || !currentSession) return;
 
     try {
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .from('chat_messages')
         .insert({
           session_id: currentSession.id,
@@ -195,13 +195,13 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
           is_system_message: false
         });
 
-      if (error) {
-        console.error('Error sending message:', error);
-        showToast('Failed to send message', 'error');
+      if (dbError) {
+        console.error('Error sending message:', dbError);
+        error('Failed to send message');
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      showToast('Failed to send message', 'error');
+    } catch (err) {
+      console.error('Error sending message:', err);
+      error('Failed to send message');
     }
   };
 
@@ -211,22 +211,22 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
     try {
       setLoading(true);
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .rpc('close_chat_session', { p_session_id: currentSession.id });
 
-      if (error) {
-        console.error('Error closing chat session:', error);
-        showToast('Failed to close chat session', 'error');
+      if (dbError) {
+        console.error('Error closing chat session:', dbError);
+        error('Failed to close chat session');
         return;
       }
 
       setCurrentSession(null);
       setMessages([]);
       setIsChatOpen(false);
-      showToast('Chat session closed', 'success');
-    } catch (error) {
-      console.error('Error closing chat session:', error);
-      showToast('Failed to close chat session', 'error');
+      success('Chat session closed');
+    } catch (err) {
+      console.error('Error closing chat session:', err);
+      error('Failed to close chat session');
     } finally {
       setLoading(false);
     }

@@ -5,9 +5,6 @@ import { useAuth } from '../context/AuthContext';
 import { format } from 'date-fns';
 
 export const ChatWidget: React.FC = () => {
-  // Feature temporarily disabled - can be re-enabled in the future
-  return null;
-  
   const { user } = useAuth();
   const {
     currentSession,
@@ -69,6 +66,10 @@ export const ChatWidget: React.FC = () => {
       await closeSession();
     }
   };
+
+  // Feature temporarily disabled - can be re-enabled in the future
+  const isDisabled = true;
+  if (isDisabled) return null;
 
   if (!user) {
     return (

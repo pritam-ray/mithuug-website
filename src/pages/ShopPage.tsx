@@ -161,7 +161,7 @@ const ShopPage: React.FC = () => {
     <div className="min-h-screen pt-4 bg-ivory">
       <SEO 
         title="Shop Premium Til-Gud Sweets | MitthuuG"
-        description="Browse our collection of authentic handcrafted Til-Gud, traditional Indian sweets, and festive treats. All-natural ingredients, no preservatives. Free shipping on orders above ₹500."
+        description="Browse our collection of authentic handcrafted Til-Gud, traditional Indian sweets, and festive treats. All-natural ingredients, no preservatives. Free shipping on orders above ₹499."
         keywords="buy til gud online, tilgul sweets, indian sweets online, traditional sweets, sesame jaggery ladoo, makar sankranti sweets, order sweets online"
       />
       

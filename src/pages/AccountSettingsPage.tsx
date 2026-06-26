@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
-import { User, Mail, Phone, Lock, Save, Eye, EyeOff, MapPin, Bell } from 'lucide-react';
+import { User, Lock, Save, Eye, EyeOff, MapPin, Bell } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PageLoader } from '../components/LoadingComponents';
 import { useToast } from '../context/ToastContext';
@@ -10,7 +10,7 @@ import { useToast } from '../context/ToastContext';
 const AccountSettingsPage: React.FC = () => {
   const { user, profile } = useAuth();
   const navigate = useNavigate();
-  const { showToast } = useToast();
+  const { success, error } = useToast();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -57,14 +57,18 @@ const AccountSettingsPage: React.FC = () => {
         setFullName(profile.full_name || '');
         setPhone(profile.phone || '');
         setEmail(user.email || '');
-        setAddress(profile.address || '');
-        setCity(profile.city || '');
-        setState(profile.state || '');
-        setPincode(profile.pincode || '');
+        
+        const shippingAddr = profile.default_shipping_address;
+        if (shippingAddr) {
+          setAddress(shippingAddr.line1 || '');
+          setCity(shippingAddr.city || '');
+          setState(shippingAddr.state || '');
+          setPincode(shippingAddr.postal_code || '');
+        }
       }
-    } catch (error) {
-      console.error('Error loading user data:', error);
-      showToast('Failed to load settings', 'error');
+    } catch (err) {
+      console.error('Error loading user data:', err);
+      error('Failed to load settings');
     } finally {
       setLoading(false);
     }
@@ -78,25 +82,32 @@ const AccountSettingsPage: React.FC = () => {
     try {
       setSaving(true);
 
-      const { error } = await supabase
+      const shippingAddressObj = {
+        name: fullName,
+        line1: address,
+        city: city,
+        state: state,
+        postal_code: pincode,
+        country: 'India',
+        phone: phone
+      };
+
+      const { error: dbError } = await supabase
         .from('user_profiles')
         .update({
           full_name: fullName,
           phone: phone,
-          address: address,
-          city: city,
-          state: state,
-          pincode: pincode,
+          default_shipping_address: shippingAddressObj,
           updated_at: new Date().toISOString(),
         })
         .eq('id', user.id);
 
-      if (error) throw error;
+      if (dbError) throw dbError;
 
-      showToast('Profile updated successfully!', 'success');
-    } catch (error: any) {
-      console.error('Error updating profile:', error);
-      showToast(error.message || 'Failed to update profile', 'error');
+      success('Profile updated successfully!');
+    } catch (err: any) {
+      console.error('Error updating profile:', err);
+      error(err.message || 'Failed to update profile');
     } finally {
       setSaving(false);
     }
@@ -106,41 +117,43 @@ const AccountSettingsPage: React.FC = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      showToast('New passwords do not match', 'error');
+      error('New passwords do not match');
       return;
     }
 
     if (newPassword.length < 6) {
-      showToast('Password must be at least 6 characters', 'error');
+      error('Password must be at least 6 characters');
       return;
     }
 
     try {
       setSaving(true);
 
-      const { error } = await supabase.auth.updateUser({
+      const { error: authError } = await supabase.auth.updateUser({
         password: newPassword,
       });
 
-      if (error) throw error;
+      if (authError) throw authError;
 
-      showToast('Password changed successfully!', 'success');
+      success('Password changed successfully!');
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
-    } catch (error: any) {
-      console.error('Error changing password:', error);
-      showToast(error.message || 'Failed to change password', 'error');
+    } catch (err: any) {
+      console.error('Error changing password:', err);
+      error(err.message || 'Failed to change password');
     } finally {
       setSaving(false);
     }
   };
 
   const handleUpdatePreferences = async () => {
+    if (!user) return;
+
     try {
       setSaving(true);
 
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .from('user_profiles')
         .update({
           email_notifications: emailNotifications,
@@ -148,14 +161,14 @@ const AccountSettingsPage: React.FC = () => {
           promotions: promotions,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', user?.id);
+        .eq('id', user.id);
 
-      if (error) throw error;
+      if (dbError) throw dbError;
 
-      showToast('Preferences updated successfully!', 'success');
-    } catch (error: any) {
-      console.error('Error updating preferences:', error);
-      showToast(error.message || 'Failed to update preferences', 'error');
+      success('Preferences updated successfully!');
+    } catch (err: any) {
+      console.error('Error updating preferences:', err);
+      error(err.message || 'Failed to update preferences');
     } finally {
       setSaving(false);
     }

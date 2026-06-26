@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
 import { supabase } from '../lib/supabase';
-import { Settings, Save, Globe, CreditCard, Truck, Mail, Receipt } from 'lucide-react';
+import { Save, Globe, CreditCard, Truck, Mail, Receipt } from 'lucide-react';
 
 interface SiteSettings {
   site_name: string;

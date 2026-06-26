@@ -8,7 +8,7 @@ const ShippingPolicyPage: React.FC = () => {
     <div className="min-h-screen pt-4 bg-ivory-50">
       <SEO 
         title="Shipping Policy | MitthuuG"
-        description="Learn about MitthuuG's shipping policy, delivery zones, shipping charges, and estimated delivery times across India. Free shipping on orders above ₹500."
+        description="Learn about MitthuuG's shipping policy, delivery zones, shipping charges, and estimated delivery times across India. Free shipping on orders above ₹499."
         keywords="shipping policy, delivery charges, shipping times, free shipping, courier delivery"
       />
       
@@ -66,11 +66,11 @@ const ShippingPolicyPage: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-ochre-100">
                   <tr>
-                    <td className="px-4 py-3 text-chocolate-700">Above ₹500</td>
+                    <td className="px-4 py-3 text-chocolate-700">₹499 and above</td>
                     <td className="px-4 py-3 text-olive-600 font-bold">FREE</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 text-chocolate-700">₹300 - ₹499</td>
+                    <td className="px-4 py-3 text-chocolate-700">₹300 - ₹498</td>
                     <td className="px-4 py-3 text-chocolate-700">₹50</td>
                   </tr>
                   <tr>

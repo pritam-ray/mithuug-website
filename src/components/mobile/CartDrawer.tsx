@@ -79,7 +79,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   // Calculate final total
   const discountAmount = cartTotal * discount;
   const finalTotal = cartTotal - discountAmount;
-  const freeShippingThreshold = 500;
+  const freeShippingThreshold = 499;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - cartTotal);
 
   return (

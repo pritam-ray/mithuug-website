@@ -42,6 +42,7 @@ export const initGA4 = (measurementId: string) => {
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
     window.dataLayer?.push(arguments);
   };
   window.gtag('js', new Date());

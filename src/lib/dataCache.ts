@@ -5,6 +5,56 @@
 
 import { supabase } from './supabase';
 import { Product, Category } from '../types/database';
+import { mitthuugProducts } from '../data/products';
+
+const localProducts: Product[] = mitthuugProducts.map(p => ({
+  id: p.sku,
+  name: p.title,
+  description: p.long_desc || p.short_desc,
+  price: p.price,
+  image_url: p.image_url,
+  images: [p.image_url],
+  category: p.category,
+  weight: p.weight,
+  ingredients: p.ingredients ? p.ingredients.split(',').map(i => i.trim()) : [],
+  stock_quantity: 100,
+  is_new: p.is_new || false,
+  is_bestseller: p.is_bestseller || false,
+  discount_percentage: 0,
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+}));
+
+const localCategories: Category[] = [
+  {
+    id: 'gud-bites',
+    name: 'Gud Bites',
+    slug: 'gud-bites',
+    description: 'Delicious sesame and jaggery bites.',
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'trial-pack',
+    name: 'Trial Pack',
+    slug: 'trial-pack',
+    description: 'Perfect for first-timers.',
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'gift-sets',
+    name: 'Gift Sets',
+    slug: 'gift-sets',
+    description: 'Premium gift sets for all occasions.',
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'traditional',
+    name: 'Traditional',
+    slug: 'traditional',
+    description: 'Traditional sweets made with love.',
+    created_at: new Date().toISOString(),
+  }
+];
 
 interface CacheEntry<T> {
   data: T;
@@ -78,13 +128,18 @@ class DataCache {
     return this.getOrFetch(
       'products:all',
       async () => {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .order('created_at', { ascending: false });
-        
-        if (error) throw error;
-        return data || [];
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .order('created_at', { ascending: false });
+          
+          if (error) throw error;
+          if (data && data.length > 0) return data;
+        } catch (e) {
+          console.warn('Supabase fetch failed or empty for all products, using local fallback:', e);
+        }
+        return localProducts;
       },
       5 * 60 * 1000 // 5 minutes
     );
@@ -97,14 +152,19 @@ class DataCache {
     return this.getOrFetch(
       `products:new:${limit}`,
       async () => {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .eq('is_new', true)
-          .limit(limit);
-        
-        if (error) throw error;
-        return data || [];
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('is_new', true)
+            .limit(limit);
+          
+          if (error) throw error;
+          if (data && data.length > 0) return data;
+        } catch (e) {
+          console.warn('Supabase fetch failed or empty for new products, using local fallback:', e);
+        }
+        return localProducts.filter(p => p.is_new).slice(0, limit);
       },
       10 * 60 * 1000 // 10 minutes
     );
@@ -117,14 +177,19 @@ class DataCache {
     return this.getOrFetch(
       `products:bestsellers:${limit}`,
       async () => {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .eq('is_bestseller', true)
-          .limit(limit);
-        
-        if (error) throw error;
-        return data || [];
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('is_bestseller', true)
+            .limit(limit);
+          
+          if (error) throw error;
+          if (data && data.length > 0) return data;
+        } catch (e) {
+          console.warn('Supabase fetch failed or empty for bestseller products, using local fallback:', e);
+        }
+        return localProducts.filter(p => p.is_bestseller).slice(0, limit);
       },
       10 * 60 * 1000 // 10 minutes
     );
@@ -137,14 +202,19 @@ class DataCache {
     return this.getOrFetch(
       `product:${id}`,
       async () => {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .eq('id', id)
-          .single();
-        
-        if (error) throw error;
-        return data;
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('id', id)
+            .single();
+          
+          if (error) throw error;
+          if (data) return data;
+        } catch (e) {
+          console.warn(`Supabase fetch failed or empty for product ${id}, using local fallback:`, e);
+        }
+        return localProducts.find(p => p.id === id) || null;
       },
       5 * 60 * 1000 // 5 minutes
     );
@@ -157,12 +227,17 @@ class DataCache {
     return this.getOrFetch(
       'categories:all',
       async () => {
-        const { data, error } = await supabase
-          .from('categories')
-          .select('*');
-        
-        if (error) throw error;
-        return data || [];
+        try {
+          const { data, error } = await supabase
+            .from('categories')
+            .select('*');
+          
+          if (error) throw error;
+          if (data && data.length > 0) return data;
+        } catch (e) {
+          console.warn('Supabase fetch failed or empty for categories, using local fallback:', e);
+        }
+        return localCategories;
       },
       30 * 60 * 1000 // 30 minutes - categories change rarely
     );

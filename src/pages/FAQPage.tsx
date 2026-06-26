@@ -32,7 +32,7 @@ const faqs: FAQItem[] = [
   {
     category: 'Ordering & Shipping',
     question: 'What are your shipping charges?',
-    answer: 'We offer FREE shipping on all orders above ₹500. For orders below ₹500, we charge ₹50 for metro cities and ₹80 for other locations. Shipping is calculated at checkout.',
+    answer: 'We offer FREE shipping on all orders above ₹499. For orders below ₹499, we charge ₹50 for metro cities and ₹80 for other locations. Shipping is calculated at checkout.',
   },
   {
     category: 'Ordering & Shipping',

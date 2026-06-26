@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
         <div className="max-w-7xl mx-auto px-3 py-1.5 md:py-2">
           <div className="flex items-center justify-center space-x-1 md:space-x-2 text-[10px] md:text-xs font-semibold tracking-wide">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-            <span className="truncate">Free Shipping ₹500+ | FSSAI Certified</span>
+            <span className="truncate">Free Shipping ₹499+ | FSSAI Certified</span>
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 hidden sm:block" />
           </div>
         </div>
@@ -93,6 +93,15 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
               <ThemeToggle />
               <LanguageSelector />
             </div>
+
+            {/* User Profile - Desktop Only */}
+            <Link
+              to={user ? '/account' : '/login'}
+              className="hidden md:flex text-chocolate dark:text-gray-300 hover:text-ochre dark:hover:text-ochre-400 transition-colors touch-target"
+              title={user ? 'My Account' : 'Sign In'}
+            >
+              <User className="w-5 h-5 md:w-6 md:h-6" />
+            </Link>
 
             {/* Search Icon - Mobile */}
             <button

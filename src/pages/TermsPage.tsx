@@ -60,7 +60,7 @@ const TermsPage: React.FC = () => {
           <section>
             <h2 className="text-2xl font-playfair font-bold text-chocolate-900 mb-4">4. Shipping and Delivery</h2>
             <ul className="list-disc pl-6 space-y-2 text-chocolate-700">
-              <li>Free shipping on orders above ₹500</li>
+              <li>Free shipping on orders above ₹499</li>
               <li>Delivery timeframes are estimates and not guaranteed</li>
               <li>We are not responsible for delays caused by courier services</li>
               <li>Risk of loss passes to you upon delivery</li>

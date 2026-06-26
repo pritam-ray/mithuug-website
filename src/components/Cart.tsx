@@ -146,15 +146,15 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
             {/* Footer with Total & Checkout */}
             <div className="border-t-2 border-ochre-200 bg-white p-6 space-y-4">
               {/* Free Shipping Message */}
-              {cartTotal < 500 && (
+              {cartTotal < 499 && (
                 <div className="bg-ochre-50 border border-ochre-200 rounded-lg p-3 text-center">
                   <p className="text-sm text-chocolate-700">
-                    Add <span className="font-bold text-ochre-600">₹{500 - cartTotal}</span> more for FREE shipping! 🚚
+                    Add <span className="font-bold text-ochre-600">₹{499 - cartTotal}</span> more for FREE shipping! 🚚
                   </p>
                 </div>
               )}
               
-              {cartTotal >= 500 && (
+              {cartTotal >= 499 && (
                 <div className="bg-olive-50 border border-olive-300 rounded-lg p-3 text-center flex items-center justify-center space-x-2">
                   <Gift className="w-4 h-4 text-olive-600" />
                   <p className="text-sm text-olive-700 font-medium">

@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
 
 const WishlistPage = () => {
   const { user } = useAuth();
-  const { wishlistItems, loading, removeFromWishlist, toggleWishlist } = useWishlist();
+  const { wishlistItems, loading, removeFromWishlist } = useWishlist();
   const { addToCart } = useCart();
 
   const handleAddToCart = (product: any) => {

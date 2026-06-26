@@ -12,6 +12,7 @@ export interface Product {
   stock_quantity: number;
   is_new?: boolean;
   is_bestseller?: boolean;
+  discount_percentage?: number;
   created_at: string;
   updated_at: string;
 }

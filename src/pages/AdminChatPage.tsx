@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Send, X, Clock, CheckCircle2, Loader2 } from 'lucide-react';
+import { MessageCircle, Send, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -31,7 +31,7 @@ interface ChatMessage {
 
 export default function AdminChatPage() {
   const { user } = useAuth();
-  const { showToast } = useToast();
+  const { success, error } = useToast();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [selectedSession, setSelectedSession] = useState<ChatSession | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -102,23 +102,23 @@ export default function AdminChatPage() {
     if (!user) return;
 
     try {
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .rpc('assign_chat_admin', {
           p_session_id: sessionId,
           p_admin_id: user.id
         });
 
-      if (error) {
-        console.error('Error assigning admin:', error);
-        showToast('Failed to assign chat', 'error');
+      if (dbError) {
+        console.error('Error assigning admin:', dbError);
+        error('Failed to assign chat');
         return;
       }
 
-      showToast('Chat assigned successfully', 'success');
+      success('Chat assigned successfully');
       loadSessions();
-    } catch (error) {
-      console.error('Error assigning admin:', error);
-      showToast('Failed to assign chat', 'error');
+    } catch (err) {
+      console.error('Error assigning admin:', err);
+      error('Failed to assign chat');
     }
   };
 
@@ -128,7 +128,7 @@ export default function AdminChatPage() {
     if (!messageInput.trim() || !selectedSession || !user) return;
 
     try {
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .from('chat_messages')
         .insert({
           session_id: selectedSession.id,
@@ -137,37 +137,37 @@ export default function AdminChatPage() {
           is_system_message: false
         });
 
-      if (error) {
-        console.error('Error sending message:', error);
-        showToast('Failed to send message', 'error');
+      if (dbError) {
+        console.error('Error sending message:', dbError);
+        error('Failed to send message');
         return;
       }
 
       setMessageInput('');
-    } catch (error) {
-      console.error('Error sending message:', error);
-      showToast('Failed to send message', 'error');
+    } catch (err) {
+      console.error('Error sending message:', err);
+      error('Failed to send message');
     }
   };
 
   // Close session
   const handleCloseSession = async (sessionId: string) => {
     try {
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .rpc('close_chat_session', { p_session_id: sessionId });
 
-      if (error) {
-        console.error('Error closing session:', error);
-        showToast('Failed to close chat', 'error');
+      if (dbError) {
+        console.error('Error closing session:', dbError);
+        error('Failed to close chat');
         return;
       }
 
-      showToast('Chat closed successfully', 'success');
+      success('Chat closed successfully');
       setSelectedSession(null);
       loadSessions();
-    } catch (error) {
-      console.error('Error closing session:', error);
-      showToast('Failed to close chat', 'error');
+    } catch (err) {
+      console.error('Error closing session:', err);
+      error('Failed to close chat');
     }
   };
 

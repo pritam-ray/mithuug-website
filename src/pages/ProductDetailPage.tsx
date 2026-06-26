@@ -5,11 +5,11 @@ import { dataCache } from '../lib/dataCache';
 import { Product, Review } from '../types/database';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Sparkles, Zap } from 'lucide-react';
+import { ShoppingBag, Heart, Star, ChevronLeft, Package, Truck, Shield, Leaf, Zap } from 'lucide-react';
 import ReviewSection from '../components/ReviewSection';
 import RatingBreakdown from '../components/RatingBreakdown';
 import SEO from '../components/SEO';
-import Breadcrumb from '../components/Breadcrumb';
+
 import { ProductSchema, BreadcrumbSchema } from '../components/StructuredData';
 import { trackViewItem, trackAddToCart } from '../lib/analytics';
 import StickyAddToCart from '../components/mobile/StickyAddToCart';
@@ -186,7 +186,7 @@ const ProductDetailPage: React.FC = () => {
     <div className="min-h-screen pt-4 bg-ivory">
       <SEO 
         title={`${product.name} - Premium Til-Gud | MitthuuG`}
-        description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹500.`}
+        description={product.description || `Order ${product.name} from MitthuuG. Authentic handcrafted Til-Gud sweets made with 100% natural ingredients. Price: ₹${product.price}. Free shipping on orders above ₹499.`}
         keywords={`${product.name}, buy ${product.name} online, til gud, traditional indian sweets`}
         ogImage={product.images?.[0] || product.image_url}
       />
@@ -218,14 +218,14 @@ const ProductDetailPage: React.FC = () => {
           {/* Product Image Gallery */}
           <div className="relative">
             {/* Badges */}
-            {(product.is_new || product.discount_percentage > 0) && (
+            {(product.is_new || (product.discount_percentage && product.discount_percentage > 0)) && (
               <div className="absolute top-2 left-2 md:top-8 md:left-8 z-10 flex flex-col gap-1 md:gap-2">
                 {product.is_new && (
                   <span className="bg-olive text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold shadow-md">
                     NEW
                   </span>
                 )}
-                {product.discount_percentage > 0 && (
+                {product.discount_percentage && product.discount_percentage > 0 && (
                   <span className="bg-red-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold shadow-md">
                     {product.discount_percentage}% OFF
                   </span>

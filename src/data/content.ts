@@ -40,7 +40,7 @@ export const microCopy = {
     payment: 'Payment',
     review: 'Review Order',
     place_order: 'Place Order',
-    free_shipping: 'Free shipping on orders above ₹599',
+    free_shipping: 'Free shipping on orders above ₹499',
     express_available: 'Express delivery available',
   },
   product: {
@@ -74,7 +74,7 @@ export const faqItems = [
   },
   {
     question: 'Do you deliver across India?',
-    answer: 'Yes! We deliver pan-India via reliable courier partners. Free shipping on orders above ₹599. Express delivery available in select metro cities.',
+    answer: 'Yes! We deliver pan-India via reliable courier partners. Free shipping on orders above ₹499. Express delivery available in select metro cities.',
   },
   {
     question: 'Are MitthuuG products suitable for vegans?',
